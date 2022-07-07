@@ -1,7 +1,7 @@
 # Control-Theory
 ### Position control with P 
 
-![](img1)
+![](Img/Img1.png)
 
 |Parameters | Value |
 |---|---|
