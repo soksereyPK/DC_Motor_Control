@@ -8,5 +8,5 @@
 |wn1 | <ul><li> a*zeta/2| 
 |kp1 | <ul><li> wn1^2/2|
 
-### Position control with PI (a=30, b=20, zeta=1, wn=2*PI*2)
+### Position control with PD (a=30, b=20, zeta=1, wn=2*PI*2)
 ![](Img/Img2.png)
