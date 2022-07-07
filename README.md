@@ -13,5 +13,5 @@
 |Parameters | Value |
 |---|---|
 |kp2 | wn^2/b| 
-|kd2 | (2*zeta*wn-a)/b|
+|kd2 | (2*zeta*wn-a)/b |
 
