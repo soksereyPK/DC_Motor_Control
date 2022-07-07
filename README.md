@@ -6,3 +6,4 @@
 |Parameters | Value |
 |---|---|
 |wn1 | <ul><li> a*zeta/2| 
+|kp1 | <ul><li> wn1^2/2|
