@@ -5,4 +5,4 @@
 
 |Parameters | Value |
 |---|---|
-|kp1 | |
+|wn1 | |<ul><li> a*zeta/2| 
