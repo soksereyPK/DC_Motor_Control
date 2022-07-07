@@ -10,3 +10,8 @@
 
 ### Position control with PD (a=30, b=20, zeta=1, wn=2*PI*2)
 ![](Img/Img2.png)
+  
+|Parameters | Value |
+|---|---|
+|kp2 | <ul><li> wn^2/b| 
+|kd2 | <ul><li> (2*zeta*wn-a)/b|
