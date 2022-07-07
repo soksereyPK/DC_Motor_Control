@@ -23,5 +23,12 @@
 |kd3 | ```(lambdal+2*zeta*wn-a)/b``` |
 |ki3 | ```lambdal*wn^2/b``` |
 
+### Position control with PID Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
+![](Img/Img5.png)
+|Parameters | Value |
+|---|---|
+|kp4 | ```wn^2/b```| 
+|kd4 | ```(2*zeta*wn-a)/b``` |
+
 ### Position control with PD Hardware Due (```a=30, b=20, zeta=1, wn=2*PI*2```)
 
