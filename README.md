@@ -15,7 +15,7 @@
 |kp2 | ```wn^2/b```| 
 |kd2 | ```(2*zeta*wn-a)/b``` |
 
-### Position control with PID Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
+### Position control with PID Simulation (```a=30, b=20, zeta=1, wn=2*PI*2, lamdal=40```)
 ![](Img/Img3.png)
 |Parameters | Value |
 |---|---|
