@@ -1,0 +1,14 @@
+rt_nonfinite.o: \
+ C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rt_nonfinite.c \
+ C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rt_nonfinite.h \
+ C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtwtypes.h \
+ C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtGetNaN.h \
+ C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtGetInf.h
+
+C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rt_nonfinite.h:
+
+C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtwtypes.h:
+
+C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtGetNaN.h:
+
+C:/Users/DCLab/OneDrive/MyGithub/Mygit/Control-Theory/Position-control-with-Hardware/position_control_PD_with_Due_ert_rtw/rtGetInf.h:
