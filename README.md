@@ -37,12 +37,12 @@
 |k1 | ```wn^2/b```| 
 |k2 | ```(2*zeta*wn-a)/b``` |
 
-### 5. Cascade control with velocity and position feedback inner and outer loop Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
+### 5. Velocity control with PI Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
 ![](Img/Img9.png)
 |Parameters | Value |
 |---|---|
-|k1 | ```wn^2/b```| 
-|k2 | ```(2*zeta*wn-a)/b``` |
+|ki | ```wn^2/b```| 
+|kp | ```(2*zeta*wn-a)/b``` |
 
 
 
