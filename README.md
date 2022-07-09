@@ -76,7 +76,7 @@ end
 ```
 - Read encoder pin with S-fuction 
 ```
-
+```
 - Convert pulse to radian 
 ```
 function outGearBox = fcn(u,ppr,gearRatio)
