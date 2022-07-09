@@ -45,7 +45,7 @@
 ![](Img/Img8.png)
 |Parameters | Value |
 |---|---|
-|k1 | ```wn^2/b```| 
-|k2 | ```(2*zeta*wn-a)/b``` |
+|kp2 | ```wn^2/b```| 
+|kd2 | ```(2*zeta*wn-a)/b``` |
 
 
