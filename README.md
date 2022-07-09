@@ -48,4 +48,8 @@
 |kp2 | ```wn^2/b```| 
 |kd2 | ```(2*zeta*wn-a)/b``` |
 
+- Calculate PWM and direction 
+```
+
+
 
