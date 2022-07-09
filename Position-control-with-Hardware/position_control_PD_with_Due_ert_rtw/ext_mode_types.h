@@ -3,9 +3,9 @@
  *
  * Code generation for model "position_control_PD_with_Due".
  *
- * Model version              : 1.9
+ * Model version              : 1.12
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Sat Jul  9 09:27:34 2022
+ * C source code generated on : Sat Jul  9 10:25:01 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex

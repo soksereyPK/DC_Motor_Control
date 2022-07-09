@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 1.9
+ * Model version                  : 1.12
  * Simulink Coder version         : 9.6 (R2021b) 14-May-2021
- * C/C++ source code generated on : Sat Jul  9 09:27:34 2022
+ * C/C++ source code generated on : Sat Jul  9 10:25:01 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -79,8 +79,9 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Gain2;                        /* '<Root>/Gain2' */
-  real_T Add;                          /* '<Root>/Add' */
+  real_T Derivative4;                  /* '<Root>/Derivative4' */
+  real_T Gain7;                        /* '<Root>/Gain7' */
+  real_T Add2;                         /* '<Root>/Add2' */
   real_T outGearBox;                   /* '<S1>/Convert pulse to rad1' */
   int32_T Encoder1;                    /* '<S1>/Encoder1' */
 } B_position_control_PD_with_Du_T;
@@ -88,17 +89,37 @@ typedef struct {
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   codertarget_arduinobase_block_T obj; /* '<S1>/Digital Output' */
-  codertarget_arduinobase_inter_T obj_i;/* '<S1>/PWM' */
+  codertarget_arduinobase_inter_T obj_n;/* '<S1>/PWM' */
   real_T Encoder1_DSTATE;              /* '<S1>/Encoder1' */
-  real_T TimeStampA;                   /* '<Root>/Derivative' */
-  real_T LastUAtTimeA;                 /* '<Root>/Derivative' */
-  real_T TimeStampB;                   /* '<Root>/Derivative' */
-  real_T LastUAtTimeB;                 /* '<Root>/Derivative' */
+  real_T TimeStampA;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative4' */
+  real_T TimeStampB;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative4' */
+  real_T TimeStampA_o;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeA_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampB_g;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeB_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampA_n;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeA_e;               /* '<Root>/Derivative3' */
+  real_T TimeStampB_c;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeB_f3;              /* '<Root>/Derivative3' */
+  real_T TimeStampA_g;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeA_b;               /* '<Root>/Derivative2' */
+  real_T TimeStampB_d;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeB_c;               /* '<Root>/Derivative2' */
   real_T counter_num;                  /* '<S1>/Convert pulse to rad1' */
   real_T over_flag;                    /* '<S1>/Convert pulse to rad1' */
   struct {
     void *LoggedData;
-  } Scope_PWORK;                       /* '<Root>/Scope' */
+  } Scope2_PWORK;                      /* '<Root>/Scope2' */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Add2_;   /* synthesized block */
+
+  struct {
+    void *LoggedData;
+  } Scope4_PWORK;                      /* '<Root>/Scope4' */
 
   struct {
     void *AQHandles;
@@ -106,37 +127,37 @@ typedef struct {
 
   struct {
     void *LoggedData;
-  } Scope_PWORK_i;                     /* '<S1>/Scope' */
+  } Scope_PWORK;                       /* '<S1>/Scope' */
 
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Conve;   /* synthesized block */
-
-  struct {
-    void *LoggedData;
-  } Scope1_PWORK;                      /* '<Root>/Scope1' */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Add_a;   /* synthesized block */
 } DW_position_control_PD_with_D_T;
 
 /* Parameters (default storage) */
 struct P_position_control_PD_with_Du_T_ {
-  real_T kd2;                          /* Variable: kd2
-                                        * Referenced by: '<Root>/Gain2'
+  real_T a;                            /* Variable: a
+                                        * Referenced by: '<Root>/Gain8'
                                         */
-  real_T kp2;                          /* Variable: kp2
-                                        * Referenced by: '<Root>/Gain1'
+  real_T b;                            /* Variable: b
+                                        * Referenced by:
+                                        *   '<Root>/Gain8'
+                                        *   '<Root>/Gain9'
+                                        */
+  real_T kd4;                          /* Variable: kd4
+                                        * Referenced by: '<Root>/Gain7'
+                                        */
+  real_T kp4;                          /* Variable: kp4
+                                        * Referenced by: '<Root>/Gain6'
+                                        */
+  real_T Constant5_Value;              /* Expression: 30
+                                        * Referenced by: '<Root>/Constant5'
                                         */
   real_T totalPPR_Value;               /* Expression: 100*2
                                         * Referenced by: '<S1>/totalPPR'
                                         */
   real_T gearRatio_Value;              /* Expression: 19.3*3.75
                                         * Referenced by: '<S1>/gearRatio'
-                                        */
-  real_T Constant3_Value;              /* Expression: 30
-                                        * Referenced by: '<Root>/Constant3'
                                         */
 };
 
@@ -216,9 +237,9 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'position_control_PD_with_Due'
- * '<S1>'   : 'position_control_PD_with_Due/Right motor'
- * '<S2>'   : 'position_control_PD_with_Due/Right motor/Convert pulse to rad1'
- * '<S3>'   : 'position_control_PD_with_Due/Right motor/MATLAB Function2'
+ * '<S1>'   : 'position_control_PD_with_Due/Right motor2'
+ * '<S2>'   : 'position_control_PD_with_Due/Right motor2/Convert pulse to rad1'
+ * '<S3>'   : 'position_control_PD_with_Due/Right motor2/MATLAB Function2'
  */
 #endif                          /* RTW_HEADER_position_control_PD_with_Due_h_ */
 
