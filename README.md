@@ -180,6 +180,23 @@ void readEncDUEpin8_9_Terminate_wrapper(real_T *xD)
 /* Terminate_END */
 }
 ```
+- Convert pulse to radian 
+```
+function outGearBox = fcn(u,ppr,gearRatio)
+
+persistent counter_num over_flag
+if(isempty(counter_num)), counter_num = 0;end
+if(isempty(over_flag)), over_flag = 0;end
+pulse2radian = 2*pi/ppr; % 1 pulse = ?? radian
+
+if(double(u) - counter_num > 40000), over_flag = over_flag-1;
+elseif(double(u) - counter_num < -40000), over_flag = over_flag+1;
+end
+
+inGearBox = (double(u)+over_flag*(2^32 -1))*pulse2radian; 
+outGearBox = inGearBox/gearRatio;
+counter_num = double(u) ;
+```
 
 
 
