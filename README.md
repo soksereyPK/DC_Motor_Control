@@ -48,7 +48,23 @@
 |kp2 | ```wn^2/b```| 
 |kd2 | ```(2*zeta*wn-a)/b``` |
 
-- Calculate PWM and direction 
+- Calculate PWM and direction in Matlab function 
+```
+function [pwm,dir] = fcn(v_a)
+
+vmax = 22.9;
+pwm_cal = v_a*254/vmax;
+
+if pwm_cal > 0
+  pwm = pwm_cal;
+  dir = 0;
+elseif pwm_cal < 0
+  pwm = abs(pwm_cal);
+  dir = 1;
+else
+  pwm = 0;
+  dir = 0;
+end
 ```
 
 
