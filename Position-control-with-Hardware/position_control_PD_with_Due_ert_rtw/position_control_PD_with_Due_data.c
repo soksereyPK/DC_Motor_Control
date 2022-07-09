@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.9
  * Simulink Coder version         : 9.6 (R2021b) 14-May-2021
- * C/C++ source code generated on : Thu Jul  7 18:59:44 2022
+ * C/C++ source code generated on : Sat Jul  9 09:27:34 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -33,15 +33,15 @@ P_position_control_PD_with_Du_T position_control_PD_with_Due_P = {
    */
   200.0,
 
-  /* Expression: 19.2*3.75
+  /* Expression: 19.3*3.75
    * Referenced by: '<S1>/gearRatio'
    */
-  72.0,
+  72.375,
 
-  /* Expression: 2*pi
+  /* Expression: 30
    * Referenced by: '<Root>/Constant3'
    */
-  6.2831853071795862
+  30.0
 };
 
 /*

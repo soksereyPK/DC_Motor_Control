@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.9
  * Simulink Coder version         : 9.6 (R2021b) 14-May-2021
- * C/C++ source code generated on : Thu Jul  7 18:59:44 2022
+ * C/C++ source code generated on : Sat Jul  9 09:27:34 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -80,6 +80,7 @@
 /* Block signals (default storage) */
 typedef struct {
   real_T Gain2;                        /* '<Root>/Gain2' */
+  real_T Add;                          /* '<Root>/Add' */
   real_T outGearBox;                   /* '<S1>/Convert pulse to rad1' */
   int32_T Encoder1;                    /* '<S1>/Encoder1' */
 } B_position_control_PD_with_Du_T;
@@ -110,6 +111,14 @@ typedef struct {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Conve;   /* synthesized block */
+
+  struct {
+    void *LoggedData;
+  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Add_a;   /* synthesized block */
 } DW_position_control_PD_with_D_T;
 
 /* Parameters (default storage) */
@@ -123,10 +132,10 @@ struct P_position_control_PD_with_Du_T_ {
   real_T totalPPR_Value;               /* Expression: 100*2
                                         * Referenced by: '<S1>/totalPPR'
                                         */
-  real_T gearRatio_Value;              /* Expression: 19.2*3.75
+  real_T gearRatio_Value;              /* Expression: 19.3*3.75
                                         * Referenced by: '<S1>/gearRatio'
                                         */
-  real_T Constant3_Value;              /* Expression: 2*pi
+  real_T Constant3_Value;              /* Expression: 30
                                         * Referenced by: '<Root>/Constant3'
                                         */
 };

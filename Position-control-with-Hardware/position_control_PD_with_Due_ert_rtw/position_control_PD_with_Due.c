@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.9
  * Simulink Coder version         : 9.6 (R2021b) 14-May-2021
- * C/C++ source code generated on : Thu Jul  7 18:59:44 2022
+ * C/C++ source code generated on : Sat Jul  9 09:27:34 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -98,12 +98,14 @@ void position_control_PD_with_Due_step(void)
 
     /* End of Derivative: '<Root>/Derivative' */
 
-    /* MATLAB Function: '<S1>/MATLAB Function2' incorporates:
+    /* Sum: '<Root>/Add' incorporates:
      *  Gain: '<Root>/Gain1'
-     *  Sum: '<Root>/Add'
      */
-    rtb_Sum1 = (position_control_PD_with_Due_P.kp2 * rtb_Sum1 + rtb_Derivative) *
-      254.0 / 22.9;
+    position_control_PD_with_Due_B.Add = position_control_PD_with_Due_P.kp2 *
+      rtb_Sum1 + rtb_Derivative;
+
+    /* MATLAB Function: '<S1>/MATLAB Function2' */
+    rtb_Sum1 = position_control_PD_with_Due_B.Add * 254.0 / 22.9;
     if (rtb_Sum1 > 0.0) {
       rtb_dir = 0;
     } else if (rtb_Sum1 < 0.0) {
@@ -117,7 +119,7 @@ void position_control_PD_with_Due_step(void)
     /* End of MATLAB Function: '<S1>/MATLAB Function2' */
 
     /* MATLABSystem: '<S1>/Digital Output' */
-    writeDigitalPin(5, (uint8_T)rtb_dir);
+    writeDigitalPin(7, (uint8_T)rtb_dir);
 
     /* MATLABSystem: '<S1>/PWM' */
     obj = &position_control_PD_with_Due_DW.obj_i;
@@ -242,14 +244,14 @@ void position_control_PD_with_Due_initialize(void)
                     "FixedStepDiscrete");
   rtmSetTPtr(position_control_PD_with_Due_M,
              &position_control_PD_with_Due_M->Timing.tArray[0]);
-  rtmSetTFinal(position_control_PD_with_Due_M, -1);
+  rtmSetTFinal(position_control_PD_with_Due_M, 5.0);
   position_control_PD_with_Due_M->Timing.stepSize0 = 0.01;
 
   /* External mode info */
-  position_control_PD_with_Due_M->Sizes.checksums[0] = (1054682646U);
-  position_control_PD_with_Due_M->Sizes.checksums[1] = (1894656752U);
-  position_control_PD_with_Due_M->Sizes.checksums[2] = (3268035436U);
-  position_control_PD_with_Due_M->Sizes.checksums[3] = (423876539U);
+  position_control_PD_with_Due_M->Sizes.checksums[0] = (725965226U);
+  position_control_PD_with_Due_M->Sizes.checksums[1] = (2717445140U);
+  position_control_PD_with_Due_M->Sizes.checksums[2] = (3644411971U);
+  position_control_PD_with_Due_M->Sizes.checksums[3] = (1055603575U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -300,7 +302,7 @@ void position_control_PD_with_Due_initialize(void)
     /* Start for MATLABSystem: '<S1>/Digital Output' */
     position_control_PD_with_Due_DW.obj.matlabCodegenIsDeleted = false;
     position_control_PD_with_Due_DW.obj.isInitialized = 1;
-    digitalIOSetup(5, 1);
+    digitalIOSetup(7, 1);
     position_control_PD_with_Due_DW.obj.isSetupComplete = true;
 
     /* Start for MATLABSystem: '<S1>/PWM' */
