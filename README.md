@@ -1,5 +1,5 @@
 # Control-Theory
-### Position control with P Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
+### 1. Position control with P Simulation (```a=30, b=20, zeta=1, wn=2*PI*2```)
 
 ![](Img/Img1.png)
 |Parameters | Value |
