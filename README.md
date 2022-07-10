@@ -76,7 +76,7 @@ end
 ```
 - Read encoder sensor with S-fuction
 Intergrated arduino code into s-function [link]{https://www.youtube.com/watch?v=0OClHIdCyDg} 
-![](Img/Img9.png) 
+![](Img/Img10.png) 
 ```
 
 ```
