@@ -74,10 +74,72 @@ else
   dir = 0;
 end
 ```
-- Read encoder sensor with S-fuction
-Intergrated arduino code into s-function [link]{https://www.youtube.com/watch?v=0OClHIdCyDg} 
-![](Img/Img10.png) 
+- Read encoder sensor with S-fuction (Intergrated arduino code into s-function [link]{https://www.youtube.com/watch?v=0OClHIdCyDg})
+
 ```
+Input code 
+#ifndef MATLAB_MEX_FILE
+#include <Arduino.h>
+#include <math.h>
+int32_t counter = 0;
+uint8_t pinA = 2;
+uint8_t pinB = 3;
+uint8_t interruptA = 2;
+uint8_t interruptB = 3;
+      void ai8() {
+      // ai8 is activated if DigitalPin nr 9 is going from LOW to HIGH
+      // Check pin 9 to determine the direction
+      if(digitalRead(pinA) == HIGH){
+          if(digitalRead(pinB)==LOW) {
+          counter++;
+          }else{
+          counter--;
+          }
+      }else{
+          if(digitalRead(pinB)==LOW) {
+              counter--;
+          }else{
+              counter++;
+          }
+      }
+      
+  }
+   
+  void ai9() {
+  // ai8 is activated if DigitalPin nr 9 is going from LOW to HIGH
+  // Check with pin 8 to determine the direction
+      if(digitalRead(pinB) == HIGH){
+          if(digitalRead(pinA)==LOW) {
+              counter--;
+          }else{
+              counter++;
+          }
+      }else{
+          if(digitalRead(pinA)==LOW) {
+              counter++;
+          }else{
+              counter--;
+          }
+      }
+ 
+  }
+#endif
+
+Output code 
+/* Output_BEGIN */
+/* This sample sets the output equal to the input
+      y0[0] = u0[0]; 
+ For complex signals use: y0[0].re = u0[0].re; 
+      y0[0].im = u0[0].im;
+      y1[0].re = u1[0].re;
+      y1[0].im = u1[0].im;
+ */
+
+    #ifndef MATLAB_MEX_FILE
+    count[0] = counter;
+    #endif
+/* Output_END */
+
 
 ```
 - Convert pulse to radian 
