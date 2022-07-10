@@ -74,8 +74,11 @@ else
   dir = 0;
 end
 ```
-- Read encoder pin with S-fuction 
+- Read encoder sensor with S-fuction
+Intergrated arduino code into s-function [link]{https://www.youtube.com/watch?v=0OClHIdCyDg} 
+![](Img/Img10.png) 
 ```
+
 ```
 - Convert pulse to radian 
 ```
