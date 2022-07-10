@@ -48,7 +48,7 @@
 
 
 
-### 6. Position control with PD Hardware Due (```a=30, b=20, zeta=1, wn=2*PI*2```)
+### 6. Position control with PD Hardware Due (```a=26.85, b=85.68, zeta=1, wn=2*PI*2```)
 ![](Img/Img7.png)
 ![](Img/Img8.png)
 |Parameters | Value |
