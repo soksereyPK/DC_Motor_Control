@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 2.13
+ * Model version                  : 2.26
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Jul 28 08:24:25 2022
+ * C/C++ source code generated on : Thu Jul 28 12:14:00 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -64,7 +64,7 @@ int main(void)
   rtmSetErrorStatus(position_control_PD_with_Due_M, 0);
 
   /* Set Final Simulation Time in Ticks */
-  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 600);
+  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) -1);
 
   /* Parse External Mode command line arguments */
   errorCode = extmodeParseArgs(0, NULL);

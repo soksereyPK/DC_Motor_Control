@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 2.13
+ * Model version                  : 2.26
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Jul 28 08:24:25 2022
+ * C/C++ source code generated on : Thu Jul 28 12:14:00 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -16,9 +16,9 @@
 #include "position_control_PD_with_Due.h"
 #include "rtwtypes.h"
 #include <math.h>
-#include "rt_nonfinite.h"
-#include "position_control_PD_with_Due_types.h"
 #include "multiword_types.h"
+#include "position_control_PD_with_Due_types.h"
+#include "rt_nonfinite.h"
 #include "position_control_PD_with_Due_private.h"
 
 /* Block signals (default storage) */
@@ -235,78 +235,16 @@ void position_control_PD_with_Due_step(void)
 {
   {
     codertarget_arduinobase_int_i_T *obj;
-    int128m_T tmp;
-    int64m_T tmp_0;
-    real_T rtb_Derivative7;
-    real_T rtb_ManualSwitch;
+    int64m_T tmp;
+    real_T lastTime;
+    real_T rtb_Derivative6;
+    real_T rtb_Sum4;
     real_T *lastU;
+    int32_T rtb_Encoder_0;
+    uint32_T tmp_0;
     uint32_T tmp_1;
-    uint32_T tmp_2;
 
-    /* ManualSwitch: '<Root>/Manual Switch' incorporates:
-     *  Constant: '<Root>/Constant'
-     *  Sin: '<Root>/Sine Wave'
-     */
-    if (position_control_PD_with_Due_P.ManualSwitch_CurrentSetting == 1) {
-      rtb_ManualSwitch = sin(2.0 * position_control_PD_with_Due_P.pi * 0.25 *
-        position_control_PD_with_Due_M->Timing.t[0] +
-        position_control_PD_with_Due_P.SineWave_Phase) * (2.0 *
-        position_control_PD_with_Due_P.pi) +
-        position_control_PD_with_Due_P.SineWave_Bias;
-    } else {
-      rtb_ManualSwitch = 2.0 * position_control_PD_with_Due_P.pi;
-    }
-
-    /* End of ManualSwitch: '<Root>/Manual Switch' */
-
-    /* MATLAB Function: '<Root>/MATLAB Function' */
-    if (rtIsNaN(rtb_ManualSwitch)) {
-      rtb_Derivative7 = rtb_ManualSwitch;
-    } else if (rtb_ManualSwitch < 0.0) {
-      rtb_Derivative7 = -1.0;
-    } else {
-      rtb_Derivative7 = (rtb_ManualSwitch > 0.0);
-    }
-
-    /* MATLABSystem: '<Root>/Digital Output' incorporates:
-     *  DataTypeConversion: '<Root>/Cast To Boolean'
-     *  MATLAB Function: '<Root>/MATLAB Function'
-     */
-    writeDigitalPin(6, (uint8_T)((rtb_Derivative7 + 1.0) / 2.0 != 0.0));
-
-    /* MATLAB Function: '<Root>/MATLAB Function' */
-    if (rtIsNaN(rtb_ManualSwitch)) {
-      rtb_Derivative7 = rtb_ManualSwitch;
-    } else if (rtb_ManualSwitch < 0.0) {
-      rtb_Derivative7 = -1.0;
-    } else {
-      rtb_Derivative7 = (rtb_ManualSwitch > 0.0);
-    }
-
-    /* MATLABSystem: '<Root>/Digital Output1' incorporates:
-     *  DataTypeConversion: '<Root>/Cast To Boolean'
-     *  Logic: '<Root>/Logical Operator'
-     *  MATLAB Function: '<Root>/MATLAB Function'
-     */
-    writeDigitalPin(7, (uint8_T)!((rtb_Derivative7 + 1.0) / 2.0 != 0.0));
-
-    /* MATLABSystem: '<Root>/PWM' */
-    obj = &position_control_PD_with_Due_DW.obj_n;
-    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(5UL);
-
-    /* Abs: '<Root>/Abs' */
-    rtb_Derivative7 = fabs(rtb_ManualSwitch);
-
-    /* MATLABSystem: '<Root>/PWM' */
-    if (!(rtb_Derivative7 <= 255.0)) {
-      rtb_Derivative7 = 255.0;
-    }
-
-    MW_PWM_SetDutyCycle
-      (position_control_PD_with_Due_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE,
-       rtb_Derivative7);
-
-    /* MATLABSystem: '<Root>/Encoder' */
+    /* MATLABSystem: '<S1>/Encoder' */
     if (position_control_PD_with_Due_DW.obj.SampleTime !=
         position_control_PD_with_Due_P.Encoder_SampleTime) {
       position_control_PD_with_Due_DW.obj.SampleTime =
@@ -317,77 +255,117 @@ void position_control_PD_with_Due_step(void)
       position_control_PD_with_Due_DW.obj.TunablePropsChanged = false;
     }
 
-    /* MATLABSystem: '<Root>/Encoder' */
-    MW_EncoderRead(position_control_PD_with_Due_DW.obj.Index,
-                   &position_control_PD_with_Due_B.Encoder);
+    MW_EncoderRead(position_control_PD_with_Due_DW.obj.Index, &rtb_Encoder_0);
 
-    /* Gain: '<S1>/Gain1' */
-    position_control_PD_with_Due_B.Gain1 =
-      position_control_PD_with_Due_P.Gain1_Gain;
+    /* Gain: '<S3>/Gain' */
+    position_control_PD_with_Due_B.Gain =
+      position_control_PD_with_Due_P.Gain_Gain;
 
-    /* Gain: '<Root>/Gain' */
-    tmp_1 = (uint32_T)position_control_PD_with_Due_P.Gain_Gain;
-    tmp_2 = (uint32_T)position_control_PD_with_Due_B.Encoder;
-    sMultiWordMul(&tmp_1, 1, &tmp_2, 1, &tmp_0.chunks[0U], 2);
+    /* Gain: '<S1>/Gain' incorporates:
+     *  MATLABSystem: '<S1>/Encoder'
+     */
+    tmp_0 = (uint32_T)position_control_PD_with_Due_P.Gain_Gain_j;
+    tmp_1 = (uint32_T)rtb_Encoder_0;
+    sMultiWordMul(&tmp_0, 1, &tmp_1, 1, &tmp.chunks[0U], 2);
 
-    /* Gain: '<S1>/Gain1' */
-    sMultiWordMul(&position_control_PD_with_Due_P.Gain1_Gain.chunks[0U], 2,
-                  &tmp_0.chunks[0U], 2, &tmp.chunks[0U], 4);
-    sMultiWordShr(&tmp.chunks[0U], 4, 32U,
+    /* Gain: '<S3>/Gain' */
+    sMultiWordMul(&position_control_PD_with_Due_P.Gain_Gain.chunks[0U], 2,
+                  &tmp.chunks[0U], 2, &position_control_PD_with_Due_B.r1.chunks
+                  [0U], 4);
+    sMultiWordShr(&position_control_PD_with_Due_B.r1.chunks[0U], 4, 37U,
                   &position_control_PD_with_Due_B.r.chunks[0U], 4);
     sMultiWord2sMultiWordSat(&position_control_PD_with_Due_B.r.chunks[0U], 4,
-      &position_control_PD_with_Due_B.Gain1.chunks[0U], 2);
+      &position_control_PD_with_Due_B.Gain.chunks[0U], 2);
 
-    /* Sum: '<Root>/Sum5' incorporates:
-     *  Constant: '<Root>/Constant4'
-     *  Gain: '<S1>/Gain1'
+    /* Sum: '<Root>/Sum4' incorporates:
+     *  Constant: '<Root>/Constant2'
+     *  Gain: '<S3>/Gain'
      */
-    position_control_PD_with_Due_B.Sum5 = 2.0 *
-      position_control_PD_with_Due_P.pi - sMultiWord2Double
-      (&position_control_PD_with_Due_B.Gain1.chunks[0U], 2, 0) *
-      2.3283064365386963E-10;
+    rtb_Sum4 = position_control_PD_with_Due_P.Constant2_Value -
+      sMultiWord2Double(&position_control_PD_with_Due_B.Gain.chunks[0U], 2, 0) *
+      7.2759576141834259E-12;
 
-    /* Gain: '<Root>/Gain11' */
-    position_control_PD_with_Due_B.Gain11 = position_control_PD_with_Due_P.kd2 *
-      position_control_PD_with_Due_B.Sum5;
+    /* Gain: '<Root>/Gain10' */
+    position_control_PD_with_Due_B.Gain10 = position_control_PD_with_Due_P.kd2 *
+      rtb_Sum4;
 
-    /* Derivative: '<Root>/Derivative7' */
-    rtb_Derivative7 = position_control_PD_with_Due_M->Timing.t[0];
-    if ((position_control_PD_with_Due_DW.TimeStampA >= rtb_Derivative7) &&
-        (position_control_PD_with_Due_DW.TimeStampB >= rtb_Derivative7)) {
-      rtb_Derivative7 = 0.0;
+    /* Derivative: '<Root>/Derivative6' */
+    rtb_Derivative6 = position_control_PD_with_Due_M->Timing.t[0];
+    if ((position_control_PD_with_Due_DW.TimeStampA >= rtb_Derivative6) &&
+        (position_control_PD_with_Due_DW.TimeStampB >= rtb_Derivative6)) {
+      rtb_Derivative6 = 0.0;
     } else {
-      rtb_ManualSwitch = position_control_PD_with_Due_DW.TimeStampA;
+      lastTime = position_control_PD_with_Due_DW.TimeStampA;
       lastU = &position_control_PD_with_Due_DW.LastUAtTimeA;
       if (position_control_PD_with_Due_DW.TimeStampA <
           position_control_PD_with_Due_DW.TimeStampB) {
-        if (position_control_PD_with_Due_DW.TimeStampB < rtb_Derivative7) {
-          rtb_ManualSwitch = position_control_PD_with_Due_DW.TimeStampB;
+        if (position_control_PD_with_Due_DW.TimeStampB < rtb_Derivative6) {
+          lastTime = position_control_PD_with_Due_DW.TimeStampB;
           lastU = &position_control_PD_with_Due_DW.LastUAtTimeB;
         }
-      } else if (position_control_PD_with_Due_DW.TimeStampA >= rtb_Derivative7)
+      } else if (position_control_PD_with_Due_DW.TimeStampA >= rtb_Derivative6)
       {
-        rtb_ManualSwitch = position_control_PD_with_Due_DW.TimeStampB;
+        lastTime = position_control_PD_with_Due_DW.TimeStampB;
         lastU = &position_control_PD_with_Due_DW.LastUAtTimeB;
       }
 
-      rtb_Derivative7 = (position_control_PD_with_Due_B.Gain11 - *lastU) /
-        (rtb_Derivative7 - rtb_ManualSwitch);
+      rtb_Derivative6 = (position_control_PD_with_Due_B.Gain10 - *lastU) /
+        (rtb_Derivative6 - lastTime);
     }
 
-    /* End of Derivative: '<Root>/Derivative7' */
+    /* End of Derivative: '<Root>/Derivative6' */
 
-    /* Sum: '<Root>/Add4' incorporates:
-     *  Gain: '<Root>/Gain12'
+    /* Sum: '<Root>/Add3' incorporates:
+     *  Gain: '<Root>/Gain5'
      */
-    position_control_PD_with_Due_B.Add4 = position_control_PD_with_Due_P.kp2 *
-      position_control_PD_with_Due_B.Sum5 + rtb_Derivative7;
+    position_control_PD_with_Due_B.Add3 = position_control_PD_with_Due_P.kp2 *
+      rtb_Sum4 + rtb_Derivative6;
+
+    /* MATLAB Function: '<S1>/MATLAB Function2' */
+    rtb_Sum4 = position_control_PD_with_Due_B.Add3 * 254.0 / 22.9;
+    if (rtb_Sum4 > 0.0) {
+      rtb_Derivative6 = 0.0;
+    } else if (rtb_Sum4 < 0.0) {
+      rtb_Derivative6 = fabs(rtb_Sum4);
+      rtb_Sum4 = 0.0;
+    } else {
+      rtb_Derivative6 = 0.0;
+      rtb_Sum4 = 0.0;
+    }
+
+    /* End of MATLAB Function: '<S1>/MATLAB Function2' */
+
+    /* MATLABSystem: '<S1>/PWM' */
+    obj = &position_control_PD_with_Due_DW.obj_f;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(9UL);
+    if (!(rtb_Derivative6 <= 255.0)) {
+      rtb_Derivative6 = 255.0;
+    }
+
+    MW_PWM_SetDutyCycle
+      (position_control_PD_with_Due_DW.obj_f.PWMDriverObj.MW_PWM_HANDLE,
+       rtb_Derivative6);
+
+    /* End of MATLABSystem: '<S1>/PWM' */
+
+    /* MATLABSystem: '<S1>/PWM1' */
+    obj = &position_control_PD_with_Due_DW.obj_k;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(10UL);
+    if (!(rtb_Sum4 <= 255.0)) {
+      rtb_Sum4 = 255.0;
+    }
+
+    MW_PWM_SetDutyCycle
+      (position_control_PD_with_Due_DW.obj_k.PWMDriverObj.MW_PWM_HANDLE,
+       rtb_Sum4);
+
+    /* End of MATLABSystem: '<S1>/PWM1' */
   }
 
   {
     real_T *lastU;
 
-    /* Update for Derivative: '<Root>/Derivative7' */
+    /* Update for Derivative: '<Root>/Derivative6' */
     if (position_control_PD_with_Due_DW.TimeStampA == (rtInf)) {
       position_control_PD_with_Due_DW.TimeStampA =
         position_control_PD_with_Due_M->Timing.t[0];
@@ -407,9 +385,9 @@ void position_control_PD_with_Due_step(void)
       lastU = &position_control_PD_with_Due_DW.LastUAtTimeB;
     }
 
-    *lastU = position_control_PD_with_Due_B.Gain11;
+    *lastU = position_control_PD_with_Due_B.Gain10;
 
-    /* End of Update for Derivative: '<Root>/Derivative7' */
+    /* End of Update for Derivative: '<Root>/Derivative6' */
   }
 
   {                                    /* Sample time: [0.0s, 0.0s] */
@@ -489,19 +467,19 @@ void position_control_PD_with_Due_initialize(void)
                     "FixedStepDiscrete");
   rtmSetTPtr(position_control_PD_with_Due_M,
              &position_control_PD_with_Due_M->Timing.tArray[0]);
-  rtmSetTFinal(position_control_PD_with_Due_M, 6.0);
+  rtmSetTFinal(position_control_PD_with_Due_M, -1);
   position_control_PD_with_Due_M->Timing.stepSize0 = 0.01;
 
   /* External mode info */
-  position_control_PD_with_Due_M->Sizes.checksums[0] = (1385806593U);
-  position_control_PD_with_Due_M->Sizes.checksums[1] = (1944012732U);
-  position_control_PD_with_Due_M->Sizes.checksums[2] = (3536636926U);
-  position_control_PD_with_Due_M->Sizes.checksums[3] = (2817918582U);
+  position_control_PD_with_Due_M->Sizes.checksums[0] = (1569711913U);
+  position_control_PD_with_Due_M->Sizes.checksums[1] = (2584086993U);
+  position_control_PD_with_Due_M->Sizes.checksums[2] = (3772120990U);
+  position_control_PD_with_Due_M->Sizes.checksums[3] = (848670986U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[6];
+    static const sysRanDType *systemRan[5];
     position_control_PD_with_Due_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
@@ -509,7 +487,6 @@ void position_control_PD_with_Due_initialize(void)
     systemRan[2] = &rtAlwaysEnabled;
     systemRan[3] = &rtAlwaysEnabled;
     systemRan[4] = &rtAlwaysEnabled;
-    systemRan[5] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(position_control_PD_with_Due_M->extModeInfo,
       &position_control_PD_with_Due_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(position_control_PD_with_Due_M->extModeInfo,
@@ -521,33 +498,11 @@ void position_control_PD_with_Due_initialize(void)
   {
     codertarget_arduinobase_int_i_T *obj;
 
-    /* InitializeConditions for Derivative: '<Root>/Derivative7' */
+    /* InitializeConditions for Derivative: '<Root>/Derivative6' */
     position_control_PD_with_Due_DW.TimeStampA = (rtInf);
     position_control_PD_with_Due_DW.TimeStampB = (rtInf);
 
-    /* Start for MATLABSystem: '<Root>/Digital Output' */
-    position_control_PD_with_Due_DW.obj_d.matlabCodegenIsDeleted = false;
-    position_control_PD_with_Due_DW.obj_d.isInitialized = 1L;
-    digitalIOSetup(6, 1);
-    position_control_PD_with_Due_DW.obj_d.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<Root>/Digital Output1' */
-    position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted = false;
-    position_control_PD_with_Due_DW.obj_f.isInitialized = 1L;
-    digitalIOSetup(7, 1);
-    position_control_PD_with_Due_DW.obj_f.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<Root>/PWM' */
-    position_control_PD_with_Due_DW.obj_n.matlabCodegenIsDeleted = true;
-    position_control_PD_with_Due_DW.obj_n.isInitialized = 0L;
-    position_control_PD_with_Due_DW.obj_n.matlabCodegenIsDeleted = false;
-    obj = &position_control_PD_with_Due_DW.obj_n;
-    position_control_PD_with_Due_DW.obj_n.isSetupComplete = false;
-    position_control_PD_with_Due_DW.obj_n.isInitialized = 1L;
-    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(5UL, 0.0, 0.0);
-    position_control_PD_with_Due_DW.obj_n.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<Root>/Encoder' */
+    /* Start for MATLABSystem: '<S1>/Encoder' */
     position_control_PD_with_Due_DW.obj.Index = 0U;
     position_control_PD_with_Due_DW.obj.matlabCodegenIsDeleted = false;
     position_control_PD_with_Due_DW.obj.SampleTime =
@@ -558,8 +513,28 @@ void position_control_PD_with_Due_initialize(void)
     position_control_PD_with_Due_DW.obj.isSetupComplete = true;
     position_control_PD_with_Due_DW.obj.TunablePropsChanged = false;
 
-    /* InitializeConditions for MATLABSystem: '<Root>/Encoder' */
+    /* InitializeConditions for MATLABSystem: '<S1>/Encoder' */
     MW_EncoderReset(position_control_PD_with_Due_DW.obj.Index);
+
+    /* Start for MATLABSystem: '<S1>/PWM' */
+    position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted = true;
+    position_control_PD_with_Due_DW.obj_f.isInitialized = 0L;
+    position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted = false;
+    obj = &position_control_PD_with_Due_DW.obj_f;
+    position_control_PD_with_Due_DW.obj_f.isSetupComplete = false;
+    position_control_PD_with_Due_DW.obj_f.isInitialized = 1L;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(9UL, 0.0, 0.0);
+    position_control_PD_with_Due_DW.obj_f.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<S1>/PWM1' */
+    position_control_PD_with_Due_DW.obj_k.matlabCodegenIsDeleted = true;
+    position_control_PD_with_Due_DW.obj_k.isInitialized = 0L;
+    position_control_PD_with_Due_DW.obj_k.matlabCodegenIsDeleted = false;
+    obj = &position_control_PD_with_Due_DW.obj_k;
+    position_control_PD_with_Due_DW.obj_k.isSetupComplete = false;
+    position_control_PD_with_Due_DW.obj_k.isInitialized = 1L;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(10UL, 0.0, 0.0);
+    position_control_PD_with_Due_DW.obj_k.isSetupComplete = true;
   }
 }
 
@@ -568,38 +543,7 @@ void position_control_PD_with_Due_terminate(void)
 {
   codertarget_arduinobase_int_i_T *obj;
 
-  /* Terminate for MATLABSystem: '<Root>/Digital Output' */
-  if (!position_control_PD_with_Due_DW.obj_d.matlabCodegenIsDeleted) {
-    position_control_PD_with_Due_DW.obj_d.matlabCodegenIsDeleted = true;
-  }
-
-  /* End of Terminate for MATLABSystem: '<Root>/Digital Output' */
-
-  /* Terminate for MATLABSystem: '<Root>/Digital Output1' */
-  if (!position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted) {
-    position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted = true;
-  }
-
-  /* End of Terminate for MATLABSystem: '<Root>/Digital Output1' */
-
-  /* Terminate for MATLABSystem: '<Root>/PWM' */
-  obj = &position_control_PD_with_Due_DW.obj_n;
-  if (!position_control_PD_with_Due_DW.obj_n.matlabCodegenIsDeleted) {
-    position_control_PD_with_Due_DW.obj_n.matlabCodegenIsDeleted = true;
-    if ((position_control_PD_with_Due_DW.obj_n.isInitialized == 1L) &&
-        position_control_PD_with_Due_DW.obj_n.isSetupComplete) {
-      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(5UL);
-      MW_PWM_SetDutyCycle
-        (position_control_PD_with_Due_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE, 0.0);
-      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(5UL);
-      MW_PWM_Close
-        (position_control_PD_with_Due_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE);
-    }
-  }
-
-  /* End of Terminate for MATLABSystem: '<Root>/PWM' */
-
-  /* Terminate for MATLABSystem: '<Root>/Encoder' */
+  /* Terminate for MATLABSystem: '<S1>/Encoder' */
   if (!position_control_PD_with_Due_DW.obj.matlabCodegenIsDeleted) {
     position_control_PD_with_Due_DW.obj.matlabCodegenIsDeleted = true;
     if ((position_control_PD_with_Due_DW.obj.isInitialized == 1L) &&
@@ -608,7 +552,40 @@ void position_control_PD_with_Due_terminate(void)
     }
   }
 
-  /* End of Terminate for MATLABSystem: '<Root>/Encoder' */
+  /* End of Terminate for MATLABSystem: '<S1>/Encoder' */
+  /* Terminate for MATLABSystem: '<S1>/PWM' */
+  obj = &position_control_PD_with_Due_DW.obj_f;
+  if (!position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted) {
+    position_control_PD_with_Due_DW.obj_f.matlabCodegenIsDeleted = true;
+    if ((position_control_PD_with_Due_DW.obj_f.isInitialized == 1L) &&
+        position_control_PD_with_Due_DW.obj_f.isSetupComplete) {
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(9UL);
+      MW_PWM_SetDutyCycle
+        (position_control_PD_with_Due_DW.obj_f.PWMDriverObj.MW_PWM_HANDLE, 0.0);
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(9UL);
+      MW_PWM_Close
+        (position_control_PD_with_Due_DW.obj_f.PWMDriverObj.MW_PWM_HANDLE);
+    }
+  }
+
+  /* End of Terminate for MATLABSystem: '<S1>/PWM' */
+
+  /* Terminate for MATLABSystem: '<S1>/PWM1' */
+  obj = &position_control_PD_with_Due_DW.obj_k;
+  if (!position_control_PD_with_Due_DW.obj_k.matlabCodegenIsDeleted) {
+    position_control_PD_with_Due_DW.obj_k.matlabCodegenIsDeleted = true;
+    if ((position_control_PD_with_Due_DW.obj_k.isInitialized == 1L) &&
+        position_control_PD_with_Due_DW.obj_k.isSetupComplete) {
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(10UL);
+      MW_PWM_SetDutyCycle
+        (position_control_PD_with_Due_DW.obj_k.PWMDriverObj.MW_PWM_HANDLE, 0.0);
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(10UL);
+      MW_PWM_Close
+        (position_control_PD_with_Due_DW.obj_k.PWMDriverObj.MW_PWM_HANDLE);
+    }
+  }
+
+  /* End of Terminate for MATLABSystem: '<S1>/PWM1' */
 }
 
 /*

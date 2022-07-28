@@ -3,9 +3,9 @@
  *
  * Code generation for model "position_control_PD_with_Due".
  *
- * Model version              : 2.13
+ * Model version              : 2.26
  * Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
- * C source code generated on : Thu Jul 28 08:24:25 2022
+ * C source code generated on : Thu Jul 28 12:14:00 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR

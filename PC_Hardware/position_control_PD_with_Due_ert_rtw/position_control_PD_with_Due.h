@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 2.13
+ * Model version                  : 2.26
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Jul 28 08:24:25 2022
+ * C/C++ source code generated on : Thu Jul 28 12:14:00 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -23,7 +23,6 @@
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "ext_mode.h"
-#include "MW_arduino_digitalio.h"
 #include "MW_ArduinoEncoder.h"
 #include "MW_PWM.h"
 #endif                       /* position_control_PD_with_Due_COMMON_INCLUDES_ */
@@ -79,73 +78,58 @@
 /* Block signals (default storage) */
 typedef struct {
   int128m_T r;
-  int64m_T Gain1;                      /* '<S1>/Gain1' */
-  real_T Sum5;                         /* '<Root>/Sum5' */
-  real_T Gain11;                       /* '<Root>/Gain11' */
-  real_T Add4;                         /* '<Root>/Add4' */
-  int32_T Encoder;                     /* '<Root>/Encoder' */
+  int128m_T r1;
+  int64m_T Gain;                       /* '<S3>/Gain' */
+  real_T Gain10;                       /* '<Root>/Gain10' */
+  real_T Add3;                         /* '<Root>/Add3' */
 } B_position_control_PD_with_Du_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_arduinobase_inter_T obj; /* '<Root>/Encoder' */
-  codertarget_arduinobase_block_T obj_f;/* '<Root>/Digital Output1' */
-  codertarget_arduinobase_block_T obj_d;/* '<Root>/Digital Output' */
-  codertarget_arduinobase_int_i_T obj_n;/* '<Root>/PWM' */
-  real_T TimeStampA;                   /* '<Root>/Derivative7' */
-  real_T LastUAtTimeA;                 /* '<Root>/Derivative7' */
-  real_T TimeStampB;                   /* '<Root>/Derivative7' */
-  real_T LastUAtTimeB;                 /* '<Root>/Derivative7' */
+  codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder' */
+  codertarget_arduinobase_int_i_T obj_k;/* '<S1>/PWM1' */
+  codertarget_arduinobase_int_i_T obj_f;/* '<S1>/PWM' */
+  real_T TimeStampA;                   /* '<Root>/Derivative6' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative6' */
+  real_T TimeStampB;                   /* '<Root>/Derivative6' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative6' */
   struct {
     void *LoggedData;
-  } Scope11_PWORK;                     /* '<Root>/Scope11' */
+  } Scope10_PWORK;                     /* '<Root>/Scope10' */
 
   struct {
     void *LoggedData;
-  } Scope12_PWORK;                     /* '<Root>/Scope12' */
+  } Scope8_PWORK;                      /* '<Root>/Scope8' */
 
   struct {
     void *LoggedData;
-  } Scope9_PWORK;                      /* '<Root>/Scope9' */
+  } Scope3_PWORK;                      /* '<Root>/Scope3' */
 
   struct {
     void *LoggedData;
-  } Scope5_PWORK;                      /* '<Root>/Scope5' */
+  } Scope9_PWORK;                      /* '<S1>/Scope9' */
 } DW_position_control_PD_with_D_T;
 
 /* Parameters (default storage) */
 struct P_position_control_PD_with_Du_T_ {
   real_T kd2;                          /* Variable: kd2
-                                        * Referenced by: '<Root>/Gain11'
+                                        * Referenced by: '<Root>/Gain10'
                                         */
   real_T kp2;                          /* Variable: kp2
-                                        * Referenced by: '<Root>/Gain12'
-                                        */
-  real_T pi;                           /* Variable: pi
-                                        * Referenced by:
-                                        *   '<Root>/Constant'
-                                        *   '<Root>/Constant4'
-                                        *   '<Root>/Sine Wave'
+                                        * Referenced by: '<Root>/Gain5'
                                         */
   real_T Encoder_SampleTime;           /* Expression: 0.01
-                                        * Referenced by: '<Root>/Encoder'
+                                        * Referenced by: '<S1>/Encoder'
                                         */
-  real_T SineWave_Bias;                /* Expression: 0
-                                        * Referenced by: '<Root>/Sine Wave'
+  real_T Constant2_Value;              /* Expression: 50
+                                        * Referenced by: '<Root>/Constant2'
                                         */
-  real_T SineWave_Phase;               /* Expression: 0
-                                        * Referenced by: '<Root>/Sine Wave'
+  int64m_T Gain_Gain;                  /* Computed Parameter: Gain_Gain
+                                        * Referenced by: '<S3>/Gain'
                                         */
-  int64m_T Gain1_Gain;                 /* Computed Parameter: Gain1_Gain
-                                        * Referenced by: '<S1>/Gain1'
+  int32_T Gain_Gain_j;                 /* Computed Parameter: Gain_Gain_j
+                                        * Referenced by: '<S1>/Gain'
                                         */
-  int32_T Gain_Gain;                   /* Computed Parameter: Gain_Gain
-                                        * Referenced by: '<Root>/Gain'
-                                        */
-  uint8_T ManualSwitch_CurrentSetting;
-                              /* Computed Parameter: ManualSwitch_CurrentSetting
-                               * Referenced by: '<Root>/Manual Switch'
-                               */
 };
 
 /* Real-time Model Data Structure */
@@ -224,8 +208,9 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'position_control_PD_with_Due'
- * '<S1>'   : 'position_control_PD_with_Due/Degrees to Radians'
- * '<S2>'   : 'position_control_PD_with_Due/MATLAB Function'
+ * '<S1>'   : 'position_control_PD_with_Due/Out_Gear_Box'
+ * '<S2>'   : 'position_control_PD_with_Due/Out_Gear_Box/MATLAB Function2'
+ * '<S3>'   : 'position_control_PD_with_Due/Out_Gear_Box/Radians to Degrees'
  */
 #endif                          /* RTW_HEADER_position_control_PD_with_Due_h_ */
 

@@ -10,7 +10,6 @@ ert_main.o: \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_continuous.h \
  C:/PROGRA~1/MATLAB/R2022a/toolbox/coder/xcp/src/target/ext_mode/include/ext_mode.h \
  C:/Users/LabPC/OneDrive/MyGithub/Control-Theory/PC_Hardware/position_control_PD_with_Due_ert_rtw/ext_mode_types.h \
- C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_PWM.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
@@ -48,8 +47,6 @@ C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_continuous.h:
 C:/PROGRA~1/MATLAB/R2022a/toolbox/coder/xcp/src/target/ext_mode/include/ext_mode.h:
 
 C:/Users/LabPC/OneDrive/MyGithub/Control-Theory/PC_Hardware/position_control_PD_with_Due_ert_rtw/ext_mode_types.h:
-
-C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h:
 

@@ -5,8 +5,8 @@ avrdude: NOTE: "flash" memory has been specified, an erase cycle will be perform
          To disable this feature, specify the -D option.
 avrdude: erasing chip
 avrdude: reading input file "C:\Users\LabPC\OneDrive\MyGithub\Control-Theory\PC_Hardware/position_control_PD_with_Due.hex"
-avrdude: writing flash (27644 bytes):
-avrdude: 27644 bytes of flash written
+avrdude: writing flash (27112 bytes):
+avrdude: 27112 bytes of flash written
 
 avrdude done.  Thank you.
 

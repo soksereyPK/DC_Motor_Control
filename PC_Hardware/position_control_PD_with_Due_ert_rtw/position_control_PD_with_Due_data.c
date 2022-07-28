@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control_PD_with_Due'.
  *
- * Model version                  : 2.13
+ * Model version                  : 2.26
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Jul 28 08:24:25 2022
+ * C/C++ source code generated on : Thu Jul 28 12:14:00 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -18,52 +18,34 @@
 /* Block parameters (default storage) */
 P_position_control_PD_with_Du_T position_control_PD_with_Due_P = {
   /* Variable: kd2
-   * Referenced by: '<Root>/Gain11'
+   * Referenced by: '<Root>/Gain10'
    */
-  574.45344129554655,
+  0.44517766877011339,
 
   /* Variable: kp2
-   * Referenced by: '<Root>/Gain12'
+   * Referenced by: '<Root>/Gain5'
    */
-  209878.54251012145,
-
-  /* Variable: pi
-   * Referenced by:
-   *   '<Root>/Constant'
-   *   '<Root>/Constant4'
-   *   '<Root>/Sine Wave'
-   */
-  180.0,
+  5.3530057768620249,
 
   /* Expression: 0.01
-   * Referenced by: '<Root>/Encoder'
+   * Referenced by: '<S1>/Encoder'
    */
   0.01,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave'
+  /* Expression: 50
+   * Referenced by: '<Root>/Constant2'
    */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave'
-   */
-  0.0,
-
-  /* Computed Parameter: Gain1_Gain
-   * Referenced by: '<S1>/Gain1'
-   */
-  { { 0UL, 0x1UL } },
+  50.0,
 
   /* Computed Parameter: Gain_Gain
-   * Referenced by: '<Root>/Gain'
+   * Referenced by: '<S3>/Gain'
    */
-  1227133513,
+  { { 0x770698F0UL, 0x729UL } },
 
-  /* Computed Parameter: ManualSwitch_CurrentSetting
-   * Referenced by: '<Root>/Manual Switch'
+  /* Computed Parameter: Gain_Gain_j
+   * Referenced by: '<S1>/Gain'
    */
-  0U
+  2044399652
 };
 
 /*

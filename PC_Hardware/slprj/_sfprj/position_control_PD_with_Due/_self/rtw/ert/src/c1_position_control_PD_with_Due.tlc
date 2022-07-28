@@ -7,25 +7,11 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   2 \
+    NumChartData   0 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
       IsTestPoint  0\
-    }\
-    ChartData {\
-      Name         "counter_num"\
-      Description  "EmlPersistent"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "position_control_PD_with_Due:134:55-66"\
-    }\
-    ChartData {\
-      Name         "over_flag"\
-      Description  "EmlPersistent"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "position_control_PD_with_Due:134:67-76"\
     }\
   }
   %return ChartDataElements
