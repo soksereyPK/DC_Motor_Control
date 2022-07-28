@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2020b/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ D:/MATLAB/Arduinocode/hardware_ekf_est_4para_myrobot_new_driver_ert_rtw/rtwtypes.h
+
+D:/MATLAB/Arduinocode/hardware_ekf_est_4para_myrobot_new_driver_ert_rtw/rtwtypes.h:

@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ C:/Users/LabPC/OneDrive/MyGithub/Control-Theory/PC_Hardware/position_control_PD_with_Due_ert_rtw/rtwtypes.h
+
+C:/Users/LabPC/OneDrive/MyGithub/Control-Theory/PC_Hardware/position_control_PD_with_Due_ert_rtw/rtwtypes.h:
