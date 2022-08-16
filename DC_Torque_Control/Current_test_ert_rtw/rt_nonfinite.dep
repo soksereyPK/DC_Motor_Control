@@ -1,0 +1,14 @@
+rt_nonfinite.o: \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rt_nonfinite.c \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetNaN.h \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetInf.h \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rt_nonfinite.h
+
+C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetNaN.h:
+
+C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h:
+
+C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetInf.h:
+
+C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rt_nonfinite.h:

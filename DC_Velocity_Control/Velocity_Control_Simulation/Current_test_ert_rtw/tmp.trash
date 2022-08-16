@@ -1,0 +1,9 @@
+
+avrdude: AVR device initialized and ready to accept instructions
+avrdude: Device signature = 0x1e9801 (probably m2560)
+avrdude: reading input file "C:\Users\LabPC\OneDrive\MyGithub\github\Control-Theory\DC_Velocity_Control\Velocity_Control_Simulation/Current_test.hex"
+avrdude: writing flash (34546 bytes):
+avrdude: 34546 bytes of flash written
+
+avrdude done.  Thank you.
+

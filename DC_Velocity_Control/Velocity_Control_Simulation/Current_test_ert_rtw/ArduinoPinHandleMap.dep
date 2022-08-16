@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ C:/Users/LabPC/OneDrive/MyGithub/github/Control-Theory/DC_Velocity_Control/Velocity_Control_Simulation/Current_test_ert_rtw/rtwtypes.h
+
+C:/Users/LabPC/OneDrive/MyGithub/github/Control-Theory/DC_Velocity_Control/Velocity_Control_Simulation/Current_test_ert_rtw/rtwtypes.h:

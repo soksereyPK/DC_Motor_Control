@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ C:/Users/LabPC/OneDrive/Desktop/Torque_Control/LP_filter_ert_rtw/rtwtypes.h
+
+C:/Users/LabPC/OneDrive/Desktop/Torque_Control/LP_filter_ert_rtw/rtwtypes.h:
