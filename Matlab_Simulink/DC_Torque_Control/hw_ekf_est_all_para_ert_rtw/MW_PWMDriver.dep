@@ -1,0 +1,20 @@
+MW_PWMDriver.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/toolbox/target/supportpackages/arduinobase/src/MW_PWMDriver.c \
+ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_PWMDriver.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/hw_ekf_est_all_para_ert_rtw/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/wiring_private.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h
+
+C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_PWMDriver.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/hw_ekf_est_all_para_ert_rtw/rtwtypes.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/wiring_private.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h:

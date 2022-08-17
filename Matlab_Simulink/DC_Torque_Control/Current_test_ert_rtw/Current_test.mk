@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Current_test'. 
 ## 
 ## Makefile     : Current_test.mk
-## Generated on : Tue Aug 16 11:52:55 2022
+## Generated on : Wed Aug 17 10:22:04 2022
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/Current_test.elf
 ## Product type : executable
 ## 
@@ -21,7 +21,7 @@ MAKEFILE                  = Current_test.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2022a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2022a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/LabPC/OneDrive/Desktop/Torque_Control
+START_DIR                 = C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0

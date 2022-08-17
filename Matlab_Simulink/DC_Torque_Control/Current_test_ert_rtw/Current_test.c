@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.17
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Aug 16 11:52:52 2022
+ * C/C++ source code generated on : Wed Aug 17 10:21:59 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -146,7 +146,7 @@ void Current_test_step0(void)          /* Sample time: [0.0s, 0.0s] */
   /* DataTypeConversion: '<S1>/Data Type Conversion' incorporates:
    *  Constant: '<S1>/Constant2'
    */
-  pwm_cal = floor(Current_test_P.Constant2_Value_e);
+  pwm_cal = floor(Current_test_P.Constant2_Value_a);
   if (rtIsNaN(pwm_cal) || rtIsInf(pwm_cal)) {
     pwm_cal = 0.0;
   } else {
@@ -248,10 +248,10 @@ void Current_test_step2(void)          /* Sample time: [0.1s, 0.0s] */
   uint8_T output_raw[2];
   uint8_T status;
 
-  /* MATLABSystem: '<Root>/Current Reg read1' */
-  if (Current_test_DW.obj.SampleTime !=
-      Current_test_P.CurrentRegread1_SampleTime) {
-    Current_test_DW.obj.SampleTime = Current_test_P.CurrentRegread1_SampleTime;
+  /* MATLABSystem: '<Root>/Current Reg read' */
+  if (Current_test_DW.obj.SampleTime != Current_test_P.CurrentRegread_SampleTime)
+  {
+    Current_test_DW.obj.SampleTime = Current_test_P.CurrentRegread_SampleTime;
   }
 
   status = 4U;
@@ -272,13 +272,13 @@ void Current_test_step2(void)          /* Sample time: [0.1s, 0.0s] */
     b_output = 0;
   }
 
-  /* Gain: '<Root>/Gain26' incorporates:
-   *  DataTypeConversion: '<Root>/Data Type Conversion2'
-   *  Gain: '<Root>/Gain25'
-   *  MATLABSystem: '<Root>/Current Reg read1'
+  /* Gain: '<Root>/Gain1' incorporates:
+   *  DataTypeConversion: '<Root>/Data Type Conversion'
+   *  Gain: '<Root>/Gain'
+   *  MATLABSystem: '<Root>/Current Reg read'
    */
-  Current_test_B.Gain26 = (real_T)((int32_T)Current_test_P.Gain25_Gain *
-    b_output) * 1.9073486328125E-6 * Current_test_P.Gain26_Gain;
+  Current_test_B.Gain1 = (real_T)((int32_T)Current_test_P.Gain_Gain * b_output) *
+    1.9073486328125E-6 * Current_test_P.Gain1_Gain;
 
   /* Update absolute time */
   /* The "clockTick2" counts the number of times the code of this task has
@@ -316,10 +316,10 @@ void Current_test_initialize(void)
   Current_test_M->Timing.stepSize0 = 0.001;
 
   /* External mode info */
-  Current_test_M->Sizes.checksums[0] = (1165854305U);
-  Current_test_M->Sizes.checksums[1] = (2452291659U);
-  Current_test_M->Sizes.checksums[2] = (606124902U);
-  Current_test_M->Sizes.checksums[3] = (3628479763U);
+  Current_test_M->Sizes.checksums[0] = (3404252529U);
+  Current_test_M->Sizes.checksums[1] = (2443029520U);
+  Current_test_M->Sizes.checksums[2] = (747284884U);
+  Current_test_M->Sizes.checksums[3] = (2416485338U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -345,39 +345,39 @@ void Current_test_initialize(void)
 
   {
     /* local block i/o variables */
-    int16_T rtb_DataTypeConversion_c;
+    int16_T rtb_DataTypeConversion_m;
     codertarget_arduinobase_in_dv_T *obj;
     codertarget_arduinobase_int_d_T *obj_0;
     codertarget_arduinobase_inter_T *obj_1;
-    int16_T rtb_DataTypeConversion_f;
+    int16_T rtb_DataTypeConversion_p;
     uint8_T SwappedDataBytes[2];
     uint8_T b_x[2];
     Current_test_M->Timing.rtmDbBufReadBuf3 = 0xFF;
     Current_test_M->Timing.rtmDbBufWriteBuf3 = 0xFF;
     Current_test_M->Timing.rtmDbBufLastBufWr3 = 0;
 
-    /* SystemInitialize for Atomic SubSystem: '<Root>/Initialize Function1' */
+    /* SystemInitialize for Atomic SubSystem: '<Root>/Initialize Function' */
     /* Start for MATLABSystem: '<S4>/Configuration write' */
-    Current_test_DW.obj_d.matlabCodegenIsDeleted = true;
-    Current_test_DW.obj_d.DefaultMaximumBusSpeedInHz = 400000.0;
-    Current_test_DW.obj_d.isInitialized = 0L;
-    Current_test_DW.obj_d.I2CDriverObj.MW_I2C_HANDLE = NULL;
-    Current_test_DW.obj_d.matlabCodegenIsDeleted = false;
-    obj_1 = &Current_test_DW.obj_d;
-    Current_test_DW.obj_d.isSetupComplete = false;
-    Current_test_DW.obj_d.isInitialized = 1L;
+    Current_test_DW.obj_m.matlabCodegenIsDeleted = true;
+    Current_test_DW.obj_m.DefaultMaximumBusSpeedInHz = 400000.0;
+    Current_test_DW.obj_m.isInitialized = 0L;
+    Current_test_DW.obj_m.I2CDriverObj.MW_I2C_HANDLE = NULL;
+    Current_test_DW.obj_m.matlabCodegenIsDeleted = false;
+    obj_1 = &Current_test_DW.obj_m;
+    Current_test_DW.obj_m.isSetupComplete = false;
+    Current_test_DW.obj_m.isInitialized = 1L;
     Current_test_B.modename = MW_I2C_MASTER;
     Current_test_B.i2cname = 0;
     obj_1->I2CDriverObj.MW_I2C_HANDLE = MW_I2C_Open(Current_test_B.i2cname,
       Current_test_B.modename);
-    Current_test_DW.obj_d.BusSpeed = 100000UL;
-    Current_test_B.varargin_1 = Current_test_DW.obj_d.BusSpeed;
-    MW_I2C_SetBusSpeed(Current_test_DW.obj_d.I2CDriverObj.MW_I2C_HANDLE,
+    Current_test_DW.obj_m.BusSpeed = 100000UL;
+    Current_test_B.varargin_1 = Current_test_DW.obj_m.BusSpeed;
+    MW_I2C_SetBusSpeed(Current_test_DW.obj_m.I2CDriverObj.MW_I2C_HANDLE,
                        Current_test_B.varargin_1);
-    Current_test_DW.obj_d.isSetupComplete = true;
+    Current_test_DW.obj_m.isSetupComplete = true;
     Curre_Calibrationwrite_Init(&Current_test_DW.Calibrationwrite_p);
 
-    /* End of SystemInitialize for SubSystem: '<Root>/Initialize Function1' */
+    /* End of SystemInitialize for SubSystem: '<Root>/Initialize Function' */
     Curre_Calibrationwrite_Init(&Current_test_DW.Calibrationwrite);
 
     /* Start for MATLABSystem: '<Root>/PWM1' */
@@ -400,14 +400,14 @@ void Current_test_initialize(void)
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(9UL, 0.0, 0.0);
     Current_test_DW.obj_l.isSetupComplete = true;
 
-    /* Start for MATLABSystem: '<Root>/Current Reg read1' */
+    /* Start for MATLABSystem: '<Root>/Current Reg read' */
     Current_test_DW.obj.matlabCodegenIsDeleted = true;
     Current_test_DW.obj.DefaultMaximumBusSpeedInHz = 400000.0;
     Current_test_DW.obj.isInitialized = 0L;
     Current_test_DW.obj.SampleTime = -1.0;
     Current_test_DW.obj.I2CDriverObj.MW_I2C_HANDLE = NULL;
     Current_test_DW.obj.matlabCodegenIsDeleted = false;
-    Current_test_DW.obj.SampleTime = Current_test_P.CurrentRegread1_SampleTime;
+    Current_test_DW.obj.SampleTime = Current_test_P.CurrentRegread_SampleTime;
     obj_0 = &Current_test_DW.obj;
     Current_test_DW.obj.isSetupComplete = false;
     Current_test_DW.obj.isInitialized = 1L;
@@ -421,7 +421,7 @@ void Current_test_initialize(void)
                        Current_test_B.varargin_1);
     Current_test_DW.obj.isSetupComplete = true;
 
-    /* Outputs for Atomic SubSystem: '<Root>/Initialize Function1' */
+    /* Outputs for Atomic SubSystem: '<Root>/Initialize Function' */
     /* DataTypeConversion: '<S4>/Data Type Conversion' incorporates:
      *  Constant: '<S4>/Constant3'
      */
@@ -432,24 +432,24 @@ void Current_test_initialize(void)
       Current_test_B.d = fmod(Current_test_B.d, 65536.0);
     }
 
-    rtb_DataTypeConversion_f = Current_test_B.d < 0.0 ? -(int16_T)(uint16_T)
+    rtb_DataTypeConversion_p = Current_test_B.d < 0.0 ? -(int16_T)(uint16_T)
       -Current_test_B.d : (int16_T)(uint16_T)Current_test_B.d;
 
     /* End of DataTypeConversion: '<S4>/Data Type Conversion' */
 
     /* MATLABSystem: '<S4>/Configuration write' */
-    memcpy((void *)&SwappedDataBytes[0], (void *)&rtb_DataTypeConversion_f,
+    memcpy((void *)&SwappedDataBytes[0], (void *)&rtb_DataTypeConversion_p,
            (uint16_T)((size_t)2 * sizeof(uint8_T)));
     b_x[0] = SwappedDataBytes[1];
     b_x[1] = SwappedDataBytes[0];
-    memcpy((void *)&rtb_DataTypeConversion_f, (void *)&b_x[0], (uint16_T)
+    memcpy((void *)&rtb_DataTypeConversion_p, (void *)&b_x[0], (uint16_T)
            ((size_t)1 * sizeof(int16_T)));
-    memcpy((void *)&SwappedDataBytes[0], (void *)&rtb_DataTypeConversion_f,
+    memcpy((void *)&SwappedDataBytes[0], (void *)&rtb_DataTypeConversion_p,
            (uint16_T)((size_t)2 * sizeof(uint8_T)));
     Current_test_B.b_SwappedDataBytes[0] = 0U;
     Current_test_B.b_SwappedDataBytes[1] = SwappedDataBytes[0];
     Current_test_B.b_SwappedDataBytes[2] = SwappedDataBytes[1];
-    MW_I2C_MasterWrite(Current_test_DW.obj_d.I2CDriverObj.MW_I2C_HANDLE, 64UL,
+    MW_I2C_MasterWrite(Current_test_DW.obj_m.I2CDriverObj.MW_I2C_HANDLE, 64UL,
                        &Current_test_B.b_SwappedDataBytes[0], 3UL, false, false);
 
     /* DataTypeConversion: '<S5>/Data Type Conversion' incorporates:
@@ -463,12 +463,12 @@ void Current_test_initialize(void)
     }
 
     /* DataTypeConversion: '<S5>/Data Type Conversion' */
-    rtb_DataTypeConversion_c = Current_test_B.d < 0.0 ? -(int16_T)(uint16_T)
+    rtb_DataTypeConversion_m = Current_test_B.d < 0.0 ? -(int16_T)(uint16_T)
       -Current_test_B.d : (int16_T)(uint16_T)Current_test_B.d;
-    Current_te_Calibrationwrite(rtb_DataTypeConversion_c,
+    Current_te_Calibrationwrite(rtb_DataTypeConversion_m,
       &Current_test_DW.Calibrationwrite_p);
 
-    /* End of Outputs for SubSystem: '<Root>/Initialize Function1' */
+    /* End of Outputs for SubSystem: '<Root>/Initialize Function' */
   }
 }
 
@@ -508,7 +508,7 @@ void Current_test_terminate(void)
 
   /* End of Terminate for MATLABSystem: '<Root>/PWM2' */
 
-  /* Terminate for MATLABSystem: '<Root>/Current Reg read1' */
+  /* Terminate for MATLABSystem: '<Root>/Current Reg read' */
   if (!Current_test_DW.obj.matlabCodegenIsDeleted) {
     Current_test_DW.obj.matlabCodegenIsDeleted = true;
     if ((Current_test_DW.obj.isInitialized == 1L) &&
@@ -517,21 +517,21 @@ void Current_test_terminate(void)
     }
   }
 
-  /* End of Terminate for MATLABSystem: '<Root>/Current Reg read1' */
-  /* Terminate for Atomic SubSystem: '<Root>/Initialize Function1' */
+  /* End of Terminate for MATLABSystem: '<Root>/Current Reg read' */
+  /* Terminate for Atomic SubSystem: '<Root>/Initialize Function' */
   /* Terminate for MATLABSystem: '<S4>/Configuration write' */
-  if (!Current_test_DW.obj_d.matlabCodegenIsDeleted) {
-    Current_test_DW.obj_d.matlabCodegenIsDeleted = true;
-    if ((Current_test_DW.obj_d.isInitialized == 1L) &&
-        Current_test_DW.obj_d.isSetupComplete) {
-      MW_I2C_Close(Current_test_DW.obj_d.I2CDriverObj.MW_I2C_HANDLE);
+  if (!Current_test_DW.obj_m.matlabCodegenIsDeleted) {
+    Current_test_DW.obj_m.matlabCodegenIsDeleted = true;
+    if ((Current_test_DW.obj_m.isInitialized == 1L) &&
+        Current_test_DW.obj_m.isSetupComplete) {
+      MW_I2C_Close(Current_test_DW.obj_m.I2CDriverObj.MW_I2C_HANDLE);
     }
   }
 
   /* End of Terminate for MATLABSystem: '<S4>/Configuration write' */
   Curre_Calibrationwrite_Term(&Current_test_DW.Calibrationwrite_p);
 
-  /* End of Terminate for SubSystem: '<Root>/Initialize Function1' */
+  /* End of Terminate for SubSystem: '<Root>/Initialize Function' */
 }
 
 /*

@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.17
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Aug 16 11:52:52 2022
+ * C/C++ source code generated on : Wed Aug 17 10:21:59 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -90,7 +90,7 @@ typedef struct {
 typedef struct {
   uint32_T i2cname;
   MW_I2C_Mode_Type modename;
-  real_T Gain26;                       /* '<Root>/Gain26' */
+  real_T Gain1;                        /* '<Root>/Gain1' */
   real_T d;
   uint32_T varargin_1;
   uint8_T b_SwappedDataBytes[3];
@@ -98,13 +98,13 @@ typedef struct {
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_arduinobase_int_d_T obj; /* '<Root>/Current Reg read1' */
-  codertarget_arduinobase_inter_T obj_d;/* '<S4>/Configuration write' */
+  codertarget_arduinobase_int_d_T obj; /* '<Root>/Current Reg read' */
+  codertarget_arduinobase_inter_T obj_m;/* '<S4>/Configuration write' */
   codertarget_arduinobase_in_dv_T obj_l;/* '<Root>/PWM2' */
   codertarget_arduinobase_in_dv_T obj_j;/* '<Root>/PWM1' */
   struct {
     void *LoggedData;
-  } Scope22_PWORK;                     /* '<Root>/Scope22' */
+  } Scope4_PWORK;                      /* '<Root>/Scope4' */
 
   DW_Calibrationwrite_Current_t_T Calibrationwrite_p;/* '<S1>/Calibration write' */
   DW_Calibrationwrite_Current_t_T Calibrationwrite;/* '<S1>/Calibration write' */
@@ -112,8 +112,8 @@ typedef struct {
 
 /* Parameters (default storage) */
 struct P_Current_test_T_ {
-  real_T CurrentRegread1_SampleTime;   /* Expression: 0.1
-                                        * Referenced by: '<Root>/Current Reg read1'
+  real_T CurrentRegread_SampleTime;    /* Expression: 0.1
+                                        * Referenced by: '<Root>/Current Reg read'
                                         */
   real_T Constant3_Value;              /* Expression: hex2dec("399F")
                                         * Referenced by: '<S4>/Constant3'
@@ -121,7 +121,7 @@ struct P_Current_test_T_ {
   real_T Constant2_Value;              /* Expression: hex2dec("0x2800")
                                         * Referenced by: '<S5>/Constant2'
                                         */
-  real_T Constant2_Value_e;            /* Expression: hex2dec("2800")
+  real_T Constant2_Value_a;            /* Expression: hex2dec("2800")
                                         * Referenced by: '<S1>/Constant2'
                                         */
   real_T SineWave1_Amp;                /* Expression: 16
@@ -136,11 +136,11 @@ struct P_Current_test_T_ {
   real_T SineWave1_Phase;              /* Expression: 0
                                         * Referenced by: '<Root>/Sine Wave1'
                                         */
-  real_T Gain26_Gain;                  /* Expression: 0.001
-                                        * Referenced by: '<Root>/Gain26'
+  real_T Gain1_Gain;                   /* Expression: 0.001
+                                        * Referenced by: '<Root>/Gain1'
                                         */
-  int16_T Gain25_Gain;                 /* Computed Parameter: Gain25_Gain
-                                        * Referenced by: '<Root>/Gain25'
+  int16_T Gain_Gain;                   /* Computed Parameter: Gain_Gain
+                                        * Referenced by: '<Root>/Gain'
                                         */
 };
 
@@ -235,11 +235,11 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'Current_test'
- * '<S1>'   : 'Current_test/Calibration every time step1'
- * '<S2>'   : 'Current_test/Initialize Function1'
+ * '<S1>'   : 'Current_test/Calibration every time step'
+ * '<S2>'   : 'Current_test/Initialize Function'
  * '<S3>'   : 'Current_test/MATLAB Function2'
- * '<S4>'   : 'Current_test/Initialize Function1/Subsystem'
- * '<S5>'   : 'Current_test/Initialize Function1/Subsystem1'
+ * '<S4>'   : 'Current_test/Initialize Function/Subsystem'
+ * '<S5>'   : 'Current_test/Initialize Function/Subsystem1'
  */
 #endif                                 /* RTW_HEADER_Current_test_h_ */
 

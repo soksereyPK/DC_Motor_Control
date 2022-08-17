@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.17
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Aug 16 11:52:52 2022
+ * C/C++ source code generated on : Wed Aug 17 10:21:59 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -18,7 +18,7 @@
 /* Block parameters (default storage) */
 P_Current_test_T Current_test_P = {
   /* Expression: 0.1
-   * Referenced by: '<Root>/Current Reg read1'
+   * Referenced by: '<Root>/Current Reg read'
    */
   0.1,
 
@@ -58,12 +58,12 @@ P_Current_test_T Current_test_P = {
   0.0,
 
   /* Expression: 0.001
-   * Referenced by: '<Root>/Gain26'
+   * Referenced by: '<Root>/Gain1'
    */
   0.001,
 
-  /* Computed Parameter: Gain25_Gain
-   * Referenced by: '<Root>/Gain25'
+  /* Computed Parameter: Gain_Gain
+   * Referenced by: '<Root>/Gain'
    */
   20972
 };
