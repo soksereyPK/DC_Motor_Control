@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.17
+ * Model version                  : 1.39
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 17 10:21:59 2022
+ * C/C++ source code generated on : Wed Aug 24 13:41:38 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -17,55 +17,47 @@
 
 /* Block parameters (default storage) */
 P_Current_test_T Current_test_P = {
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Current Reg read'
+  /* Variable: a
+   * Referenced by: '<Root>/Gain11'
    */
-  0.1,
+  24.43,
 
-  /* Expression: hex2dec("399F")
-   * Referenced by: '<S4>/Constant3'
+  /* Variable: b
+   * Referenced by:
+   *   '<Root>/Gain11'
+   *   '<Root>/Gain12'
    */
-  14751.0,
+  40.34,
 
-  /* Expression: hex2dec("0x2800")
-   * Referenced by: '<S5>/Constant2'
+  /* Variable: kd4
+   * Referenced by: '<Root>/Gain10'
    */
-  10240.0,
+  0.017420456834862298,
 
-  /* Expression: hex2dec("2800")
-   * Referenced by: '<S1>/Constant2'
+  /* Variable: kp4
+   * Referenced by: '<Root>/Gain9'
    */
-  10240.0,
+  3.9145679330051988,
 
-  /* Expression: 16
-   * Referenced by: '<Root>/Sine Wave1'
+  /* Expression: -1
+   * Referenced by: '<S1>/Encoder1'
    */
-  16.0,
+  -1.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave1'
+  /* Expression: (2*pi)/(11*4*370)
+   * Referenced by: '<S1>/Gain2'
    */
-  0.0,
+  0.00038594504343854953,
 
-  /* Expression: 0.5
-   * Referenced by: '<Root>/Sine Wave1'
+  /* Expression: 50
+   * Referenced by: '<Root>/Constant5'
    */
-  0.5,
+  50.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave1'
+  /* Expression: 180/pi
+   * Referenced by: '<S3>/Gain'
    */
-  0.0,
-
-  /* Expression: 0.001
-   * Referenced by: '<Root>/Gain1'
-   */
-  0.001,
-
-  /* Computed Parameter: Gain_Gain
-   * Referenced by: '<Root>/Gain'
-   */
-  20972
+  57.295779513082323
 };
 
 /*

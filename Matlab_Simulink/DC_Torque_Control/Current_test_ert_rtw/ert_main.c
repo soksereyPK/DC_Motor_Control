@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.17
+ * Model version                  : 1.39
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 17 10:21:59 2022
+ * C/C++ source code generated on : Wed Aug 24 13:41:38 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -19,30 +19,15 @@
 #include "ext_mode.h"
 
 volatile int IsrOverrun = 0;
-boolean_T isRateRunning[3] = { 0, 0, 0 };
-
-boolean_T need2runFlags[3] = { 0, 0, 0 };
-
+static boolean_T OverrunFlag = 0;
 void rt_OneStep(void)
 {
-  extmodeSimulationTime_T currentTime = (extmodeSimulationTime_T) 0;
-  boolean_T eventFlags[3];
-
-  /* Check base rate for overrun */
-  if (isRateRunning[0]++) {
+  /* Check for overrun. Protect OverrunFlag against preemption */
+  if (OverrunFlag++) {
     IsrOverrun = 1;
-    isRateRunning[0]--;                /* allow future iterations to succeed*/
+    OverrunFlag--;
     return;
   }
-
-  /*
-   * For a bare-board target (i.e., no operating system), the rates
-   * that execute this base step are buffered locally to allow for
-   * overlapping preemption.  The generated code includes function
-   * writeCodeInfoFcn() which sets the rates that need to run this time step.
-   * The return values are 1 and 0 for true and false, respectively.
-   */
-  Current_test_SetEventsForThisBaseStep(eventFlags);
 
 #ifndef _MW_ARDUINO_LOOP_
 
@@ -50,73 +35,16 @@ void rt_OneStep(void)
 
 #endif;
 
-  currentTime = (extmodeSimulationTime_T) ((Current_test_M->Timing.clockTick0 *
-    1) + 0)
-    ;
-  Current_test_step0();
+  Current_test_step();
 
   /* Get model outputs here */
-
-  /* Trigger External Mode event */
-  extmodeEvent(1, currentTime);
-
 #ifndef _MW_ARDUINO_LOOP_
 
   cli();
 
 #endif;
 
-  isRateRunning[0]--;
-  if (eventFlags[2]) {
-    if (need2runFlags[2]++) {
-      IsrOverrun = 1;
-      need2runFlags[2]--;              /* allow future iterations to succeed*/
-      return;
-    }
-  }
-
-  if (need2runFlags[2]) {
-    if (isRateRunning[1]) {
-      /* Yield to higher priority*/
-      return;
-    }
-
-    isRateRunning[2]++;
-
-#ifndef _MW_ARDUINO_LOOP_
-
-    sei();
-
-#endif;
-
-    /* Step the model for subrate "2" */
-    switch (2)
-    {
-     case 2 :
-      currentTime = (extmodeSimulationTime_T)
-        ((Current_test_M->Timing.clockTick2 * 100) + 0)
-        ;
-      Current_test_step2();
-
-      /* Get model outputs here */
-
-      /* Trigger External Mode event */
-      extmodeEvent(2, currentTime);
-      break;
-
-     default :
-      break;
-    }
-
-#ifndef _MW_ARDUINO_LOOP_
-
-    cli();
-
-#endif;
-
-    need2runFlags[2]--;
-    isRateRunning[2]--;
-  }
+  OverrunFlag--;
 }
 
 extern void rtIOStreamResync();
