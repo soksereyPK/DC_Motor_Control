@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'hw_ekf_est_all_para'.
  *
- * Model version                  : 4.5
+ * Model version                  : 4.4
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 17 11:47:30 2022
+ * C/C++ source code generated on : Fri Aug 26 10:32:21 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -64,7 +64,7 @@ int main(void)
   rtmSetErrorStatus(hw_ekf_est_all_para_M, 0);
 
   /* Set Final Simulation Time in Ticks */
-  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 10000);
+  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 12000);
 
   /* Parse External Mode command line arguments */
   errorCode = extmodeParseArgs(0, NULL);

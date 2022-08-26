@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'hw_ekf_est_all_para'.
  *
- * Model version                  : 4.5
+ * Model version                  : 4.4
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 17 11:47:30 2022
+ * C/C++ source code generated on : Fri Aug 26 10:32:21 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -90,9 +90,6 @@ extern void hw_ekf_est_all_Calibrationwrite(int16_T rtu_0,
   DW_Calibrationwrite_hw_ekf_es_T *localDW);
 extern void hw_ekf_es_Calibrationwrite_Term(DW_Calibrationwrite_hw_ekf_es_T
   *localDW);
-
-/* private model entry point functions */
-extern void hw_ekf_est_all_para_derivatives(void);
 
 #endif                           /* RTW_HEADER_hw_ekf_est_all_para_private_h_ */
 

@@ -1,32 +1,34 @@
 Current_test.o: \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test.c \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test.c \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtwtypes.h \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_extmode.h \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/sysran_types.h \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_continuous.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtwtypes.h \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_solver.h \
  C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_continuous.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_I2C.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
+ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h \
+ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_PWM.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test_types.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test_types.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetInf.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rt_nonfinite.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/MW_target_hardware_resources.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtGetInf.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rt_nonfinite.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/MW_target_hardware_resources.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~1/include/MW_ArduinoHWInit.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~1/SCHEDU~1/include/arduinoAVRScheduler.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test_private.h \
- C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/multiword_types.h
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test_private.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/multiword_types.h
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtwtypes.h:
 
 C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_extmode.h:
 
@@ -34,7 +36,7 @@ C:/PROGRA~1/MATLAB/R2022a/simulink/include/sysran_types.h:
 
 C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_continuous.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtwtypes.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtwtypes.h:
 
 C:/PROGRA~1/MATLAB/R2022a/simulink/include/rtw_solver.h:
 
@@ -44,17 +46,21 @@ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_I2C.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h:
 
+C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h:
+
+C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h:
+
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_PWM.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test_types.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test_types.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rtGetInf.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rtGetInf.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/rt_nonfinite.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/rt_nonfinite.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/MW_target_hardware_resources.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/MW_target_hardware_resources.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~1/include/MW_ArduinoHWInit.h:
 
@@ -66,6 +72,6 @@ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/ard
 
 C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/Current_test_private.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/Current_test_private.h:
 
-C:/Users/LabPC/OneDrive/Desktop/Torque_Control/Current_test_ert_rtw/multiword_types.h:
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/Current_test_ert_rtw/multiword_types.h:

@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Position'.
  *
- * Model version                  : 1.16
+ * Model version                  : 1.19
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Aug 25 12:50:48 2022
+ * C/C++ source code generated on : Fri Aug 26 11:18:31 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -15,10 +15,52 @@
 
 #ifndef RTW_HEADER_Position_types_h_
 #define RTW_HEADER_Position_types_h_
-#include "rtwtypes.h"
 #include "MW_SVD.h"
+#include "rtwtypes.h"
 
 /* Model Code Variants */
+
+/* Custom Type definition for MATLABSystem: '<S1>/Calibration write' */
+#include "MW_SVD.h"
+#ifndef struct_tag_jbIFaTBEZATkkvPSmnoPa
+#define struct_tag_jbIFaTBEZATkkvPSmnoPa
+
+struct tag_jbIFaTBEZATkkvPSmnoPa
+{
+  MW_Handle_Type MW_I2C_HANDLE;
+};
+
+#endif                                 /* struct_tag_jbIFaTBEZATkkvPSmnoPa */
+
+#ifndef typedef_c_arduinodriver_ArduinoI2C_Po_T
+#define typedef_c_arduinodriver_ArduinoI2C_Po_T
+
+typedef struct tag_jbIFaTBEZATkkvPSmnoPa c_arduinodriver_ArduinoI2C_Po_T;
+
+#endif                             /* typedef_c_arduinodriver_ArduinoI2C_Po_T */
+
+#ifndef struct_tag_3coDYKg8JwMUxQ16KBcXBE
+#define struct_tag_3coDYKg8JwMUxQ16KBcXBE
+
+struct tag_3coDYKg8JwMUxQ16KBcXBE
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  c_arduinodriver_ArduinoI2C_Po_T I2CDriverObj;
+  uint32_T BusSpeed;
+  real_T DefaultMaximumBusSpeedInHz;
+};
+
+#endif                                 /* struct_tag_3coDYKg8JwMUxQ16KBcXBE */
+
+#ifndef typedef_codertarget_arduinobase_inter_T
+#define typedef_codertarget_arduinobase_inter_T
+
+typedef struct tag_3coDYKg8JwMUxQ16KBcXBE codertarget_arduinobase_inter_T;
+
+#endif                             /* typedef_codertarget_arduinobase_inter_T */
+
 #ifndef struct_tag_04b6x6tDldj9IrIH2gmbjG
 #define struct_tag_04b6x6tDldj9IrIH2gmbjG
 
@@ -71,15 +113,36 @@ struct tag_hiATgaifu8RfrjZ2yifYbH
 
 #endif                                 /* struct_tag_hiATgaifu8RfrjZ2yifYbH */
 
-#ifndef typedef_codertarget_arduinobase_inter_T
-#define typedef_codertarget_arduinobase_inter_T
+#ifndef typedef_codertarget_arduinobase_int_c_T
+#define typedef_codertarget_arduinobase_int_c_T
 
-typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_inter_T;
+typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_int_c_T;
 
-#endif                             /* typedef_codertarget_arduinobase_inter_T */
+#endif                             /* typedef_codertarget_arduinobase_int_c_T */
 
-/* Custom Type definition for MATLABSystem: '<S1>/PWM' */
-#include "MW_SVD.h"
+#ifndef struct_tag_chY474Xs2EmAHQmJ9UhmtD
+#define struct_tag_chY474Xs2EmAHQmJ9UhmtD
+
+struct tag_chY474Xs2EmAHQmJ9UhmtD
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  c_arduinodriver_ArduinoI2C_Po_T I2CDriverObj;
+  uint32_T BusSpeed;
+  real_T DefaultMaximumBusSpeedInHz;
+  real_T SampleTime;
+};
+
+#endif                                 /* struct_tag_chY474Xs2EmAHQmJ9UhmtD */
+
+#ifndef typedef_codertarget_arduinobase_in_cv_T
+#define typedef_codertarget_arduinobase_in_cv_T
+
+typedef struct tag_chY474Xs2EmAHQmJ9UhmtD codertarget_arduinobase_in_cv_T;
+
+#endif                             /* typedef_codertarget_arduinobase_in_cv_T */
+
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN
 
@@ -110,12 +173,12 @@ struct tag_4eDVzK5FiryyCjvjjvrZGB
 
 #endif                                 /* struct_tag_4eDVzK5FiryyCjvjjvrZGB */
 
-#ifndef typedef_codertarget_arduinobase_int_c_T
-#define typedef_codertarget_arduinobase_int_c_T
+#ifndef typedef_codertarget_arduinobase_i_cva_T
+#define typedef_codertarget_arduinobase_i_cva_T
 
-typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_int_c_T;
+typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_i_cva_T;
 
-#endif                             /* typedef_codertarget_arduinobase_int_c_T */
+#endif                             /* typedef_codertarget_arduinobase_i_cva_T */
 
 /* Parameters (default storage) */
 typedef struct P_Position_T_ P_Position_T;

@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Current_test'.
  *
- * Model version                  : 1.39
+ * Model version                  : 1.42
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 24 13:41:38 2022
+ * C/C++ source code generated on : Fri Aug 26 10:25:18 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR

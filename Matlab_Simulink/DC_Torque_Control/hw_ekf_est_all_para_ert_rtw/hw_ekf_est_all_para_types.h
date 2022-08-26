@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'hw_ekf_est_all_para'.
  *
- * Model version                  : 4.5
+ * Model version                  : 4.4
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Wed Aug 17 11:47:30 2022
+ * C/C++ source code generated on : Fri Aug 26 10:32:21 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -60,6 +60,43 @@ struct tag_3coDYKg8JwMUxQ16KBcXBE
 typedef struct tag_3coDYKg8JwMUxQ16KBcXBE codertarget_arduinobase_inter_T;
 
 #endif                             /* typedef_codertarget_arduinobase_inter_T */
+
+#ifndef struct_tag_04b6x6tDldj9IrIH2gmbjG
+#define struct_tag_04b6x6tDldj9IrIH2gmbjG
+
+struct tag_04b6x6tDldj9IrIH2gmbjG
+{
+  int16_T __dummy;
+};
+
+#endif                                 /* struct_tag_04b6x6tDldj9IrIH2gmbjG */
+
+#ifndef typedef_b_arduinodriver_ArduinoDigita_T
+#define typedef_b_arduinodriver_ArduinoDigita_T
+
+typedef struct tag_04b6x6tDldj9IrIH2gmbjG b_arduinodriver_ArduinoDigita_T;
+
+#endif                             /* typedef_b_arduinodriver_ArduinoDigita_T */
+
+#ifndef struct_tag_AYWgtFscQm3mLUJYb3A20C
+#define struct_tag_AYWgtFscQm3mLUJYb3A20C
+
+struct tag_AYWgtFscQm3mLUJYb3A20C
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  b_arduinodriver_ArduinoDigita_T DigitalIODriverObj;
+};
+
+#endif                                 /* struct_tag_AYWgtFscQm3mLUJYb3A20C */
+
+#ifndef typedef_codertarget_arduinobase_block_T
+#define typedef_codertarget_arduinobase_block_T
+
+typedef struct tag_AYWgtFscQm3mLUJYb3A20C codertarget_arduinobase_block_T;
+
+#endif                             /* typedef_codertarget_arduinobase_block_T */
 
 #ifndef struct_tag_hiATgaifu8RfrjZ2yifYbH
 #define struct_tag_hiATgaifu8RfrjZ2yifYbH

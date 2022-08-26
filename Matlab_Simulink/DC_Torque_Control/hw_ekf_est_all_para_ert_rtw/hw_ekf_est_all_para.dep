@@ -12,6 +12,7 @@ hw_ekf_est_all_para.o: \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/hw_ekf_est_all_para_ert_rtw/ext_mode_types.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_I2C.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
+ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_PWM.h \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_Control/hw_ekf_est_all_para_ert_rtw/hw_ekf_est_all_para_types.h \
@@ -50,6 +51,8 @@ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torq
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_I2C.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h:
+
+C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h:
 
