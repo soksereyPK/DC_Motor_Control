@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.39
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Fri Aug 26 16:07:10 2022
+ * C/C++ source code generated on : Sat Sep  3 11:18:33 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -107,7 +107,6 @@ void Torque_control_step(void)
     codertarget_arduinobase_i_h3r_T *obj;
     real_T y_tmp_idx_1_tmp;
     real_T *lastU;
-    int32_T rtb_Encoder1_0;
     int16_T Ak_tmp;
     int16_T Ak_tmp_tmp;
     int16_T rtb_IN1;
@@ -136,14 +135,14 @@ void Torque_control_step(void)
       Torque_control_DW.obj_j.TunablePropsChanged = false;
     }
 
-    MW_EncoderRead(Torque_control_DW.obj_j.Index, &rtb_Encoder1_0);
+    /* MATLABSystem: '<S5>/Encoder1' */
+    MW_EncoderRead(Torque_control_DW.obj_j.Index, &Torque_control_B.Encoder1);
 
     /* Gain: '<S5>/Gain2' incorporates:
      *  DataTypeConversion: '<S5>/Data Type Conversion1'
-     *  MATLABSystem: '<S5>/Encoder1'
      */
     Torque_control_B.Gain2 = Torque_control_P.Gain2_Gain * (real_T)
-      rtb_Encoder1_0;
+      Torque_control_B.Encoder1;
 
     /* Derivative: '<Root>/Derivative' incorporates:
      *  Clock: '<Root>/Clock'
@@ -151,22 +150,24 @@ void Torque_control_step(void)
     Torque_control_B.y_tmp_idx_0 = Torque_control_M->Timing.t[0];
     if ((Torque_control_DW.TimeStampA >= Torque_control_B.y_tmp_idx_0) &&
         (Torque_control_DW.TimeStampB >= Torque_control_B.y_tmp_idx_0)) {
+      /* Derivative: '<Root>/Derivative' */
       Torque_control_B.Derivative = 0.0;
     } else {
-      Torque_control_B.Derivative = Torque_control_DW.TimeStampA;
+      Torque_control_B.pwm_cal = Torque_control_DW.TimeStampA;
       lastU = &Torque_control_DW.LastUAtTimeA;
       if (Torque_control_DW.TimeStampA < Torque_control_DW.TimeStampB) {
         if (Torque_control_DW.TimeStampB < Torque_control_B.y_tmp_idx_0) {
-          Torque_control_B.Derivative = Torque_control_DW.TimeStampB;
+          Torque_control_B.pwm_cal = Torque_control_DW.TimeStampB;
           lastU = &Torque_control_DW.LastUAtTimeB;
         }
       } else if (Torque_control_DW.TimeStampA >= Torque_control_B.y_tmp_idx_0) {
-        Torque_control_B.Derivative = Torque_control_DW.TimeStampB;
+        Torque_control_B.pwm_cal = Torque_control_DW.TimeStampB;
         lastU = &Torque_control_DW.LastUAtTimeB;
       }
 
+      /* Derivative: '<Root>/Derivative' */
       Torque_control_B.Derivative = (Torque_control_B.Gain2 - *lastU) /
-        (Torque_control_B.y_tmp_idx_0 - Torque_control_B.Derivative);
+        (Torque_control_B.y_tmp_idx_0 - Torque_control_B.pwm_cal);
     }
 
     /* End of Derivative: '<Root>/Derivative' */
@@ -181,24 +182,24 @@ void Torque_control_step(void)
      *  Delay: '<S7>/Delay1'
      *  MATLAB Function: '<S7>/MATLAB Function'
      */
-    Torque_control_B.u = Torque_control_DW.Delay_DSTATE[0];
-    if (!rtIsNaN(Torque_control_B.u)) {
-      if (Torque_control_B.u < 0.0) {
-        Torque_control_B.u = -1.0;
+    Torque_control_B.pwm_cal = Torque_control_DW.Delay_DSTATE[0];
+    if (!rtIsNaN(Torque_control_B.pwm_cal)) {
+      if (Torque_control_B.pwm_cal < 0.0) {
+        Torque_control_B.pwm_cal = -1.0;
       } else {
-        Torque_control_B.u = (Torque_control_B.u > 0.0);
+        Torque_control_B.pwm_cal = (Torque_control_B.pwm_cal > 0.0);
       }
     }
 
     Torque_control_B.x[0] = ((-Torque_control_DW.Delay_DSTATE[1] *
       Torque_control_DW.Delay_DSTATE[0] + Torque_control_B.SineWave *
       Torque_control_DW.Delay_DSTATE[2]) - Torque_control_DW.Delay_DSTATE[3] *
-      Torque_control_B.u) * 0.01 + Torque_control_DW.Delay_DSTATE[0];
+      Torque_control_B.pwm_cal) * 0.01 + Torque_control_DW.Delay_DSTATE[0];
     Torque_control_B.x[1] = Torque_control_DW.Delay_DSTATE[1];
     Torque_control_B.x[2] = Torque_control_DW.Delay_DSTATE[2];
     Torque_control_B.x[3] = Torque_control_DW.Delay_DSTATE[3];
     memset(&Torque_control_B.b_I[0], 0, sizeof(real_T) << 4U);
-    Torque_control_B.u = Torque_control_DW.Delay_DSTATE[0];
+    Torque_control_B.pwm_cal = Torque_control_DW.Delay_DSTATE[0];
     Torque_control_B.Ak[0] = 0.01 * -Torque_control_DW.Delay_DSTATE[1] + 1.0;
     Torque_control_B.Ak[1] = Torque_control_B.b_I[1];
     Torque_control_B.Ak[2] = Torque_control_B.b_I[2];
@@ -213,16 +214,16 @@ void Torque_control_step(void)
     Torque_control_B.Ak[9] = Torque_control_B.b_I[9];
     Torque_control_B.Ak[10] = 1.0;
     Torque_control_B.Ak[11] = Torque_control_B.b_I[11];
-    if (!rtIsNaN(Torque_control_B.u)) {
-      if (Torque_control_B.u < 0.0) {
-        Torque_control_B.u = -1.0;
+    if (!rtIsNaN(Torque_control_B.pwm_cal)) {
+      if (Torque_control_B.pwm_cal < 0.0) {
+        Torque_control_B.pwm_cal = -1.0;
       } else {
-        Torque_control_B.u = (Torque_control_B.u > 0.0);
+        Torque_control_B.pwm_cal = (Torque_control_B.pwm_cal > 0.0);
       }
     }
 
-    Torque_control_B.Ak[12] = 0.01 * -Torque_control_B.u + Torque_control_B.b_I
-      [12];
+    Torque_control_B.Ak[12] = 0.01 * -Torque_control_B.pwm_cal +
+      Torque_control_B.b_I[12];
     Torque_control_B.Ak[13] = Torque_control_B.b_I[13];
     Torque_control_B.Ak[14] = Torque_control_B.b_I[14];
     Torque_control_B.Ak[15] = 1.0;
@@ -258,10 +259,10 @@ void Torque_control_step(void)
       y_tmp_0[rtb_IN2] = d[rtb_IN2];
     }
 
-    Torque_control_B.u = 0.0;
+    Torque_control_B.pwm_cal = 0.0;
     for (rtb_IN1 = 0; rtb_IN1 < 4; rtb_IN1++) {
       rtb_IN2 = rtb_IN1 << 2;
-      Torque_control_B.u += (((Torque_control_B.b_I[rtb_IN2 + 1] * (real_T)
+      Torque_control_B.pwm_cal += (((Torque_control_B.b_I[rtb_IN2 + 1] * (real_T)
         y_tmp_0[1] + Torque_control_B.b_I[rtb_IN2] * (real_T)y_tmp_0[0]) +
         Torque_control_B.b_I[rtb_IN2 + 2] * (real_T)y_tmp_0[2]) +
         Torque_control_B.b_I[rtb_IN2 + 3] * (real_T)y_tmp_0[3]) * (real_T)
@@ -274,17 +275,17 @@ void Torque_control_step(void)
         (real_T)y_tmp[1] + Torque_control_B.b_I[rtb_IN1] * (real_T)y_tmp[0]) +
         Torque_control_B.b_I[rtb_IN1 + 8] * (real_T)y_tmp[2]) +
         Torque_control_B.b_I[rtb_IN1 + 12] * (real_T)y_tmp[3]) /
-        (Torque_control_B.u + 0.01);
+        (Torque_control_B.pwm_cal + 0.01);
       Torque_control_B.y_tmp += (real_T)y_tmp_0[rtb_IN1] *
         Torque_control_B.x[rtb_IN1];
     }
 
-    Torque_control_B.u = Torque_control_B.Derivative - (0.0 *
+    Torque_control_B.pwm_cal = Torque_control_B.Derivative - (0.0 *
       Torque_control_B.SineWave + Torque_control_B.y_tmp);
     for (rtb_IN1 = 0; rtb_IN1 < 4; rtb_IN1++) {
       y_tmp_1 = y_tmp_0[rtb_IN1];
       Torque_control_B.x[rtb_IN1] += Torque_control_B.Wk[rtb_IN1] *
-        Torque_control_B.u;
+        Torque_control_B.pwm_cal;
       rtb_IN2 = rtb_IN1 << 2;
       Torque_control_B.Ak[rtb_IN2] = Torque_control_B.Wk[0] * (real_T)y_tmp_1;
       Torque_control_B.Ak[rtb_IN2 + 1] = Torque_control_B.Wk[1] * (real_T)
@@ -312,7 +313,7 @@ void Torque_control_step(void)
     /* End of MATLAB Function: '<S7>/MATLAB Function3' */
 
     /* DataTypeConversion: '<Root>/Data Type Conversion6' */
-    Torque_control_B.DataTypeConversion6 = (real32_T)Torque_control_B.x[1];
+    Torque_control_B.a = (real32_T)Torque_control_B.x[1];
 
     /* MATLABSystem: '<Root>/Current Reg read1' */
     if (Torque_control_DW.obj.SampleTime !=
@@ -368,33 +369,33 @@ void Torque_control_step(void)
         Torque_control_DW.Delay2_DSTATE[3];
       Torque_control_B.y_tmp = Torque_control_B.current_A *
         Torque_control_DW.Delay2_DSTATE[2] + y_tmp_idx_1_tmp;
-      Torque_control_B.u = Torque_control_B.y_tmp_idx_0 *
+      Torque_control_B.pwm_cal = Torque_control_B.y_tmp_idx_0 *
         Torque_control_B.current_A + Torque_control_B.y_tmp *
         Torque_control_B.Derivative;
       Torque_control_B.y_tmp_idx_0_tmp = (Torque_control_DW.Delay2_DSTATE[2] *
         Torque_control_B.Derivative + Torque_control_B.y_tmp_idx_0_tmp) /
-        (Torque_control_B.u + 1.0);
-      Torque_control_B.u = (Torque_control_DW.Delay2_DSTATE[1] *
-                            Torque_control_B.current_A + y_tmp_idx_1_tmp) /
-        (Torque_control_B.u + 1.0);
+        (Torque_control_B.pwm_cal + 1.0);
+      Torque_control_B.pwm_cal = (Torque_control_DW.Delay2_DSTATE[1] *
+        Torque_control_B.current_A + y_tmp_idx_1_tmp) /
+        (Torque_control_B.pwm_cal + 1.0);
       Torque_control_B.P_n[0] = Torque_control_DW.Delay2_DSTATE[0] -
         Torque_control_B.y_tmp_idx_0_tmp * Torque_control_B.y_tmp_idx_0;
       Torque_control_B.P_n[1] = Torque_control_DW.Delay2_DSTATE[1] -
-        Torque_control_B.u * Torque_control_B.y_tmp_idx_0;
+        Torque_control_B.pwm_cal * Torque_control_B.y_tmp_idx_0;
       Torque_control_B.P_n[2] = Torque_control_DW.Delay2_DSTATE[2] -
         Torque_control_B.y_tmp_idx_0_tmp * Torque_control_B.y_tmp;
       Torque_control_B.P_n[3] = Torque_control_DW.Delay2_DSTATE[3] -
-        Torque_control_B.u * Torque_control_B.y_tmp;
-      Torque_control_B.u = Torque_control_B.SineWave -
+        Torque_control_B.pwm_cal * Torque_control_B.y_tmp;
+      Torque_control_B.pwm_cal = Torque_control_B.SineWave -
         (Torque_control_B.current_A * Torque_control_DW.Delay3_DSTATE[0] +
          Torque_control_B.Derivative * Torque_control_DW.Delay3_DSTATE[1]);
       Torque_control_B.x_a[0] = (Torque_control_B.P_n[0] *
         Torque_control_B.current_A + Torque_control_B.P_n[2] *
-        Torque_control_B.Derivative) * Torque_control_B.u +
+        Torque_control_B.Derivative) * Torque_control_B.pwm_cal +
         Torque_control_DW.Delay3_DSTATE[0];
       Torque_control_B.x_a[1] = (Torque_control_B.P_n[1] *
         Torque_control_B.current_A + Torque_control_B.P_n[3] *
-        Torque_control_B.Derivative) * Torque_control_B.u +
+        Torque_control_B.Derivative) * Torque_control_B.pwm_cal +
         Torque_control_DW.Delay3_DSTATE[1];
       srUpdateBC(Torque_control_DW.Subsystem1_SubsysRanBC);
     }
@@ -408,37 +409,35 @@ void Torque_control_step(void)
     Torque_control_B.DataTypeConversion5 = (real32_T)Torque_control_B.x_a[1];
 
     /* DataTypeConversion: '<Root>/Data Type Conversion2' */
-    Torque_control_B.DataTypeConversion2 = (real32_T)Torque_control_B.x[2];
+    Torque_control_B.b = (real32_T)Torque_control_B.x[2];
 
     /* DataTypeConversion: '<Root>/Data Type Conversion3' */
-    Torque_control_B.DataTypeConversion3 = (real32_T)Torque_control_B.x[3];
+    Torque_control_B.c = (real32_T)Torque_control_B.x[3];
 
     /* MATLAB Function: '<Root>/MATLAB Function3' */
     Torque_control_B.Ra = Torque_control_B.DataTypeConversion4;
     Torque_control_B.kt = Torque_control_B.DataTypeConversion5;
     Torque_control_B.J = Torque_control_B.kt / (Torque_control_B.Ra *
-      Torque_control_B.DataTypeConversion2);
-    Torque_control_B.Tc = Torque_control_B.DataTypeConversion3 *
-      Torque_control_B.J;
-    Torque_control_B.D = (Torque_control_B.DataTypeConversion6 *
-                          Torque_control_B.Ra * Torque_control_B.J -
-                          Torque_control_B.kt * Torque_control_B.kt) /
-      Torque_control_B.Ra;
+      Torque_control_B.b);
+    Torque_control_B.Tc = Torque_control_B.c * Torque_control_B.J;
+    Torque_control_B.D = (Torque_control_B.a * Torque_control_B.Ra *
+                          Torque_control_B.J - Torque_control_B.kt *
+                          Torque_control_B.kt) / Torque_control_B.Ra;
 
     /* DataTypeConversion: '<Root>/Data Type Conversion7' */
     Torque_control_B.w = (real32_T)Torque_control_B.x[0];
 
     /* MATLAB Function: '<S5>/MATLAB Function4' */
-    Torque_control_B.Derivative = Torque_control_B.SineWave * 254.0 / 12.0;
-    if (Torque_control_B.Derivative > 0.0) {
+    Torque_control_B.pwm_cal = Torque_control_B.SineWave * 254.0 / 12.0;
+    if (Torque_control_B.pwm_cal > 0.0) {
       rtb_IN1 = 1;
       rtb_IN2 = 0;
-    } else if (Torque_control_B.Derivative < 0.0) {
-      Torque_control_B.Derivative = fabs(Torque_control_B.Derivative);
+    } else if (Torque_control_B.pwm_cal < 0.0) {
+      Torque_control_B.pwm_cal = fabs(Torque_control_B.pwm_cal);
       rtb_IN1 = 0;
       rtb_IN2 = 1;
     } else {
-      Torque_control_B.Derivative = 0.0;
+      Torque_control_B.pwm_cal = 0.0;
       rtb_IN1 = 0;
       rtb_IN2 = 0;
     }
@@ -454,12 +453,12 @@ void Torque_control_step(void)
     /* MATLABSystem: '<S5>/PWM' */
     obj = &Torque_control_DW.obj_f;
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(4UL);
-    if (!(Torque_control_B.Derivative <= 255.0)) {
-      Torque_control_B.Derivative = 255.0;
+    if (!(Torque_control_B.pwm_cal <= 255.0)) {
+      Torque_control_B.pwm_cal = 255.0;
     }
 
     MW_PWM_SetDutyCycle(Torque_control_DW.obj_f.PWMDriverObj.MW_PWM_HANDLE,
-                        Torque_control_B.Derivative);
+                        Torque_control_B.pwm_cal);
 
     /* End of MATLABSystem: '<S5>/PWM' */
     /* DataTypeConversion: '<S1>/Data Type Conversion' incorporates:
@@ -625,14 +624,14 @@ void Torque_control_initialize(void)
   rtsiSetSimTimeStep(&Torque_control_M->solverInfo, MAJOR_TIME_STEP);
   rtsiSetSolverName(&Torque_control_M->solverInfo,"FixedStepDiscrete");
   rtmSetTPtr(Torque_control_M, &Torque_control_M->Timing.tArray[0]);
-  rtmSetTFinal(Torque_control_M, 50.0);
+  rtmSetTFinal(Torque_control_M, 20.0);
   Torque_control_M->Timing.stepSize0 = 0.01;
 
   /* External mode info */
-  Torque_control_M->Sizes.checksums[0] = (1066229772U);
-  Torque_control_M->Sizes.checksums[1] = (2742355446U);
-  Torque_control_M->Sizes.checksums[2] = (464244847U);
-  Torque_control_M->Sizes.checksums[3] = (2326988256U);
+  Torque_control_M->Sizes.checksums[0] = (695418410U);
+  Torque_control_M->Sizes.checksums[1] = (2971431712U);
+  Torque_control_M->Sizes.checksums[2] = (2582651454U);
+  Torque_control_M->Sizes.checksums[3] = (465047621U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;

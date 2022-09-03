@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.39
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Fri Aug 26 16:07:10 2022
+ * C/C++ source code generated on : Sat Sep  3 11:18:33 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -86,33 +86,34 @@ typedef struct {
   real_T Ak[16];
   real_T b_I[16];
   real_T Ak_m[16];
-  real_T x[4];                         /* '<S7>/MATLAB Function3' */
-  real_T P[16];                        /* '<S7>/MATLAB Function3' */
   real_T Wk[4];
-  real_T x_a[2];                       /* '<S6>/MATLAB Function1' */
-  real_T P_n[4];                       /* '<S6>/MATLAB Function1' */
   uint32_T i2cname;
   MW_I2C_Mode_Type modename;
   real_T Gain2;                        /* '<S5>/Gain2' */
-  real_T current_A;                    /* '<Root>/Gain3' */
   real_T Derivative;                   /* '<Root>/Derivative' */
-  real_T SineWave;
+  real_T SineWave;                     /* '<Root>/Sine Wave' */
+  real_T current_A;                    /* '<Root>/Gain3' */
+  real_T x[4];                         /* '<S7>/MATLAB Function3' */
+  real_T P[16];                        /* '<S7>/MATLAB Function3' */
+  real_T x_a[2];                       /* '<S6>/MATLAB Function1' */
+  real_T P_n[4];                       /* '<S6>/MATLAB Function1' */
+  real_T pwm_cal;
   real_T y_tmp;
   real_T y_tmp_idx_0;
-  real_T u;
   real_T y_tmp_idx_0_tmp;
   real_T d;
-  real32_T DataTypeConversion6;        /* '<Root>/Data Type Conversion6' */
+  real32_T a;                          /* '<Root>/Data Type Conversion6' */
   real32_T DataTypeConversion4;        /* '<Root>/Data Type Conversion4' */
   real32_T DataTypeConversion5;        /* '<Root>/Data Type Conversion5' */
-  real32_T DataTypeConversion2;        /* '<Root>/Data Type Conversion2' */
-  real32_T DataTypeConversion3;        /* '<Root>/Data Type Conversion3' */
+  real32_T b;                          /* '<Root>/Data Type Conversion2' */
+  real32_T c;                          /* '<Root>/Data Type Conversion3' */
   real32_T w;                          /* '<Root>/Data Type Conversion7' */
   real32_T Ra;                         /* '<Root>/MATLAB Function3' */
   real32_T kt;                         /* '<Root>/MATLAB Function3' */
   real32_T Tc;                         /* '<Root>/MATLAB Function3' */
   real32_T D;                          /* '<Root>/MATLAB Function3' */
   real32_T J;                          /* '<Root>/MATLAB Function3' */
+  int32_T Encoder1;                    /* '<S5>/Encoder1' */
   uint32_T varargin_1;
   uint8_T b_SwappedDataBytes[3];
 } B_Torque_control_T;
@@ -182,8 +183,16 @@ typedef struct {
   } Scope6_PWORK;                      /* '<Root>/Scope6' */
 
   struct {
+    void *LoggedData[2];
+  } Scope23_PWORK;                     /* '<Root>/Scope23' */
+
+  struct {
     void *LoggedData;
   } Scope5_PWORK_o;                    /* '<S5>/Scope5' */
+
+  struct {
+    void *LoggedData;
+  } Scope1_PWORK_d;                    /* '<S5>/Scope1' */
 
   int8_T Subsystem1_SubsysRanBC;       /* '<Root>/Subsystem1' */
   boolean_T Subsystem1_MODE;           /* '<Root>/Subsystem1' */
@@ -223,10 +232,10 @@ struct P_Torque_control_T_ {
   real_T Delay_InitialCondition[4];    /* Expression: [0;0;0;0]
                                         * Referenced by: '<S7>/Delay'
                                         */
-  real_T Gain2_Gain;                   /* Expression: -(2*pi)/(14*4*370)
+  real_T Gain2_Gain;                   /* Expression: -(2*pi)/(11*4)
                                         * Referenced by: '<S5>/Gain2'
                                         */
-  real_T SineWave_Amp;                 /* Expression: 10
+  real_T SineWave_Amp;                 /* Expression: 12
                                         * Referenced by: '<Root>/Sine Wave'
                                         */
   real_T SineWave_Bias;                /* Expression: 0

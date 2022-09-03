@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.39
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Fri Aug 26 16:07:10 2022
+ * C/C++ source code generated on : Sat Sep  3 11:18:33 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -68,15 +68,15 @@ P_Torque_control_T Torque_control_P = {
    */
   { 0.0, 0.0, 0.0, 0.0 },
 
-  /* Expression: -(2*pi)/(14*4*370)
+  /* Expression: -(2*pi)/(11*4)
    * Referenced by: '<S5>/Gain2'
    */
-  -0.00030324253413028889,
+  -0.14279966607226333,
 
-  /* Expression: 10
+  /* Expression: 12
    * Referenced by: '<Root>/Sine Wave'
    */
-  10.0,
+  12.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Sine Wave'
