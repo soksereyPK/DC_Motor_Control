@@ -3,9 +3,9 @@
  *
  * Code generation for model "Torque_control".
  *
- * Model version              : 1.39
+ * Model version              : 1.154
  * Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
- * C source code generated on : Sat Sep  3 11:18:33 2022
+ * C source code generated on : Tue Sep  6 14:29:50 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -42,7 +42,7 @@ typedef real_T extmodeClassicTriggerSignal_T;
 #define EXTMODE_MAX_BASE_RATE_SIMULATION_TIME MAX_uint32_T
 
 /** External Mode Step Size in microseconds */
-#define EXTMODE_STEP_SIZE_IN_MICROSECONDS 10000
+#define EXTMODE_STEP_SIZE_IN_MICROSECONDS 1000
 
 /** External Mode Base rate event id */
 #define EXTMODE_BASE_RATE_EVENT_ID     1

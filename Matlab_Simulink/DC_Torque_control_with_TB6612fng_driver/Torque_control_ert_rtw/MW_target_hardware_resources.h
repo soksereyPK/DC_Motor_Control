@@ -3,7 +3,7 @@
 #ifndef __MW_TARGET_HARDWARE_RESOURCES_H__
 #define __MW_TARGET_HARDWARE_RESOURCES_H__
 
-#define MW_MULTI_TASKING_MODE 1
+#define MW_MULTI_TASKING_MODE 0
 #include "MW_ArduinoHWInit.h"
 #include "arduinoAVRScheduler.h"
 

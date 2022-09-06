@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.39
+ * Model version                  : 1.154
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Sep  3 11:18:33 2022
+ * C/C++ source code generated on : Tue Sep  6 14:29:50 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR

@@ -9,7 +9,7 @@ function [taskInfo, numtask, isDeploymentDiagram]=extmode_task_info()
             taskInfo(1).entryPoints = {};
             taskInfo(1).nonFcnCallPartitionName = '';
 
-            taskInfo(2).samplePeriod = 0.01;
+            taskInfo(2).samplePeriod = 0.001;
             taskInfo(2).sampleOffset = 0.0;
 
                 taskInfo(2).taskPrio = 40;
@@ -17,7 +17,6 @@ function [taskInfo, numtask, isDeploymentDiagram]=extmode_task_info()
                 taskInfo(2).taskName = ['SubRate' '1'];
             taskInfo(2).entryPoints = {};
             taskInfo(2).nonFcnCallPartitionName = 'Cont';
-
 
 
 

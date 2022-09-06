@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.39
+ * Model version                  : 1.154
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Sep  3 11:18:33 2022
+ * C/C++ source code generated on : Tue Sep  6 14:29:50 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -17,96 +17,47 @@
 
 /* Block parameters (default storage) */
 P_Torque_control_T Torque_control_P = {
-  /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S2>/Constant'
+  /* Variable: a
+   * Referenced by: '<Root>/Gain11'
    */
-  1.0,
+  176.0,
 
-  /* Expression: 0.01
-   * Referenced by: '<Root>/Current Reg read1'
+  /* Variable: b
+   * Referenced by:
+   *   '<Root>/Gain11'
+   *   '<Root>/Gain12'
    */
-  0.01,
+  140000.0,
 
-  /* Expression: hex2dec("399F")
-   * Referenced by: '<S8>/Constant3'
+  /* Variable: kd4
+   * Referenced by: '<Root>/Gain10'
    */
-  14751.0,
+  -0.0011673830670402914,
 
-  /* Expression: hex2dec("0x2800")
-   * Referenced by: '<S9>/Constant2'
+  /* Variable: kp4
+   * Referenced by: '<Root>/Gain9'
    */
-  10240.0,
-
-  /* Expression: -1
-   * Referenced by: '<S5>/Encoder1'
-   */
-  -1.0,
-
-  /* Computed Parameter: x_Y0
-   * Referenced by: '<S6>/x'
-   */
-  0.0,
-
-  /* Expression: diag([5,0.1])
-   * Referenced by: '<S6>/Delay2'
-   */
-  { 5.0, 0.0, 0.0, 0.1 },
-
-  /* Expression: [5;0.4]
-   * Referenced by: '<S6>/Delay3'
-   */
-  { 5.0, 0.4 },
-
-  /* Expression: 1e0*diag([10,1,30,10])
-   * Referenced by: '<S7>/Delay1'
-   */
-  { 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 30.0, 0.0, 0.0, 0.0, 0.0,
-    10.0 },
-
-  /* Expression: [0;0;0;0]
-   * Referenced by: '<S7>/Delay'
-   */
-  { 0.0, 0.0, 0.0, 0.0 },
-
-  /* Expression: -(2*pi)/(11*4)
-   * Referenced by: '<S5>/Gain2'
-   */
-  -0.14279966607226333,
-
-  /* Expression: 12
-   * Referenced by: '<Root>/Sine Wave'
-   */
-  12.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave'
-   */
-  0.0,
-
-  /* Expression: 2*pi*0.4
-   * Referenced by: '<Root>/Sine Wave'
-   */
-  2.5132741228718345,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Sine Wave'
-   */
-  0.0,
+  0.00028198869717398168,
 
   /* Expression: 0.001
-   * Referenced by: '<Root>/Gain3'
+   * Referenced by: '<S1>/Encoder1'
    */
   0.001,
 
-  /* Expression: hex2dec("2800")
-   * Referenced by: '<S1>/Constant2'
+  /* Expression: -(2*pi)/(11*4)
+   * Referenced by: '<S1>/Gain2'
    */
-  10240.0,
+  -0.14279966607226333,
 
-  /* Computed Parameter: Gain2_Gain_h
-   * Referenced by: '<Root>/Gain2'
+  /* Expression: 180/pi
+   * Referenced by: '<S3>/Gain'
    */
-  20972
+  57.295779513082323,
+
+  /* Expression: 50
+   * Referenced by: '<Root>/Constant5'
+   */
+  50.0
 };
 
 /*
