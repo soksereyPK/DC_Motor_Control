@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.154
+ * Model version                  : 1.164
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Sep  6 14:29:50 2022
+ * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -64,7 +64,7 @@ int main(void)
   rtmSetErrorStatus(Torque_control_M, 0);
 
   /* Set Final Simulation Time in Ticks */
-  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 30000);
+  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 3000);
 
   /* Parse External Mode command line arguments */
   errorCode = extmodeParseArgs(0, NULL);

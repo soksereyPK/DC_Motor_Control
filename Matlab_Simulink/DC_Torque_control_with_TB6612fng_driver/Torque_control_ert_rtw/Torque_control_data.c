@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.154
+ * Model version                  : 1.164
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Sep  6 14:29:50 2022
+ * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -17,47 +17,50 @@
 
 /* Block parameters (default storage) */
 P_Torque_control_T Torque_control_P = {
-  /* Variable: a
-   * Referenced by: '<Root>/Gain11'
+  /* Expression: -1
+   * Referenced by: '<Root>/Encoder1'
    */
-  176.0,
+  -1.0,
 
-  /* Variable: b
-   * Referenced by:
-   *   '<Root>/Gain11'
-   *   '<Root>/Gain12'
+  /* Expression: 12
+   * Referenced by: '<Root>/uk1'
    */
-  140000.0,
+  12.0,
 
-  /* Variable: kd4
-   * Referenced by: '<Root>/Gain10'
+  /* Expression: 0
+   * Referenced by: '<Root>/uk1'
    */
-  -0.0011673830670402914,
+  0.0,
 
-  /* Variable: kp4
-   * Referenced by: '<Root>/Gain9'
+  /* Expression: 2*pi*1.2
+   * Referenced by: '<Root>/uk1'
    */
-  0.00028198869717398168,
+  7.5398223686155035,
 
-  /* Expression: 0.001
-   * Referenced by: '<S1>/Encoder1'
+  /* Expression: 0
+   * Referenced by: '<Root>/uk1'
    */
-  0.001,
+  0.0,
 
-  /* Expression: -(2*pi)/(11*4)
-   * Referenced by: '<S1>/Gain2'
+  /* Expression: 10
+   * Referenced by: '<Root>/Constant1'
    */
-  -0.14279966607226333,
+  10.0,
+
+  /* Expression: -(2*pi)/(11*4*370)
+   * Referenced by: '<Root>/Gain15'
+   */
+  -0.00038594504343854953,
 
   /* Expression: 180/pi
-   * Referenced by: '<S3>/Gain'
+   * Referenced by: '<S2>/Gain'
    */
   57.295779513082323,
 
-  /* Expression: 50
-   * Referenced by: '<Root>/Constant5'
+  /* Computed Parameter: ManualSwitch_CurrentSetting
+   * Referenced by: '<Root>/Manual Switch'
    */
-  50.0
+  0U
 };
 
 /*

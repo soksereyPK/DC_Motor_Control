@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.154
+ * Model version                  : 1.164
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Sep  6 14:29:50 2022
+ * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -76,80 +76,50 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Gain;                         /* '<S3>/Gain' */
-  real_T Sum3;                         /* '<Root>/Sum3' */
-  real_T Derivative6;                  /* '<Root>/Derivative6' */
-  real_T Gain10;                       /* '<Root>/Gain10' */
-  real_T Add3;                         /* '<Root>/Add3' */
+  real_T Gain;                         /* '<S2>/Gain' */
 } B_Torque_control_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder1' */
-  codertarget_arduinobase_block_T obj_e;/* '<S1>/Digital Output1' */
-  codertarget_arduinobase_block_T obj_i;/* '<S1>/Digital Output' */
-  codertarget_arduinobase_int_h_T obj_ir;/* '<S1>/PWM' */
-  real_T TimeStampA;                   /* '<Root>/Derivative6' */
-  real_T LastUAtTimeA;                 /* '<Root>/Derivative6' */
-  real_T TimeStampB;                   /* '<Root>/Derivative6' */
-  real_T LastUAtTimeB;                 /* '<Root>/Derivative6' */
-  real_T TimeStampA_b;                 /* '<Root>/Derivative7' */
-  real_T LastUAtTimeA_d;               /* '<Root>/Derivative7' */
-  real_T TimeStampB_b;                 /* '<Root>/Derivative7' */
-  real_T LastUAtTimeB_l;               /* '<Root>/Derivative7' */
-  real_T TimeStampA_b4;                /* '<Root>/Derivative5' */
-  real_T LastUAtTimeA_l;               /* '<Root>/Derivative5' */
-  real_T TimeStampB_p;                 /* '<Root>/Derivative5' */
-  real_T LastUAtTimeB_a;               /* '<Root>/Derivative5' */
-  real_T TimeStampA_j;                 /* '<Root>/Derivative4' */
-  real_T LastUAtTimeA_j;               /* '<Root>/Derivative4' */
-  real_T TimeStampB_e;                 /* '<Root>/Derivative4' */
-  real_T LastUAtTimeB_j;               /* '<Root>/Derivative4' */
+  codertarget_arduinobase_inter_T obj; /* '<Root>/Encoder1' */
+  codertarget_arduinobase_block_T obj_e;/* '<Root>/Digital Output1' */
+  codertarget_arduinobase_block_T obj_g;/* '<Root>/Digital Output' */
+  codertarget_arduinobase_int_h_T obj_h;/* '<Root>/PWM' */
   struct {
     void *LoggedData;
-  } Scope16_PWORK;                     /* '<Root>/Scope16' */
-
-  struct {
-    void *LoggedData;
-  } Scope5_PWORK;                      /* '<S1>/Scope5' */
-
-  struct {
-    void *LoggedData;
-  } Scope7_PWORK;                      /* '<Root>/Scope7' */
-
-  struct {
-    void *LoggedData;
-  } Scope8_PWORK;                      /* '<Root>/Scope8' */
+  } Scope26_PWORK;                     /* '<Root>/Scope26' */
 } DW_Torque_control_T;
 
 /* Parameters (default storage) */
 struct P_Torque_control_T_ {
-  real_T a;                            /* Variable: a
-                                        * Referenced by: '<Root>/Gain11'
+  real_T Encoder1_SampleTime;          /* Expression: -1
+                                        * Referenced by: '<Root>/Encoder1'
                                         */
-  real_T b;                            /* Variable: b
-                                        * Referenced by:
-                                        *   '<Root>/Gain11'
-                                        *   '<Root>/Gain12'
+  real_T uk1_Amp;                      /* Expression: 12
+                                        * Referenced by: '<Root>/uk1'
                                         */
-  real_T kd4;                          /* Variable: kd4
-                                        * Referenced by: '<Root>/Gain10'
+  real_T uk1_Bias;                     /* Expression: 0
+                                        * Referenced by: '<Root>/uk1'
                                         */
-  real_T kp4;                          /* Variable: kp4
-                                        * Referenced by: '<Root>/Gain9'
+  real_T uk1_Freq;                     /* Expression: 2*pi*1.2
+                                        * Referenced by: '<Root>/uk1'
                                         */
-  real_T Encoder1_SampleTime;          /* Expression: 0.001
-                                        * Referenced by: '<S1>/Encoder1'
+  real_T uk1_Phase;                    /* Expression: 0
+                                        * Referenced by: '<Root>/uk1'
                                         */
-  real_T Gain2_Gain;                   /* Expression: -(2*pi)/(11*4)
-                                        * Referenced by: '<S1>/Gain2'
+  real_T Constant1_Value;              /* Expression: 10
+                                        * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Gain15_Gain;                  /* Expression: -(2*pi)/(11*4*370)
+                                        * Referenced by: '<Root>/Gain15'
                                         */
   real_T Gain_Gain;                    /* Expression: 180/pi
-                                        * Referenced by: '<S3>/Gain'
+                                        * Referenced by: '<S2>/Gain'
                                         */
-  real_T Constant5_Value;              /* Expression: 50
-                                        * Referenced by: '<Root>/Constant5'
-                                        */
+  uint8_T ManualSwitch_CurrentSetting;
+                              /* Computed Parameter: ManualSwitch_CurrentSetting
+                               * Referenced by: '<Root>/Manual Switch'
+                               */
 };
 
 /* Real-time Model Data Structure */
@@ -228,9 +198,8 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'Torque_control'
- * '<S1>'   : 'Torque_control/Right motor2'
- * '<S2>'   : 'Torque_control/Right motor2/MATLAB Function4'
- * '<S3>'   : 'Torque_control/Right motor2/Radians to Degrees'
+ * '<S1>'   : 'Torque_control/MATLAB Function4'
+ * '<S2>'   : 'Torque_control/Radians to Degrees'
  */
 #endif                                 /* RTW_HEADER_Torque_control_h_ */
 
