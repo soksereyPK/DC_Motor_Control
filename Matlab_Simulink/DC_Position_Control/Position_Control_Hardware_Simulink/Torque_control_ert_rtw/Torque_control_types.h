@@ -3,12 +3,12 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.234
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Fri Aug 19 15:44:07 2022
+ * C/C++ source code generated on : Sat Apr 22 18:22:06 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -41,7 +41,7 @@ typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_inter_T;
 
 #endif                             /* typedef_codertarget_arduinobase_inter_T */
 
-/* Custom Type definition for MATLABSystem: '<S3>/PWM9' */
+/* Custom Type definition for MATLABSystem: '<S1>/PWM2' */
 #include "MW_SVD.h"
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN

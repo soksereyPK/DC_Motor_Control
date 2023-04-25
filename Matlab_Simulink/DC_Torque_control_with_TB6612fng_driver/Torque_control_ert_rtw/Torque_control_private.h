@@ -3,12 +3,12 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.164
+ * Model version                  : 1.200
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -34,6 +34,10 @@
 #ifndef rtmSetTPtr
 #define rtmSetTPtr(rtm, val)           ((rtm)->Timing.t = (val))
 #endif
+
+/* private model entry point functions */
+extern void Torque_control_derivatives(void);
+
 #endif                                /* RTW_HEADER_Torque_control_private_h_ */
 
 /*

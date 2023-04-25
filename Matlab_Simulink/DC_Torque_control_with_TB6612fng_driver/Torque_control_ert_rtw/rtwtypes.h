@@ -3,12 +3,12 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.164
+ * Model version                  : 1.200
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -29,10 +29,10 @@
 
 /*=======================================================================*
  * Target hardware information
- *   Device type: Atmel->AVR
- *   Number of bits:     char:   8    short:   16    int:  16
+ *   Device type: ARM Compatible->ARM Cortex
+ *   Number of bits:     char:   8    short:   16    int:  32
  *                       long:  32
- *                       native word size:   8
+ *                       native word size:  32
  *   Byte ordering: LittleEndian
  *   Signed integer division rounds to: Zero
  *   Shift right on a signed integer as arithmetic shift: on
@@ -46,10 +46,10 @@
  *=======================================================================*/
 typedef signed char int8_T;
 typedef unsigned char uint8_T;
-typedef int int16_T;
-typedef unsigned int uint16_T;
-typedef long int32_T;
-typedef unsigned long uint32_T;
+typedef short int16_T;
+typedef unsigned short uint16_T;
+typedef int int32_T;
+typedef unsigned int uint32_T;
 typedef float real32_T;
 typedef double real64_T;
 
@@ -140,9 +140,9 @@ typedef struct {
 #define MAX_int16_T                    ((int16_T)(32767))
 #define MIN_int16_T                    ((int16_T)(-32768))
 #define MAX_uint16_T                   ((uint16_T)(65535U))
-#define MAX_int32_T                    ((int32_T)(2147483647L))
-#define MIN_int32_T                    ((int32_T)(-2147483647L-1L))
-#define MAX_uint32_T                   ((uint32_T)(0xFFFFFFFFUL))
+#define MAX_int32_T                    ((int32_T)(2147483647))
+#define MIN_int32_T                    ((int32_T)(-2147483647-1))
+#define MAX_uint32_T                   ((uint32_T)(0xFFFFFFFFU))
 
 /* Block D-Work pointer type */
 typedef void * pointer_T;

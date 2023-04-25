@@ -3,12 +3,12 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.164
+ * Model version                  : 1.200
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -17,50 +17,52 @@
 
 /* Block parameters (default storage) */
 P_Torque_control_T Torque_control_P = {
-  /* Expression: -1
-   * Referenced by: '<Root>/Encoder1'
+  /* Variable: a
+   * Referenced by: '<Root>/Gain5'
    */
-  -1.0,
+  26.85,
 
-  /* Expression: 12
-   * Referenced by: '<Root>/uk1'
+  /* Variable: b
+   * Referenced by:
+   *   '<Root>/Gain5'
+   *   '<Root>/Gain8'
    */
-  12.0,
+  85.68,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/uk1'
+  /* Variable: k1
+   * Referenced by: '<Root>/Gain6'
    */
-  0.0,
+  0.46076584505552554,
 
-  /* Expression: 2*pi*1.2
-   * Referenced by: '<Root>/uk1'
+  /* Variable: k2
+   * Referenced by: '<Root>/Gain7'
    */
-  7.5398223686155035,
+  -0.16670902644305355,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/uk1'
+  /* Expression: 0.01
+   * Referenced by: '<S1>/Encoder1'
    */
-  0.0,
+  0.01,
 
   /* Expression: 10
-   * Referenced by: '<Root>/Constant1'
+   * Referenced by: '<Root>/Constant2'
    */
   10.0,
 
-  /* Expression: -(2*pi)/(11*4*370)
-   * Referenced by: '<Root>/Gain15'
+  /* Expression: 0
+   * Referenced by: '<Root>/Integrator'
    */
-  -0.00038594504343854953,
+  0.0,
+
+  /* Expression: (2*pi)/(100*4*19.2)
+   * Referenced by: '<S1>/Gain15'
+   */
+  0.00081812308687234192,
 
   /* Expression: 180/pi
-   * Referenced by: '<S2>/Gain'
+   * Referenced by: '<S3>/Gain'
    */
-  57.295779513082323,
-
-  /* Computed Parameter: ManualSwitch_CurrentSetting
-   * Referenced by: '<Root>/Manual Switch'
-   */
-  0U
+  57.295779513082323
 };
 
 /*

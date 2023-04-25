@@ -1,9 +1,14 @@
+Atmel SMART device 0x285e0a60 found
+Erase flash
+done in 0.044 seconds
 
-avrdude: AVR device initialized and ready to accept instructions
-avrdude: Device signature = 0x1e9801 (probably m2560)
-avrdude: reading input file "C:\Users\LabPC\OneDrive\MyGithub\github\DC_Motor_Control\Matlab_Simulink\DC_Torque_control_with_TB6612fng_driver/Torque_control.hex"
-avrdude: writing flash (26834 bytes):
-avrdude: 26834 bytes of flash written
+Write 42580 bytes to flash (167 pages)
+[                              ] 0% (0/167 pages)[==                            ] 9% (16/167 pages)[=====                         ] 19% (32/167 pages)[========                      ] 28% (48/167 pages)[===========                   ] 38% (64/167 pages)[==============                ] 47% (80/167 pages)[=================             ] 57% (96/167 pages)[====================          ] 67% (112/167 pages)[======================        ] 76% (128/167 pages)[=========================     ] 86% (144/167 pages)[============================  ] 95% (160/167 pages)[==============================] 100% (167/167 pages)
+done in 8.440 seconds
 
-avrdude done.  Thank you.
-
+Verify 42580 bytes of flash
+[                              ] 0% (0/167 pages)[==                            ] 9% (16/167 pages)[=====                         ] 19% (32/167 pages)[========                      ] 28% (48/167 pages)[===========                   ] 38% (64/167 pages)[==============                ] 47% (80/167 pages)[=================             ] 57% (96/167 pages)[====================          ] 67% (112/167 pages)[======================        ] 76% (128/167 pages)[=========================     ] 86% (144/167 pages)[============================  ] 95% (160/167 pages)[==============================] 100% (167/167 pages)
+Verify successful
+done in 7.821 seconds
+Set boot flash true
+CPU reset.

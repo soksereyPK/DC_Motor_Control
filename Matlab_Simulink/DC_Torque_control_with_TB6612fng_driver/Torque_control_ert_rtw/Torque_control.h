@@ -3,12 +3,12 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
- * Model version                  : 1.164
+ * Model version                  : 1.200
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Tue Nov 15 09:57:12 2022
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -23,7 +23,6 @@
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "ext_mode.h"
-#include "MW_arduino_digitalio.h"
 #include "MW_ArduinoEncoder.h"
 #include "MW_PWM.h"
 #endif                                 /* Torque_control_COMMON_INCLUDES_ */
@@ -34,12 +33,92 @@
 #include "MW_target_hardware_resources.h"
 
 /* Macros for accessing real-time model data structure */
+#ifndef rtmGetContStateDisabled
+#define rtmGetContStateDisabled(rtm)   ((rtm)->contStateDisabled)
+#endif
+
+#ifndef rtmSetContStateDisabled
+#define rtmSetContStateDisabled(rtm, val) ((rtm)->contStateDisabled = (val))
+#endif
+
+#ifndef rtmGetContStates
+#define rtmGetContStates(rtm)          ((rtm)->contStates)
+#endif
+
+#ifndef rtmSetContStates
+#define rtmSetContStates(rtm, val)     ((rtm)->contStates = (val))
+#endif
+
+#ifndef rtmGetContTimeOutputInconsistentWithStateAtMajorStepFlag
+#define rtmGetContTimeOutputInconsistentWithStateAtMajorStepFlag(rtm) ((rtm)->CTOutputIncnstWithState)
+#endif
+
+#ifndef rtmSetContTimeOutputInconsistentWithStateAtMajorStepFlag
+#define rtmSetContTimeOutputInconsistentWithStateAtMajorStepFlag(rtm, val) ((rtm)->CTOutputIncnstWithState = (val))
+#endif
+
+#ifndef rtmGetDerivCacheNeedsReset
+#define rtmGetDerivCacheNeedsReset(rtm) ((rtm)->derivCacheNeedsReset)
+#endif
+
+#ifndef rtmSetDerivCacheNeedsReset
+#define rtmSetDerivCacheNeedsReset(rtm, val) ((rtm)->derivCacheNeedsReset = (val))
+#endif
+
 #ifndef rtmGetFinalTime
 #define rtmGetFinalTime(rtm)           ((rtm)->Timing.tFinal)
 #endif
 
+#ifndef rtmGetIntgData
+#define rtmGetIntgData(rtm)            ((rtm)->intgData)
+#endif
+
+#ifndef rtmSetIntgData
+#define rtmSetIntgData(rtm, val)       ((rtm)->intgData = (val))
+#endif
+
+#ifndef rtmGetOdeF
+#define rtmGetOdeF(rtm)                ((rtm)->odeF)
+#endif
+
+#ifndef rtmSetOdeF
+#define rtmSetOdeF(rtm, val)           ((rtm)->odeF = (val))
+#endif
+
+#ifndef rtmGetPeriodicContStateIndices
+#define rtmGetPeriodicContStateIndices(rtm) ((rtm)->periodicContStateIndices)
+#endif
+
+#ifndef rtmSetPeriodicContStateIndices
+#define rtmSetPeriodicContStateIndices(rtm, val) ((rtm)->periodicContStateIndices = (val))
+#endif
+
+#ifndef rtmGetPeriodicContStateRanges
+#define rtmGetPeriodicContStateRanges(rtm) ((rtm)->periodicContStateRanges)
+#endif
+
+#ifndef rtmSetPeriodicContStateRanges
+#define rtmSetPeriodicContStateRanges(rtm, val) ((rtm)->periodicContStateRanges = (val))
+#endif
+
 #ifndef rtmGetRTWExtModeInfo
 #define rtmGetRTWExtModeInfo(rtm)      ((rtm)->extModeInfo)
+#endif
+
+#ifndef rtmGetZCCacheNeedsReset
+#define rtmGetZCCacheNeedsReset(rtm)   ((rtm)->zCCacheNeedsReset)
+#endif
+
+#ifndef rtmSetZCCacheNeedsReset
+#define rtmSetZCCacheNeedsReset(rtm, val) ((rtm)->zCCacheNeedsReset = (val))
+#endif
+
+#ifndef rtmGetdX
+#define rtmGetdX(rtm)                  ((rtm)->derivs)
+#endif
+
+#ifndef rtmSetdX
+#define rtmSetdX(rtm, val)             ((rtm)->derivs = (val))
 #endif
 
 #ifndef rtmGetErrorStatus
@@ -76,50 +155,100 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Gain;                         /* '<S2>/Gain' */
+  real_T Gain5;                        /* '<Root>/Gain5' */
+  real_T Gain;                         /* '<S3>/Gain' */
+  real_T Derivative2;                  /* '<Root>/Derivative2' */
+  real_T Sum2;                         /* '<Root>/Sum2' */
+  real_T Add1;                         /* '<Root>/Add1' */
+  real_T Gain6;                        /* '<Root>/Gain6' */
 } B_Torque_control_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_arduinobase_inter_T obj; /* '<Root>/Encoder1' */
-  codertarget_arduinobase_block_T obj_e;/* '<Root>/Digital Output1' */
-  codertarget_arduinobase_block_T obj_g;/* '<Root>/Digital Output' */
-  codertarget_arduinobase_int_h_T obj_h;/* '<Root>/PWM' */
+  codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder1' */
+  codertarget_arduinobase_int_h_T obj_b;/* '<S1>/PWM2' */
+  codertarget_arduinobase_int_h_T obj_n;/* '<S1>/PWM1' */
+  real_T TimeStampA;                   /* '<Root>/Derivative1' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative1' */
+  real_T TimeStampB;                   /* '<Root>/Derivative1' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative1' */
+  real_T TimeStampA_p;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeA_g;               /* '<Root>/Derivative2' */
+  real_T TimeStampB_n;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeB_c;               /* '<Root>/Derivative2' */
   struct {
     void *LoggedData;
-  } Scope26_PWORK;                     /* '<Root>/Scope26' */
+  } Scope29_PWORK;                     /* '<Root>/Scope29' */
+
+  struct {
+    void *LoggedData;
+  } Scope28_PWORK;                     /* '<Root>/Scope28' */
+
+  struct {
+    void *LoggedData;
+  } Scope9_PWORK;                      /* '<Root>/Scope9' */
+
+  struct {
+    void *LoggedData;
+  } Scope26_PWORK;                     /* '<S1>/Scope26' */
 } DW_Torque_control_T;
+
+/* Continuous states (default storage) */
+typedef struct {
+  real_T Integrator_CSTATE;            /* '<Root>/Integrator' */
+} X_Torque_control_T;
+
+/* State derivatives (default storage) */
+typedef struct {
+  real_T Integrator_CSTATE;            /* '<Root>/Integrator' */
+} XDot_Torque_control_T;
+
+/* State disabled  */
+typedef struct {
+  boolean_T Integrator_CSTATE;         /* '<Root>/Integrator' */
+} XDis_Torque_control_T;
+
+#ifndef ODE1_INTG
+#define ODE1_INTG
+
+/* ODE1 Integration Data */
+typedef struct {
+  real_T *f[1];                        /* derivatives */
+} ODE1_IntgData;
+
+#endif
 
 /* Parameters (default storage) */
 struct P_Torque_control_T_ {
-  real_T Encoder1_SampleTime;          /* Expression: -1
-                                        * Referenced by: '<Root>/Encoder1'
+  real_T a;                            /* Variable: a
+                                        * Referenced by: '<Root>/Gain5'
                                         */
-  real_T uk1_Amp;                      /* Expression: 12
-                                        * Referenced by: '<Root>/uk1'
+  real_T b;                            /* Variable: b
+                                        * Referenced by:
+                                        *   '<Root>/Gain5'
+                                        *   '<Root>/Gain8'
                                         */
-  real_T uk1_Bias;                     /* Expression: 0
-                                        * Referenced by: '<Root>/uk1'
+  real_T k1;                           /* Variable: k1
+                                        * Referenced by: '<Root>/Gain6'
                                         */
-  real_T uk1_Freq;                     /* Expression: 2*pi*1.2
-                                        * Referenced by: '<Root>/uk1'
+  real_T k2;                           /* Variable: k2
+                                        * Referenced by: '<Root>/Gain7'
                                         */
-  real_T uk1_Phase;                    /* Expression: 0
-                                        * Referenced by: '<Root>/uk1'
+  real_T Encoder1_SampleTime;          /* Expression: 0.01
+                                        * Referenced by: '<S1>/Encoder1'
                                         */
-  real_T Constant1_Value;              /* Expression: 10
-                                        * Referenced by: '<Root>/Constant1'
+  real_T Constant2_Value;              /* Expression: 10
+                                        * Referenced by: '<Root>/Constant2'
                                         */
-  real_T Gain15_Gain;                  /* Expression: -(2*pi)/(11*4*370)
-                                        * Referenced by: '<Root>/Gain15'
+  real_T Integrator_IC;                /* Expression: 0
+                                        * Referenced by: '<Root>/Integrator'
+                                        */
+  real_T Gain15_Gain;                  /* Expression: (2*pi)/(100*4*19.2)
+                                        * Referenced by: '<S1>/Gain15'
                                         */
   real_T Gain_Gain;                    /* Expression: 180/pi
-                                        * Referenced by: '<S2>/Gain'
+                                        * Referenced by: '<S3>/Gain'
                                         */
-  uint8_T ManualSwitch_CurrentSetting;
-                              /* Computed Parameter: ManualSwitch_CurrentSetting
-                               * Referenced by: '<Root>/Manual Switch'
-                               */
 };
 
 /* Real-time Model Data Structure */
@@ -127,6 +256,16 @@ struct tag_RTM_Torque_control_T {
   const char_T *errorStatus;
   RTWExtModeInfo *extModeInfo;
   RTWSolverInfo solverInfo;
+  X_Torque_control_T *contStates;
+  int_T *periodicContStateIndices;
+  real_T *periodicContStateRanges;
+  real_T *derivs;
+  boolean_T *contStateDisabled;
+  boolean_T zCCacheNeedsReset;
+  boolean_T derivCacheNeedsReset;
+  boolean_T CTOutputIncnstWithState;
+  real_T odeF[1][1];
+  ODE1_IntgData intgData;
 
   /*
    * Sizes:
@@ -136,6 +275,9 @@ struct tag_RTM_Torque_control_T {
    */
   struct {
     uint32_T checksums[4];
+    int_T numContStates;
+    int_T numPeriodicContStates;
+    int_T numSampTimes;
   } Sizes;
 
   /*
@@ -170,6 +312,9 @@ extern P_Torque_control_T Torque_control_P;
 /* Block signals (default storage) */
 extern B_Torque_control_T Torque_control_B;
 
+/* Continuous states (default storage) */
+extern X_Torque_control_T Torque_control_X;
+
 /* Block states (default storage) */
 extern DW_Torque_control_T Torque_control_DW;
 
@@ -198,8 +343,9 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'Torque_control'
- * '<S1>'   : 'Torque_control/MATLAB Function4'
- * '<S2>'   : 'Torque_control/Radians to Degrees'
+ * '<S1>'   : 'Torque_control/Right motor3'
+ * '<S2>'   : 'Torque_control/Right motor3/MATLAB Function2'
+ * '<S3>'   : 'Torque_control/Right motor3/Radians to Degrees1'
  */
 #endif                                 /* RTW_HEADER_Torque_control_h_ */
 

@@ -1,0 +1,14 @@
+readEncDUEpin8_9_wrapper.o: \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/readEncDUEpin8_9_wrapper.c \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Yaw_Axis_Control_ert_rtw/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Yaw_Axis_Control_ert_rtw/rtwtypes.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h:
+
+C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h:
