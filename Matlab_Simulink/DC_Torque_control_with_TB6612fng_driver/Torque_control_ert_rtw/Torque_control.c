@@ -3,23 +3,35 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
+<<<<<<< HEAD
  * Model version                  : 1.177
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
  * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
+=======
+ * Model version                  : 1.200
+ * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 
 #include "Torque_control.h"
 #include "rtwtypes.h"
+<<<<<<< HEAD
 #include "Torque_control_private.h"
 #include "Torque_control_types.h"
 #include <string.h>
 #include <stddef.h>
 #include <math.h>
+=======
+#include <math.h>
+#include "Torque_control_types.h"
+#include "Torque_control_private.h"
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #include "rt_nonfinite.h"
 
 /* Block signals (default storage) */
@@ -142,17 +154,45 @@ void Torque_co_Calibrationwrite_Term(DW_Calibrationwrite_Torque_co_T *localDW)
   /* End of Terminate for MATLABSystem: '<S1>/Calibration write' */
 }
 
+/*
+ * This function updates continuous states using the ODE1 fixed-step
+ * solver algorithm
+ */
+static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
+{
+  time_T tnew = rtsiGetSolverStopTime(si);
+  time_T h = rtsiGetStepSize(si);
+  real_T *x = rtsiGetContStates(si);
+  ODE1_IntgData *id = (ODE1_IntgData *)rtsiGetSolverData(si);
+  real_T *f0 = id->f[0];
+  int_T i;
+  int_T nXc = 1;
+  rtsiSetSimTimeStep(si,MINOR_TIME_STEP);
+  rtsiSetdX(si, f0);
+  Torque_control_derivatives();
+  rtsiSetT(si, tnew);
+  for (i = 0; i < nXc; ++i) {
+    x[i] += h * f0[i];
+  }
+
+  rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
+}
+
 /* Model step function */
 void Torque_control_step(void)
 {
+<<<<<<< HEAD
   /* local block i/o variables */
   int16_T rtb_DataTypeConversion;
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   if (rtmIsMajorTimeStep(Torque_control_M)) {
     /* set solver stop time */
     rtsiSetSolverStopTime(&Torque_control_M->solverInfo,
                           ((Torque_control_M->Timing.clockTick0+1)*
       Torque_control_M->Timing.stepSize0));
   }                                    /* end MajorTimeStep */
+<<<<<<< HEAD
 
   /* Update absolute time of base rate at minor time step */
   if (rtmIsMinorTimeStep(Torque_control_M)) {
@@ -370,6 +410,157 @@ void Torque_control_step(void)
     }
   }
 
+=======
+
+  /* Update absolute time of base rate at minor time step */
+  if (rtmIsMinorTimeStep(Torque_control_M)) {
+    Torque_control_M->Timing.t[0] = rtsiGetT(&Torque_control_M->solverInfo);
+  }
+
+  {
+    codertarget_arduinobase_int_h_T *obj;
+    real_T lastTime;
+    real_T rtb_Integrator;
+    real_T tmp;
+    real_T *lastU;
+    int32_T rtb_dir;
+
+    /* Derivative: '<Root>/Derivative1' incorporates:
+     *  Constant: '<Root>/Constant2'
+     *  Derivative: '<Root>/Derivative2'
+     */
+    tmp = Torque_control_M->Timing.t[0];
+    if ((Torque_control_DW.TimeStampA >= tmp) && (Torque_control_DW.TimeStampB >=
+         tmp)) {
+      rtb_Integrator = 0.0;
+    } else {
+      lastTime = Torque_control_DW.TimeStampA;
+      lastU = &Torque_control_DW.LastUAtTimeA;
+      if (Torque_control_DW.TimeStampA < Torque_control_DW.TimeStampB) {
+        if (Torque_control_DW.TimeStampB < tmp) {
+          lastTime = Torque_control_DW.TimeStampB;
+          lastU = &Torque_control_DW.LastUAtTimeB;
+        }
+      } else if (Torque_control_DW.TimeStampA >= tmp) {
+        lastTime = Torque_control_DW.TimeStampB;
+        lastU = &Torque_control_DW.LastUAtTimeB;
+      }
+
+      rtb_Integrator = (Torque_control_P.Constant2_Value - *lastU) / (tmp -
+        lastTime);
+    }
+
+    /* End of Derivative: '<Root>/Derivative1' */
+    if (rtmIsMajorTimeStep(Torque_control_M)) {
+      /* Gain: '<Root>/Gain5' incorporates:
+       *  Constant: '<Root>/Constant2'
+       */
+      Torque_control_B.Gain5 = Torque_control_P.a / Torque_control_P.b *
+        Torque_control_P.Constant2_Value;
+
+      /* MATLABSystem: '<S1>/Encoder1' */
+      if (Torque_control_DW.obj.SampleTime !=
+          Torque_control_P.Encoder1_SampleTime) {
+        Torque_control_DW.obj.SampleTime = Torque_control_P.Encoder1_SampleTime;
+      }
+
+      if (Torque_control_DW.obj.TunablePropsChanged) {
+        Torque_control_DW.obj.TunablePropsChanged = false;
+      }
+
+      MW_EncoderRead(Torque_control_DW.obj.Index, &rtb_dir);
+
+      /* Gain: '<S3>/Gain' incorporates:
+       *  DataTypeConversion: '<S1>/Data Type Conversion8'
+       *  Gain: '<S1>/Gain15'
+       *  MATLABSystem: '<S1>/Encoder1'
+       */
+      Torque_control_B.Gain = Torque_control_P.Gain15_Gain * (real_T)rtb_dir *
+        Torque_control_P.Gain_Gain;
+    }
+
+    /* Derivative: '<Root>/Derivative2' */
+    if ((Torque_control_DW.TimeStampA_p >= tmp) &&
+        (Torque_control_DW.TimeStampB_n >= tmp)) {
+      /* Derivative: '<Root>/Derivative2' */
+      Torque_control_B.Derivative2 = 0.0;
+    } else {
+      lastTime = Torque_control_DW.TimeStampA_p;
+      lastU = &Torque_control_DW.LastUAtTimeA_g;
+      if (Torque_control_DW.TimeStampA_p < Torque_control_DW.TimeStampB_n) {
+        if (Torque_control_DW.TimeStampB_n < tmp) {
+          lastTime = Torque_control_DW.TimeStampB_n;
+          lastU = &Torque_control_DW.LastUAtTimeB_c;
+        }
+      } else if (Torque_control_DW.TimeStampA_p >= tmp) {
+        lastTime = Torque_control_DW.TimeStampB_n;
+        lastU = &Torque_control_DW.LastUAtTimeB_c;
+      }
+
+      /* Derivative: '<Root>/Derivative2' */
+      Torque_control_B.Derivative2 = (Torque_control_B.Gain - *lastU) / (tmp -
+        lastTime);
+    }
+
+    /* Sum: '<Root>/Sum2' incorporates:
+     *  Constant: '<Root>/Constant2'
+     */
+    Torque_control_B.Sum2 = Torque_control_P.Constant2_Value -
+      Torque_control_B.Derivative2;
+
+    /* Sum: '<Root>/Add1' incorporates:
+     *  Gain: '<Root>/Gain7'
+     *  Gain: '<Root>/Gain8'
+     *  Integrator: '<Root>/Integrator'
+     *  Sum: '<Root>/Add2'
+     */
+    Torque_control_B.Add1 = ((1.0 / Torque_control_P.b * rtb_Integrator +
+      Torque_control_B.Gain5) + Torque_control_X.Integrator_CSTATE) +
+      Torque_control_P.k2 * Torque_control_B.Sum2;
+    if (rtmIsMajorTimeStep(Torque_control_M)) {
+    }
+
+    /* MATLAB Function: '<S1>/MATLAB Function2' */
+    rtb_Integrator = Torque_control_B.Add1 * 254.0 / 22.9;
+    if (rtb_Integrator > 0.0) {
+      rtb_dir = 0;
+    } else if (rtb_Integrator < 0.0) {
+      rtb_Integrator = fabs(rtb_Integrator);
+      rtb_dir = 1;
+    } else {
+      rtb_Integrator = 0.0;
+      rtb_dir = 0;
+    }
+
+    /* End of MATLAB Function: '<S1>/MATLAB Function2' */
+
+    /* MATLABSystem: '<S1>/PWM1' */
+    obj = &Torque_control_DW.obj_n;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
+    if (!(rtb_Integrator <= 255.0)) {
+      rtb_Integrator = 255.0;
+    }
+
+    MW_PWM_SetDutyCycle(Torque_control_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE,
+                        rtb_Integrator);
+
+    /* End of MATLABSystem: '<S1>/PWM1' */
+
+    /* MATLABSystem: '<S1>/PWM2' */
+    obj = &Torque_control_DW.obj_b;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
+    MW_PWM_SetDutyCycle(Torque_control_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE,
+                        (real_T)rtb_dir);
+    if (rtmIsMajorTimeStep(Torque_control_M)) {
+    }
+
+    /* Gain: '<Root>/Gain6' */
+    Torque_control_B.Gain6 = Torque_control_P.k1 * Torque_control_B.Sum2;
+    if (rtmIsMajorTimeStep(Torque_control_M)) {
+    }
+  }
+
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   if (rtmIsMajorTimeStep(Torque_control_M)) {
     real_T *lastU;
 
@@ -390,7 +581,11 @@ void Torque_control_step(void)
       lastU = &Torque_control_DW.LastUAtTimeB;
     }
 
+<<<<<<< HEAD
     *lastU = Torque_control_P.Constant2_Value_i;
+=======
+    *lastU = Torque_control_P.Constant2_Value;
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 
     /* End of Update for Derivative: '<Root>/Derivative1' */
 
@@ -416,8 +611,12 @@ void Torque_control_step(void)
     {                                  /* Sample time: [0.0s, 0.0s] */
       extmodeErrorCode_T errorCode = EXTMODE_SUCCESS;
       extmodeSimulationTime_T currentTime = (extmodeSimulationTime_T)
+<<<<<<< HEAD
         ((Torque_control_M->Timing.clockTick0 * 1) + 0)
         ;
+=======
+        Torque_control_M->Timing.t[0];
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 
       /* Trigger External Mode event */
       errorCode = extmodeEvent(0,currentTime);
@@ -427,12 +626,19 @@ void Torque_control_step(void)
       }
     }
 
+<<<<<<< HEAD
     if (rtmIsMajorTimeStep(Torque_control_M) &&
         Torque_control_M->Timing.TaskCounters.TID[1] == 0) {/* Sample time: [0.001s, 0.0s] */
       extmodeErrorCode_T errorCode = EXTMODE_SUCCESS;
       extmodeSimulationTime_T currentTime = (extmodeSimulationTime_T)
         ((Torque_control_M->Timing.clockTick1 * 1) + 0)
         ;
+=======
+    if (rtmIsMajorTimeStep(Torque_control_M)) {/* Sample time: [0.01s, 0.0s] */
+      extmodeErrorCode_T errorCode = EXTMODE_SUCCESS;
+      extmodeSimulationTime_T currentTime = (extmodeSimulationTime_T)
+        ((Torque_control_M->Timing.clockTick1) * 0.01);
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 
       /* Trigger External Mode event */
       errorCode = extmodeEvent(1,currentTime);
@@ -441,6 +647,7 @@ void Torque_control_step(void)
            may be added here */
       }
     }
+<<<<<<< HEAD
 
     if (rtmIsMajorTimeStep(Torque_control_M) &&
         Torque_control_M->Timing.TaskCounters.TID[2] == 0) {/* Sample time: [0.1s, 0.0s] */
@@ -456,6 +663,8 @@ void Torque_control_step(void)
            may be added here */
       }
     }
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   }                                    /* end MajorTimeStep */
 
   if (rtmIsMajorTimeStep(Torque_control_M)) {
@@ -472,15 +681,24 @@ void Torque_control_step(void)
       (&Torque_control_M->solverInfo);
 
     {
+<<<<<<< HEAD
       /* Update absolute timer for sample time: [0.001s, 0.0s] */
       /* The "clockTick1" counts the number of times the code of this task has
        * been executed. The resolution of this integer timer is 0.001, which is the step size
+=======
+      /* Update absolute timer for sample time: [0.01s, 0.0s] */
+      /* The "clockTick1" counts the number of times the code of this task has
+       * been executed. The resolution of this integer timer is 0.01, which is the step size
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
        * of the task. Size of "clockTick1" ensures timer will not overflow during the
        * application lifespan selected.
        */
       Torque_control_M->Timing.clockTick1++;
     }
+  }                                    /* end MajorTimeStep */
+}
 
+<<<<<<< HEAD
     if (rtmIsMajorTimeStep(Torque_control_M) &&
         Torque_control_M->Timing.TaskCounters.TID[2] == 0) {
       /* Update absolute timer for sample time: [0.1s, 0.0s] */
@@ -517,6 +735,8 @@ void Torque_control_step(void)
   }                                    /* end MajorTimeStep */
 }
 
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 /* Derivatives for root system: '<Root>' */
 void Torque_control_derivatives(void)
 {
@@ -567,6 +787,7 @@ void Torque_control_initialize(void)
   rtsiSetSolverName(&Torque_control_M->solverInfo,"ode1");
   rtmSetTPtr(Torque_control_M, &Torque_control_M->Timing.tArray[0]);
   rtmSetTFinal(Torque_control_M, -1);
+<<<<<<< HEAD
   Torque_control_M->Timing.stepSize0 = 0.001;
 
   /* External mode info */
@@ -574,11 +795,24 @@ void Torque_control_initialize(void)
   Torque_control_M->Sizes.checksums[1] = (1516702071U);
   Torque_control_M->Sizes.checksums[2] = (124454554U);
   Torque_control_M->Sizes.checksums[3] = (2727842215U);
+=======
+  Torque_control_M->Timing.stepSize0 = 0.01;
+
+  /* External mode info */
+  Torque_control_M->Sizes.checksums[0] = (1242110801U);
+  Torque_control_M->Sizes.checksums[1] = (1066942541U);
+  Torque_control_M->Sizes.checksums[2] = (962801922U);
+  Torque_control_M->Sizes.checksums[3] = (340573686U);
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
+<<<<<<< HEAD
     static const sysRanDType *systemRan[11];
+=======
+    static const sysRanDType *systemRan[5];
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
     Torque_control_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
@@ -586,12 +820,15 @@ void Torque_control_initialize(void)
     systemRan[2] = &rtAlwaysEnabled;
     systemRan[3] = &rtAlwaysEnabled;
     systemRan[4] = &rtAlwaysEnabled;
+<<<<<<< HEAD
     systemRan[5] = &rtAlwaysEnabled;
     systemRan[6] = &rtAlwaysEnabled;
     systemRan[7] = &rtAlwaysEnabled;
     systemRan[8] = &rtAlwaysEnabled;
     systemRan[9] = &rtAlwaysEnabled;
     systemRan[10] = &rtAlwaysEnabled;
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
     rteiSetModelMappingInfoPtr(Torque_control_M->extModeInfo,
       &Torque_control_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(Torque_control_M->extModeInfo,
@@ -622,6 +859,7 @@ void Torque_control_initialize(void)
     /* InitializeConditions for Derivative: '<Root>/Derivative2' */
     Torque_control_DW.TimeStampA_p = (rtInf);
     Torque_control_DW.TimeStampB_n = (rtInf);
+<<<<<<< HEAD
 
     /* SystemInitialize for Atomic SubSystem: '<Root>/Initialize Function' */
     /* Start for MATLABSystem: '<S4>/Configuration write' */
@@ -643,6 +881,8 @@ void Torque_control_initialize(void)
                        Torque_control_B.varargin_1);
     Torque_control_DW.obj_l.isSetupComplete = true;
     Torque_co_Calibrationwrite_Init(&Torque_control_DW.Calibrationwrite_p);
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 
     /* End of SystemInitialize for SubSystem: '<Root>/Initialize Function' */
     Torque_co_Calibrationwrite_Init(&Torque_control_DW.Calibrationwrite);
@@ -693,6 +933,7 @@ void Torque_control_initialize(void)
       Torque_control_P.CurrentRegread_SampleTime;
     obj_0 = &Torque_control_DW.obj;
     Torque_control_DW.obj.isSetupComplete = false;
+<<<<<<< HEAD
     Torque_control_DW.obj.isInitialized = 1L;
     Torque_control_B.modename = MW_I2C_MASTER;
     Torque_control_B.i2cname = 0;
@@ -702,6 +943,10 @@ void Torque_control_initialize(void)
     Torque_control_B.varargin_1 = Torque_control_DW.obj.BusSpeed;
     MW_I2C_SetBusSpeed(Torque_control_DW.obj.I2CDriverObj.MW_I2C_HANDLE,
                        Torque_control_B.varargin_1);
+=======
+    Torque_control_DW.obj.isInitialized = 1;
+    MW_EncoderSetup(2U, 3U, &Torque_control_DW.obj.Index);
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
     Torque_control_DW.obj.isSetupComplete = true;
 
     /* Outputs for Atomic SubSystem: '<Root>/Initialize Function' */
@@ -715,6 +960,7 @@ void Torque_control_initialize(void)
       Torque_control_B.d = fmod(Torque_control_B.d, 65536.0);
     }
 
+<<<<<<< HEAD
     rtb_DataTypeConversion_g = Torque_control_B.d < 0.0 ? -(int16_T)(uint16_T)
       -Torque_control_B.d : (int16_T)(uint16_T)Torque_control_B.d;
 
@@ -753,6 +999,27 @@ void Torque_control_initialize(void)
       &Torque_control_DW.Calibrationwrite_p);
 
     /* End of Outputs for SubSystem: '<Root>/Initialize Function' */
+=======
+    /* Start for MATLABSystem: '<S1>/PWM1' */
+    Torque_control_DW.obj_n.matlabCodegenIsDeleted = true;
+    Torque_control_DW.obj_n.isInitialized = 0;
+    Torque_control_DW.obj_n.matlabCodegenIsDeleted = false;
+    obj = &Torque_control_DW.obj_n;
+    Torque_control_DW.obj_n.isSetupComplete = false;
+    Torque_control_DW.obj_n.isInitialized = 1;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(6U, 0.0, 0.0);
+    Torque_control_DW.obj_n.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<S1>/PWM2' */
+    Torque_control_DW.obj_b.matlabCodegenIsDeleted = true;
+    Torque_control_DW.obj_b.isInitialized = 0;
+    Torque_control_DW.obj_b.matlabCodegenIsDeleted = false;
+    obj = &Torque_control_DW.obj_b;
+    Torque_control_DW.obj_b.isSetupComplete = false;
+    Torque_control_DW.obj_b.isInitialized = 1;
+    obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(7U, 0.0, 0.0);
+    Torque_control_DW.obj_b.isSetupComplete = true;
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   }
 }
 
@@ -762,15 +1029,24 @@ void Torque_control_terminate(void)
   codertarget_arduinobase_i_h3r_T *obj;
   Torque_co_Calibrationwrite_Term(&Torque_control_DW.Calibrationwrite);
 
+<<<<<<< HEAD
   /* Terminate for MATLABSystem: '<S3>/Encoder1' */
   if (!Torque_control_DW.obj_j.matlabCodegenIsDeleted) {
     Torque_control_DW.obj_j.matlabCodegenIsDeleted = true;
     if ((Torque_control_DW.obj_j.isInitialized == 1L) &&
         Torque_control_DW.obj_j.isSetupComplete) {
+=======
+  /* Terminate for MATLABSystem: '<S1>/Encoder1' */
+  if (!Torque_control_DW.obj.matlabCodegenIsDeleted) {
+    Torque_control_DW.obj.matlabCodegenIsDeleted = true;
+    if ((Torque_control_DW.obj.isInitialized == 1) &&
+        Torque_control_DW.obj.isSetupComplete) {
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
       MW_EncoderRelease();
     }
   }
 
+<<<<<<< HEAD
   /* End of Terminate for MATLABSystem: '<S3>/Encoder1' */
   /* Terminate for MATLABSystem: '<S3>/Digital Output' */
   if (!Torque_control_DW.obj_n.matlabCodegenIsDeleted) {
@@ -825,6 +1101,40 @@ void Torque_control_terminate(void)
   Torque_co_Calibrationwrite_Term(&Torque_control_DW.Calibrationwrite_p);
 
   /* End of Terminate for SubSystem: '<Root>/Initialize Function' */
+=======
+  /* End of Terminate for MATLABSystem: '<S1>/Encoder1' */
+  /* Terminate for MATLABSystem: '<S1>/PWM1' */
+  obj = &Torque_control_DW.obj_n;
+  if (!Torque_control_DW.obj_n.matlabCodegenIsDeleted) {
+    Torque_control_DW.obj_n.matlabCodegenIsDeleted = true;
+    if ((Torque_control_DW.obj_n.isInitialized == 1) &&
+        Torque_control_DW.obj_n.isSetupComplete) {
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
+      MW_PWM_SetDutyCycle(Torque_control_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE,
+                          0.0);
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
+      MW_PWM_Close(Torque_control_DW.obj_n.PWMDriverObj.MW_PWM_HANDLE);
+    }
+  }
+
+  /* End of Terminate for MATLABSystem: '<S1>/PWM1' */
+
+  /* Terminate for MATLABSystem: '<S1>/PWM2' */
+  obj = &Torque_control_DW.obj_b;
+  if (!Torque_control_DW.obj_b.matlabCodegenIsDeleted) {
+    Torque_control_DW.obj_b.matlabCodegenIsDeleted = true;
+    if ((Torque_control_DW.obj_b.isInitialized == 1) &&
+        Torque_control_DW.obj_b.isSetupComplete) {
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
+      MW_PWM_SetDutyCycle(Torque_control_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE,
+                          0.0);
+      obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
+      MW_PWM_Close(Torque_control_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE);
+    }
+  }
+
+  /* End of Terminate for MATLABSystem: '<S1>/PWM2' */
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 }
 
 /*

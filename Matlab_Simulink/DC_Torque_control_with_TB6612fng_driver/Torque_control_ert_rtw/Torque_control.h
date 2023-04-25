@@ -3,12 +3,18 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
+<<<<<<< HEAD
  * Model version                  : 1.177
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
  * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
+=======
+ * Model version                  : 1.200
+ * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -23,8 +29,11 @@
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "ext_mode.h"
+<<<<<<< HEAD
 #include "MW_I2C.h"
 #include "MW_arduino_digitalio.h"
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #include "MW_ArduinoEncoder.h"
 #include "MW_PWM.h"
 #endif                                 /* Torque_control_COMMON_INCLUDES_ */
@@ -163,28 +172,42 @@ typedef struct {
 
 /* Block signals (default storage) */
 typedef struct {
+<<<<<<< HEAD
   uint32_T i2cname;
   MW_I2C_Mode_Type modename;
   real_T Gain5;                        /* '<Root>/Gain5' */
   real_T Gain;                         /* '<S7>/Gain' */
+=======
+  real_T Gain5;                        /* '<Root>/Gain5' */
+  real_T Gain;                         /* '<S3>/Gain' */
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   real_T Derivative2;                  /* '<Root>/Derivative2' */
   real_T Sum2;                         /* '<Root>/Sum2' */
   real_T Add1;                         /* '<Root>/Add1' */
   real_T Gain6;                        /* '<Root>/Gain6' */
+<<<<<<< HEAD
   real_T Gain1;                        /* '<Root>/Gain1' */
   real_T d;
   uint32_T varargin_1;
   uint8_T b_SwappedDataBytes[3];
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 } B_Torque_control_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
+<<<<<<< HEAD
   codertarget_arduinobase_in_h3_T obj; /* '<Root>/Current Reg read' */
   codertarget_arduinobase_int_h_T obj_j;/* '<S3>/Encoder1' */
   codertarget_arduinobase_inter_T obj_l;/* '<S4>/Configuration write' */
   codertarget_arduinobase_block_T obj_d;/* '<S3>/Digital Output1' */
   codertarget_arduinobase_block_T obj_n;/* '<S3>/Digital Output' */
   codertarget_arduinobase_i_h3r_T obj_jy;/* '<S3>/PWM' */
+=======
+  codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder1' */
+  codertarget_arduinobase_int_h_T obj_b;/* '<S1>/PWM2' */
+  codertarget_arduinobase_int_h_T obj_n;/* '<S1>/PWM1' */
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   real_T TimeStampA;                   /* '<Root>/Derivative1' */
   real_T LastUAtTimeA;                 /* '<Root>/Derivative1' */
   real_T TimeStampB;                   /* '<Root>/Derivative1' */
@@ -207,6 +230,7 @@ typedef struct {
 
   struct {
     void *LoggedData;
+<<<<<<< HEAD
   } Scope5_PWORK;                      /* '<S3>/Scope5' */
 
   struct {
@@ -215,6 +239,9 @@ typedef struct {
 
   DW_Calibrationwrite_Torque_co_T Calibrationwrite_p;/* '<S1>/Calibration write' */
   DW_Calibrationwrite_Torque_co_T Calibrationwrite;/* '<S1>/Calibration write' */
+=======
+  } Scope26_PWORK;                     /* '<S1>/Scope26' */
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 } DW_Torque_control_T;
 
 /* Continuous states (default storage) */
@@ -257,6 +284,7 @@ struct P_Torque_control_T_ {
                                         */
   real_T k2;                           /* Variable: k2
                                         * Referenced by: '<Root>/Gain7'
+<<<<<<< HEAD
                                         */
   real_T CurrentRegread_SampleTime;    /* Expression: 0.1
                                         * Referenced by: '<Root>/Current Reg read'
@@ -274,23 +302,38 @@ struct P_Torque_control_T_ {
                                         * Referenced by: '<S1>/Constant2'
                                         */
   real_T Constant2_Value_i;            /* Expression: 100
+=======
+                                        */
+  real_T Encoder1_SampleTime;          /* Expression: 0.01
+                                        * Referenced by: '<S1>/Encoder1'
+                                        */
+  real_T Constant2_Value;              /* Expression: 10
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
                                         * Referenced by: '<Root>/Constant2'
                                         */
   real_T Integrator_IC;                /* Expression: 0
                                         * Referenced by: '<Root>/Integrator'
                                         */
+<<<<<<< HEAD
   real_T Gain2_Gain;                   /* Expression: -(2*pi)/(11*4*370)
                                         * Referenced by: '<S3>/Gain2'
+=======
+  real_T Gain15_Gain;                  /* Expression: (2*pi)/(100*4*19.2)
+                                        * Referenced by: '<S1>/Gain15'
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
                                         */
   real_T Gain_Gain;                    /* Expression: 180/pi
                                         * Referenced by: '<S7>/Gain'
                                         */
+<<<<<<< HEAD
   real_T Gain1_Gain;                   /* Expression: 0.001
                                         * Referenced by: '<Root>/Gain1'
                                         */
   int16_T Gain_Gain_p;                 /* Computed Parameter: Gain_Gain_p
                                         * Referenced by: '<Root>/Gain'
                                         */
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 };
 
 /* Real-time Model Data Structure */
@@ -395,6 +438,7 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'Torque_control'
+<<<<<<< HEAD
  * '<S1>'   : 'Torque_control/Calibration every time step'
  * '<S2>'   : 'Torque_control/Initialize Function'
  * '<S3>'   : 'Torque_control/Right motor3'
@@ -402,6 +446,11 @@ extern volatile boolean_T runModel;
  * '<S5>'   : 'Torque_control/Initialize Function/Subsystem1'
  * '<S6>'   : 'Torque_control/Right motor3/MATLAB Function4'
  * '<S7>'   : 'Torque_control/Right motor3/Radians to Degrees'
+=======
+ * '<S1>'   : 'Torque_control/Right motor3'
+ * '<S2>'   : 'Torque_control/Right motor3/MATLAB Function2'
+ * '<S3>'   : 'Torque_control/Right motor3/Radians to Degrees1'
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  */
 #endif                                 /* RTW_HEADER_Torque_control_h_ */
 

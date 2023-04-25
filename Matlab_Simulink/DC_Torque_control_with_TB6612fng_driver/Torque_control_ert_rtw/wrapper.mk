@@ -8,13 +8,14 @@
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
-## Toolchain Name:          Arduino AVR
+## Toolchain Name:          Arduino ARM
 
 
 ###########################################################################
 ## TOOLCHAIN MACROS
 ###########################################################################
 # ARDUINO_ROOT = Intrinsically defined
+# ARDUINO_PACKAGES_TOOLS_ROOT = Intrinsically defined
 # ARDUINO_PORT = Intrinsically defined
 # ARDUINO_MCU = Intrinsically defined
 # ARDUINO_BAUD = Intrinsically defined
@@ -22,10 +23,8 @@
 # ARDUINO_F_CPU = Intrinsically defined
 SHELL = %SystemRoot%/system32/cmd.exe
 PRODUCT_HEX = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).hex
-PRODUCT_BIN = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).eep
-ARDUINO_TOOLS = $(ARDUINO_ROOT)/hardware/tools/avr/bin
-ELF2EEP_OPTIONS = -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0
-DOWNLOAD_ARGS =  >tmp.trash 2>&1 -P$(ARDUINO_PORT) -V -q -q -q -q -F -C$(ARDUINO_ROOT)/hardware/tools/avr/etc/avrdude.conf -p$(ARDUINO_MCU) -c$(ARDUINO_PROTOCOL) -b$(ARDUINO_BAUD) -D -Uflash:w:
+PRODUCT_BIN = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).bin
+ARDUINO_TOOLS = $(ARDUINO_PACKAGES_TOOLS_ROOT)/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin
 
 
 #-------------------------
@@ -40,34 +39,34 @@ MV                        =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# Assembler: Arduino AVR Assembler
+# Assembler: Arduino ARM Assembler
 AS_PATH := $(ARDUINO_TOOLS)
-AS := $(AS_PATH)/avr-gcc
+AS := $(AS_PATH)/arm-none-eabi-gcc
 
-# C Compiler: Arduino AVR C Compiler
+# C Compiler: Arduino ARM C Compiler
 CC_PATH := $(ARDUINO_TOOLS)
-CC := $(CC_PATH)/avr-gcc
+CC := $(CC_PATH)/arm-none-eabi-gcc
 
-# Linker: Arduino AVR Linker
+# Linker: Arduino ARM Linker
 LD_PATH = $(ARDUINO_TOOLS)
-LD := $(LD_PATH)/avr-gcc
+LD := $(LD_PATH)/arm-none-eabi-gcc
 
 
-# C++ Compiler: Arduino AVR C++ Compiler
+# C++ Compiler: Arduino ARM C++ Compiler
 CPP_PATH := $(ARDUINO_TOOLS)
-CPP := $(CPP_PATH)/avr-g++
+CPP := $(CPP_PATH)/arm-none-eabi-g++
 
-# C++ Linker: Arduino AVR C++ Linker
+# C++ Linker: Arduino ARM C++ Linker
 CPP_LD_PATH = $(ARDUINO_TOOLS)
-CPP_LD := $(CPP_LD_PATH)/avr-gcc
+CPP_LD := $(CPP_LD_PATH)/arm-none-eabi-gcc
 
-# Archiver: Arduino AVR Archiver
+# Archiver: Arduino ARM Archiver
 AR_PATH := $(ARDUINO_TOOLS)
-AR := $(AR_PATH)/avr-ar
+AR := $(AR_PATH)/arm-none-eabi-ar
 
-# Indexing: Arduino AVR Ranlib
+# Indexing: Arduino ARM Ranlib
 RANLIB_PATH := $(ARDUINO_TOOLS)
-RANLIB := $(RANLIB_PATH)/avr-ranlib
+RANLIB := $(RANLIB_PATH)/arm-none-eabi-ranlib
 
 # Execute: Execute
 EXECUTE = $(PRODUCT)
@@ -81,7 +80,7 @@ MAKE = $(MAKE_PATH)/gmake
 #--------------------------------------
 # Faster Runs Build Configuration
 #--------------------------------------
-ARFLAGS              = rcs
+ARFLAGS              = ruvs
 ASFLAGS              = -MMD -MP  \
                        -Wall \
                        -x assembler-with-cpp \
@@ -89,31 +88,34 @@ ASFLAGS              = -MMD -MP  \
                        $(DEFINES) \
                        $(INCLUDES) \
                        -c
-OBJCOPYFLAGS_BIN     = $(ELF2EEP_OPTIONS) $(PRODUCT) $(PRODUCT_BIN)
-CFLAGS               = -std=gnu11  \
+OBJCOPYFLAGS_BIN     = -O binary $(PRODUCT) $(PRODUCT_BIN)
+CFLAGS               = -std=gnu11 \
+                       -Os \
                        -c \
                        -w \
                        -ffunction-sections \
                        -fdata-sections  \
-                       -MMD \
+                       -nostdlib  \
+                       --param max-inline-insns-single=500  \
+                       -Dprintf=iprintf  \
                        -DARDUINO=10801  \
-                       -MMD -MP  \
-                       -Os
-CPPFLAGS             = -std=gnu++11 -fpermissive -fno-exceptions -fno-threadsafe-statics  \
+                       -MMD -MP 
+CPPFLAGS             = -std=gnu++11 -fno-threadsafe-statics -fno-rtti -fno-exceptions  \
+                       -Os \
                        -c \
                        -w \
                        -ffunction-sections \
                        -fdata-sections  \
-                       -MMD \
+                       -nostdlib  \
+                       --param max-inline-insns-single=500  \
+                       -Dprintf=iprintf  \
                        -DARDUINO=10801  \
-                       -MMD -MP  \
-                       -Os
-CPP_LDFLAGS          =  -w -Os -Wl,--gc-sections,--relax
+                       -MMD -MP 
+CPP_LDFLAGS          =  -Os -Wl,-Map="$(PRODUCT_NAME).map" -Wl,--gc-sections
 CPP_SHAREDLIB_LDFLAGS =
-DOWNLOAD_FLAGS       = $(DOWNLOAD_ARGS)$(PRODUCT_HEX):i
+DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-OBJCOPYFLAGS_HEX     = -O ihex -R .eeprom $(PRODUCT) $(PRODUCT_HEX)
-LDFLAGS              =  -w -Os -Wl,--gc-sections,--relax
+LDFLAGS              =  -Os -Wl,-Map="$(PRODUCT_NAME).map" -Wl,--gc-sections
 MAKE_FLAGS           = -f $(MAKEFILE)
 SHAREDLIB_LDFLAGS    =
 
@@ -124,34 +126,34 @@ SHAREDLIB_LDFLAGS    =
 #---------------
 # C Compiler
 #---------------
-CFLAGS_SKIPFORSIL = -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR -D_RUNONTARGETHARDWARE_BUILD_ -D_ROTH_MEGA2560_ -DARDUINO_NUM_SERIAL_PORTS=4
+CFLAGS_SKIPFORSIL = -MD -mcpu=cortex-m3 -fpermissive -DF_CPU=84000000L -DARDUINO_SAM_DUE -DARDUINO_ARCH_SAM -D__SAM3X8E__ -mthumb -DUSB_VID=0x2341 -DUSB_PID=0x003e -DUSBCON -DUSB_MANUFACTURER=\""Unknown\"" -DUSB_PRODUCT=\""Arduino Due\"" -D_RUNONTARGETHARDWARE_BUILD_ -D_ROTH_DUE_ -DARDUINO_NUM_SERIAL_PORTS=4 -DARDUINO_ARM -DARDUINO_ARM_CORTEX_M3
 CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 CFLAGS += $(CFLAGS_SKIPFORSIL) $(CFLAGS_BASIC)
 #-----------------
 # C++ Compiler
 #-----------------
-CPPFLAGS_SKIPFORSIL = -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR -D_RUNONTARGETHARDWARE_BUILD_ -D_ROTH_MEGA2560_ -DARDUINO_NUM_SERIAL_PORTS=4
+CPPFLAGS_SKIPFORSIL = -MD -mcpu=cortex-m3 -fpermissive -DF_CPU=84000000L -DARDUINO_SAM_DUE -DARDUINO_ARCH_SAM -D__SAM3X8E__ -mthumb -DUSB_VID=0x2341 -DUSB_PID=0x003e -DUSBCON -DUSB_MANUFACTURER=\""Unknown\"" -DUSB_PRODUCT=\""Arduino Due\"" -D_RUNONTARGETHARDWARE_BUILD_ -D_ROTH_DUE_ -DARDUINO_NUM_SERIAL_PORTS=4 -DARDUINO_ARM -DARDUINO_ARM_CORTEX_M3
 CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 CPPFLAGS += $(CPPFLAGS_SKIPFORSIL) $(CPPFLAGS_BASIC)
 #---------------
 # C++ Linker
 #---------------
-CPP_LDFLAGS_SKIPFORSIL = -mmcu=atmega2560 
+CPP_LDFLAGS_SKIPFORSIL = -T$(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/linker_scripts/gcc/flash.ld -mcpu=cortex-m3 -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--warn-unresolved-symbols -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a
 CPP_LDFLAGS += $(CPP_LDFLAGS_SKIPFORSIL)
 #------------------------------
 # C++ Shared Library Linker
 #------------------------------
-CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL = -mmcu=atmega2560 
+CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL = -T$(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/linker_scripts/gcc/flash.ld -mcpu=cortex-m3 -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--warn-unresolved-symbols -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a
 CPP_SHAREDLIB_LDFLAGS += $(CPP_SHAREDLIB_LDFLAGS_SKIPFORSIL)
 #-----------
 # Linker
 #-----------
-LDFLAGS_SKIPFORSIL = -mmcu=atmega2560 
+LDFLAGS_SKIPFORSIL = -T$(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/linker_scripts/gcc/flash.ld -mcpu=cortex-m3 -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--warn-unresolved-symbols -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a
 LDFLAGS += $(LDFLAGS_SKIPFORSIL)
 #--------------------------
 # Shared Library Linker
 #--------------------------
-SHAREDLIB_LDFLAGS_SKIPFORSIL = -mmcu=atmega2560 
+SHAREDLIB_LDFLAGS_SKIPFORSIL = -T$(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/linker_scripts/gcc/flash.ld -mcpu=cortex-m3 -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--warn-unresolved-symbols -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(ARDUINO_SAM_ROOT)/hardware/sam/$(SAM_LIB_VERSION)/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a
 SHAREDLIB_LDFLAGS += $(SHAREDLIB_LDFLAGS_SKIPFORSIL)
 
 
@@ -163,10 +165,16 @@ SHAREDLIB_LDFLAGS += $(SHAREDLIB_LDFLAGS_SKIPFORSIL)
 ###########################################################################
 SLMKPATH=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/STATIC~1
 MODELMK=Torque_control.mk
+<<<<<<< HEAD
 SLIB_PATH=C:/Users/sokse/DOCUME~1/MATLAB/R2022a/ARDUIN~1/ARDUIN~2/FASTER~1
 VARIANT_HEADER_PATH=$(ARDUINO_ROOT)/hardware/arduino/avr/variants/mega
+=======
+SLIB_PATH=C:/Users/LabPC/DOCUME~1/MATLAB/R2022a/ARDUIN~1/ARDUIN~1/FASTER~1
+VARIANT_HEADER_PATH=$(ARDUINO_SAM_ROOT)/hardware/sam/1.6.12/variants/arduino_due_x
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 ARDUINO_SKETCHBOOK_ROOT=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/aIDE/portable/SKETCH~1/LIBRAR~1
 ARDUINO_BASESUPPORTPKG_ROOT=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2
+ARDUINO_SAM_BOARDS=1
 
 
 ###########################################################################
@@ -185,6 +193,7 @@ export SLIB_PATH
 export VARIANT_HEADER_PATH
 export ARDUINO_SKETCHBOOK_ROOT
 export ARDUINO_BASESUPPORTPKG_ROOT
+export ARDUINO_SAM_BOARDS
 
 
 ###########################################################################
@@ -193,7 +202,12 @@ export ARDUINO_BASESUPPORTPKG_ROOT
 .PHONY : all
 all : 
 	@echo "### Generating static library."
+<<<<<<< HEAD
 	"$(MAKE)" -j5 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f avrcomm.mk all
 	"$(MAKE)" -j5 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f avrcore.mk all
 	"$(MAKE)" -j5 SHELL="$(SHELL)" -f "$(MODELMK)" all
+=======
+	"$(MAKE)" -j7 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f samcore.mk all
+	"$(MAKE)" -j7 SHELL="$(SHELL)" -f "$(MODELMK)" all
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 

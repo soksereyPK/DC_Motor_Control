@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/SlCache/19700101">
+<<<<<<< HEAD
   <slcache.FileAttributes type="slcache.FileAttributes" uuid="2574dba6-4190-4858-b932-a0c240200e9a">
     <checksum>eV6/H2hyrx4wQEIb1bAfzblmpKPcOba2QTpuQdTX0wCsTu0nOBr2EVlk58pFsecBJ9vhL+GuceJ0ccccP8/czg==</checksum>
+=======
+  <slcache.FileAttributes type="slcache.FileAttributes" uuid="417f7ada-e3f5-4c20-be70-9ed016cacd64">
+    <checksum>nOfpuS1cBPErliDc9wTvxrnJ9YcRQ7CM0TSZYwwPDLXxOvMzr9Z7HgKX6B+bX5tEFgeSqj+YaH0UkbSvHh7Jrw==</checksum>
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   </slcache.FileAttributes>
 </MF0>

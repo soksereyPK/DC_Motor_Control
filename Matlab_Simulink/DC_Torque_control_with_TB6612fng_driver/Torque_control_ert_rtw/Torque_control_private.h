@@ -3,12 +3,18 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
+<<<<<<< HEAD
  * Model version                  : 1.177
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
  * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
+=======
+ * Model version                  : 1.200
+ * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -36,6 +42,7 @@
 #define rtmSetTPtr(rtm, val)           ((rtm)->Timing.t = (val))
 #endif
 
+<<<<<<< HEAD
 #ifndef UCHAR_MAX
 #include <limits.h>
 #endif
@@ -91,6 +98,8 @@ extern void Torque_control_Calibrationwrite(int16_T rtu_0,
 extern void Torque_co_Calibrationwrite_Term(DW_Calibrationwrite_Torque_co_T
   *localDW);
 
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 /* private model entry point functions */
 extern void Torque_control_derivatives(void);
 

@@ -3,12 +3,18 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
+<<<<<<< HEAD
  * Model version                  : 1.177
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
  * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
+=======
+ * Model version                  : 1.200
+ * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -31,7 +37,7 @@ void rt_OneStep(void)
 
 #ifndef _MW_ARDUINO_LOOP_
 
-  sei();
+  interrupts();
 
 #endif;
 
@@ -40,7 +46,7 @@ void rt_OneStep(void)
   /* Get model outputs here */
 #ifndef _MW_ARDUINO_LOOP_
 
-  cli();
+  noInterrupts();
 
 #endif;
 
@@ -52,20 +58,31 @@ volatile boolean_T stopRequested;
 volatile boolean_T runModel;
 int main(void)
 {
-  float modelBaseRate = 0.001;
+  float modelBaseRate = 0.01;
   float systemClock = 0;
   extmodeErrorCode_T errorCode = EXTMODE_SUCCESS;
 
   /* Initialize variables */
   stopRequested = false;
   runModel = false;
+
+#if defined(MW_MULTI_TASKING_MODE) && (MW_MULTI_TASKING_MODE == 1)
+
+  MW_ASM (" SVC #1");
+
+#endif
+
+  ;
   init();
   MW_Arduino_Init();
   rtmSetErrorStatus(Torque_control_M, 0);
 
+<<<<<<< HEAD
   /* Set Final Simulation Time in Ticks */
   errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) -1);
 
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   /* Parse External Mode command line arguments */
   errorCode = extmodeParseArgs(0, NULL);
   if (errorCode != EXTMODE_SUCCESS) {
@@ -73,8 +90,8 @@ int main(void)
   }
 
   Torque_control_initialize();
-  cli();
-  sei();
+  noInterrupts();
+  interrupts();
 
   /* External Mode initialization */
   errorCode = extmodeInit(Torque_control_M->extModeInfo, &rtmGetTFinal
@@ -92,19 +109,19 @@ int main(void)
     }
   }
 
-  cli();
-  configureArduinoAVRTimer();
+  noInterrupts();
+  configureArduinoARMTimer();
   runModel = !extmodeSimulationComplete() && !extmodeStopRequested() &&
     !rtmGetStopRequested(Torque_control_M);
 
 #ifndef _MW_ARDUINO_LOOP_
 
-  sei();
+  interrupts();
 
 #endif;
 
   XcpStatus lastXcpState = xcpStatusGet();
-  sei();
+  interrupts();
   while (runModel) {
     /* Run External Mode background activities */
     errorCode = extmodeBackgroundRun();
@@ -129,7 +146,8 @@ int main(void)
 
   /* External Mode reset */
   extmodeReset();
-  cli();
+  MW_Arduino_Terminate();
+  noInterrupts();
   return 0;
 }
 

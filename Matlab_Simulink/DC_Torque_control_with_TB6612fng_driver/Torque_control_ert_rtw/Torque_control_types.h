@@ -3,12 +3,18 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
+<<<<<<< HEAD
  * Model version                  : 1.177
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
  * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
+=======
+ * Model version                  : 1.200
+ * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
+ * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -19,6 +25,7 @@
 #include "rtwtypes.h"
 
 /* Model Code Variants */
+<<<<<<< HEAD
 
 /* Custom Type definition for MATLABSystem: '<S1>/Calibration write' */
 #include "MW_SVD.h"
@@ -98,6 +105,8 @@ typedef struct tag_AYWgtFscQm3mLUJYb3A20C codertarget_arduinobase_block_T;
 
 #endif                             /* typedef_codertarget_arduinobase_block_T */
 
+=======
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #ifndef struct_tag_hiATgaifu8RfrjZ2yifYbH
 #define struct_tag_hiATgaifu8RfrjZ2yifYbH
 
@@ -143,6 +152,11 @@ typedef struct tag_chY474Xs2EmAHQmJ9UhmtD codertarget_arduinobase_in_h3_T;
 
 #endif                             /* typedef_codertarget_arduinobase_in_h3_T */
 
+<<<<<<< HEAD
+=======
+/* Custom Type definition for MATLABSystem: '<S1>/PWM2' */
+#include "MW_SVD.h"
+>>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN
 
