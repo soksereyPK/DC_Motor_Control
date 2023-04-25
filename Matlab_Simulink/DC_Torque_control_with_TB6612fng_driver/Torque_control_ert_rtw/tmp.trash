@@ -1,9 +1,9 @@
 
 avrdude: AVR device initialized and ready to accept instructions
 avrdude: Device signature = 0x1e9801 (probably m2560)
-avrdude: reading input file "C:\Users\LabPC\OneDrive\MyGithub\github\DC_Motor_Control\Matlab_Simulink\DC_Torque_control_with_TB6612fng_driver/Torque_control.hex"
-avrdude: writing flash (28568 bytes):
-avrdude: 28568 bytes of flash written
+avrdude: reading input file "C:\Users\sokse\OneDrive\MyGithub\DC_Motor_Control\Matlab_Simulink\DC_Torque_control_with_TB6612fng_driver/Torque_control.hex"
+avrdude: writing flash (33758 bytes):
+avrdude: 33758 bytes of flash written
 
 avrdude done.  Thank you.
 

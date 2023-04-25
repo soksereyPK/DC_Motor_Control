@@ -1,7 +1,7 @@
 MW_ArduinoEncoder.o: \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/toolbox/target/supportpackages/arduinobase/src/MW_ArduinoEncoder.cpp \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h \
- C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h \
+ C:/Users/sokse/OneDrive/MyGithub/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/binary.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -16,7 +16,7 @@ MW_ArduinoEncoder.o: \
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_ArduinoEncoder.h:
 
-C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h:
+C:/Users/sokse/OneDrive/MyGithub/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h:
 
 C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h:
 

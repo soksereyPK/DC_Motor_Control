@@ -12,7 +12,7 @@ MW_arduino_digitalio.o: \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h \
  C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/mega/pins_arduino.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h \
- C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h
+ C:/Users/sokse/OneDrive/MyGithub/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h
 
 C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/cores/arduino/Arduino.h:
 
@@ -38,4 +38,4 @@ C:/ProgramData/MATLAB/SupportPackages/R2022a/aIDE/hardware/arduino/avr/variants/
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h:
 
-C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h:
+C:/Users/sokse/OneDrive/MyGithub/DC_Motor_Control/Matlab_Simulink/DC_Torque_control_with_TB6612fng_driver/Torque_control_ert_rtw/rtwtypes.h:

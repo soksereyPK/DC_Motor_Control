@@ -163,7 +163,7 @@ SHAREDLIB_LDFLAGS += $(SHAREDLIB_LDFLAGS_SKIPFORSIL)
 ###########################################################################
 SLMKPATH=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2/STATIC~1
 MODELMK=Torque_control.mk
-SLIB_PATH=C:/Users/LabPC/DOCUME~1/MATLAB/R2022a/ARDUIN~1/ARDUIN~3/FASTER~1
+SLIB_PATH=C:/Users/sokse/DOCUME~1/MATLAB/R2022a/ARDUIN~1/ARDUIN~2/FASTER~1
 VARIANT_HEADER_PATH=$(ARDUINO_ROOT)/hardware/arduino/avr/variants/mega
 ARDUINO_SKETCHBOOK_ROOT=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/aIDE/portable/SKETCH~1/LIBRAR~1
 ARDUINO_BASESUPPORTPKG_ROOT=C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/SUPPOR~1/ARDUIN~2
@@ -193,6 +193,7 @@ export ARDUINO_BASESUPPORTPKG_ROOT
 .PHONY : all
 all : 
 	@echo "### Generating static library."
-	"$(MAKE)" -j7 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f avrcore.mk all
-	"$(MAKE)" -j7 SHELL="$(SHELL)" -f "$(MODELMK)" all
+	"$(MAKE)" -j5 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f avrcomm.mk all
+	"$(MAKE)" -j5 -C "$(SLMKPATH)" SHELL="$(SHELL)" -f avrcore.mk all
+	"$(MAKE)" -j5 SHELL="$(SHELL)" -f "$(MODELMK)" all
 

@@ -3,9 +3,9 @@
  *
  * Code generation for model "Torque_control".
  *
- * Model version              : 1.154
+ * Model version              : 1.177
  * Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
- * C source code generated on : Tue Sep  6 14:29:50 2022
+ * C source code generated on : Sat Oct 15 08:20:33 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
