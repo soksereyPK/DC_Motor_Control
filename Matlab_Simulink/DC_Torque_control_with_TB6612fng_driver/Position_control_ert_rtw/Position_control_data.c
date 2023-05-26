@@ -1,56 +1,63 @@
 /*
- * File: Position_control_data.c
+ * File: position_control_data.c
  *
- * Code generated for Simulink model 'Position_control'.
+ * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 2.44
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Sep  8 10:36:03 2022
+ * C/C++ source code generated on : Wed Apr 26 12:25:19 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 
-#include "Position_control.h"
+#include "position_control.h"
 
 /* Block parameters (default storage) */
-P_Position_control_T Position_control_P = {
-  /* Expression: -1
-   * Referenced by: '<S3>/Encoder'
+P_position_control_T position_control_P = {
+  /* Variable: a
+   * Referenced by: '<Root>/Gain8'
    */
-  -1.0,
+  26.85,
 
-  /* Expression: [0;0;0;0]
-   * Referenced by: '<S1>/Unit Delay2'
+  /* Variable: b
+   * Referenced by:
+   *   '<Root>/Gain8'
+   *   '<Root>/Gain9'
    */
-  { 0.0, 0.0, 0.0, 0.0 },
+  85.68,
 
-  /* Expression: 12
-   * Referenced by: '<Root>/uk2'
+  /* Variable: kd4
+   * Referenced by: '<Root>/Gain7'
    */
-  12.0,
+  -0.16670902644305355,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/uk2'
+  /* Variable: kp4
+   * Referenced by: '<Root>/Gain6'
    */
-  0.0,
+  0.46076584505552554,
 
-  /* Expression: 2*pi*1.2
-   * Referenced by: '<Root>/uk2'
+  /* Expression: 0.01
+   * Referenced by: '<S1>/Encoder'
    */
-  7.5398223686155035,
+  0.01,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/uk2'
+  /* Expression: 30
+   * Referenced by: '<Root>/Constant5'
    */
-  0.0,
+  30.0,
 
-  /* Expression: -(2*pi)/(11*4)
+  /* Expression: -(2*pi)/(100*4*19.2)
+   * Referenced by: '<S1>/Gain'
+   */
+  -0.00081812308687234192,
+
+  /* Expression: 180/pi
    * Referenced by: '<S3>/Gain'
    */
-  -0.14279966607226333
+  57.295779513082323
 };
 
 /*

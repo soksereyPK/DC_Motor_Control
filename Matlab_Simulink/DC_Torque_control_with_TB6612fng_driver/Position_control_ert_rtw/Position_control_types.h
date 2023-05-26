@@ -1,61 +1,24 @@
 /*
- * File: Position_control_types.h
+ * File: position_control_types.h
  *
- * Code generated for Simulink model 'Position_control'.
+ * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 2.44
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Sep  8 10:36:03 2022
+ * C/C++ source code generated on : Wed Apr 26 12:25:19 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_Position_control_types_h_
-#define RTW_HEADER_Position_control_types_h_
+#ifndef RTW_HEADER_position_control_types_h_
+#define RTW_HEADER_position_control_types_h_
 #include "rtwtypes.h"
 #include "MW_SVD.h"
 
 /* Model Code Variants */
-#ifndef struct_tag_04b6x6tDldj9IrIH2gmbjG
-#define struct_tag_04b6x6tDldj9IrIH2gmbjG
-
-struct tag_04b6x6tDldj9IrIH2gmbjG
-{
-  int16_T __dummy;
-};
-
-#endif                                 /* struct_tag_04b6x6tDldj9IrIH2gmbjG */
-
-#ifndef typedef_b_arduinodriver_ArduinoDigita_T
-#define typedef_b_arduinodriver_ArduinoDigita_T
-
-typedef struct tag_04b6x6tDldj9IrIH2gmbjG b_arduinodriver_ArduinoDigita_T;
-
-#endif                             /* typedef_b_arduinodriver_ArduinoDigita_T */
-
-#ifndef struct_tag_AYWgtFscQm3mLUJYb3A20C
-#define struct_tag_AYWgtFscQm3mLUJYb3A20C
-
-struct tag_AYWgtFscQm3mLUJYb3A20C
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_arduinodriver_ArduinoDigita_T DigitalIODriverObj;
-};
-
-#endif                                 /* struct_tag_AYWgtFscQm3mLUJYb3A20C */
-
-#ifndef typedef_codertarget_arduinobase_block_T
-#define typedef_codertarget_arduinobase_block_T
-
-typedef struct tag_AYWgtFscQm3mLUJYb3A20C codertarget_arduinobase_block_T;
-
-#endif                             /* typedef_codertarget_arduinobase_block_T */
-
 #ifndef struct_tag_hiATgaifu8RfrjZ2yifYbH
 #define struct_tag_hiATgaifu8RfrjZ2yifYbH
 
@@ -78,7 +41,7 @@ typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_inter_T;
 
 #endif                             /* typedef_codertarget_arduinobase_inter_T */
 
-/* Custom Type definition for MATLABSystem: '<S3>/PWM' */
+/* Custom Type definition for MATLABSystem: '<S1>/PWM2' */
 #include "MW_SVD.h"
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN
@@ -110,20 +73,20 @@ struct tag_4eDVzK5FiryyCjvjjvrZGB
 
 #endif                                 /* struct_tag_4eDVzK5FiryyCjvjjvrZGB */
 
-#ifndef typedef_codertarget_arduinobase_int_o_T
-#define typedef_codertarget_arduinobase_int_o_T
+#ifndef typedef_codertarget_arduinobase_int_b_T
+#define typedef_codertarget_arduinobase_int_b_T
 
-typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_int_o_T;
+typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_int_b_T;
 
-#endif                             /* typedef_codertarget_arduinobase_int_o_T */
+#endif                             /* typedef_codertarget_arduinobase_int_b_T */
 
 /* Parameters (default storage) */
-typedef struct P_Position_control_T_ P_Position_control_T;
+typedef struct P_position_control_T_ P_position_control_T;
 
 /* Forward declaration for rtModel */
-typedef struct tag_RTM_Position_control_T RT_MODEL_Position_control_T;
+typedef struct tag_RTM_position_control_T RT_MODEL_position_control_T;
 
-#endif                                /* RTW_HEADER_Position_control_types_h_ */
+#endif                                /* RTW_HEADER_position_control_types_h_ */
 
 /*
  * File trailer for generated code.

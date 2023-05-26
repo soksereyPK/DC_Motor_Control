@@ -1,34 +1,33 @@
 /*
- * File: Position_control.h
+ * File: position_control.h
  *
- * Code generated for Simulink model 'Position_control'.
+ * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 2.44
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Sep  8 10:36:03 2022
+ * C/C++ source code generated on : Wed Apr 26 12:25:19 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_Position_control_h_
-#define RTW_HEADER_Position_control_h_
-#ifndef Position_control_COMMON_INCLUDES_
-#define Position_control_COMMON_INCLUDES_
+#ifndef RTW_HEADER_position_control_h_
+#define RTW_HEADER_position_control_h_
+#ifndef position_control_COMMON_INCLUDES_
+#define position_control_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #include "rtw_extmode.h"
 #include "sysran_types.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "ext_mode.h"
-#include "MW_arduino_digitalio.h"
 #include "MW_ArduinoEncoder.h"
 #include "MW_PWM.h"
-#endif                                 /* Position_control_COMMON_INCLUDES_ */
+#endif                                 /* position_control_COMMON_INCLUDES_ */
 
-#include "Position_control_types.h"
+#include "position_control_types.h"
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
 #include "MW_target_hardware_resources.h"
@@ -76,80 +75,78 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Ak[16];
-  real_T Ak_m[16];
-  real_T UnitDelay2[4];                /* '<S1>/Unit Delay2' */
-  real_T uk2;                          /* '<Root>/uk2' */
+  real_T Derivative4;                  /* '<Root>/Derivative4' */
   real_T Gain;                         /* '<S3>/Gain' */
-  real_T Derivative2;                  /* '<S1>/Derivative2' */
-  real_T x_est[4];                     /* '<S1>/EKF2' */
-  real_T Wk[4];
-  int8_T b_I[16];
-} B_Position_control_T;
+  real_T Gain7;                        /* '<Root>/Gain7' */
+  real_T Add2;                         /* '<Root>/Add2' */
+} B_position_control_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_arduinobase_inter_T obj; /* '<S3>/Encoder' */
-  codertarget_arduinobase_block_T obj_b;/* '<S3>/Digital Output1' */
-  codertarget_arduinobase_block_T obj_d;/* '<S3>/Digital Output' */
-  codertarget_arduinobase_int_o_T obj_bg;/* '<S3>/PWM' */
-  real_T UnitDelay2_DSTATE[4];         /* '<S1>/Unit Delay2' */
-  real_T TimeStampA;                   /* '<S1>/Derivative2' */
-  real_T LastUAtTimeA;                 /* '<S1>/Derivative2' */
-  real_T TimeStampB;                   /* '<S1>/Derivative2' */
-  real_T LastUAtTimeB;                 /* '<S1>/Derivative2' */
-  real_T x_est_p[4];                   /* '<S1>/EKF2' */
-  real_T P[16];                        /* '<S1>/EKF2' */
-  real_T Qd_est[16];                   /* '<S1>/EKF2' */
-  real_T R_est;                        /* '<S1>/EKF2' */
+  codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder' */
+  codertarget_arduinobase_int_b_T obj_d;/* '<S1>/PWM2' */
+  codertarget_arduinobase_int_b_T obj_a;/* '<S1>/PWM1' */
+  real_T TimeStampA;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative4' */
+  real_T TimeStampB;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative4' */
+  real_T TimeStampA_o;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeA_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampB_g;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeB_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampA_n;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeA_e;               /* '<Root>/Derivative3' */
+  real_T TimeStampB_c;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeB_f3;              /* '<Root>/Derivative3' */
+  real_T TimeStampA_g;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeA_b;               /* '<Root>/Derivative2' */
+  real_T TimeStampB_d;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeB_c;               /* '<Root>/Derivative2' */
   struct {
     void *LoggedData;
   } Scope2_PWORK;                      /* '<Root>/Scope2' */
 
   struct {
     void *LoggedData;
-  } Scope3_PWORK;                      /* '<S1>/Scope3' */
+  } Scope4_PWORK;                      /* '<Root>/Scope4' */
 
   struct {
-    void *LoggedData[2];
+    void *LoggedData;
   } Scope1_PWORK;                      /* '<S1>/Scope1' */
-
-  struct {
-    void *LoggedData;
-  } Scope_PWORK;                       /* '<S1>/Scope' */
-
-  struct {
-    void *LoggedData;
-  } Scope_PWORK_j;                     /* '<S3>/Scope' */
-} DW_Position_control_T;
+} DW_position_control_T;
 
 /* Parameters (default storage) */
-struct P_Position_control_T_ {
-  real_T Encoder_SampleTime;           /* Expression: -1
-                                        * Referenced by: '<S3>/Encoder'
+struct P_position_control_T_ {
+  real_T a;                            /* Variable: a
+                                        * Referenced by: '<Root>/Gain8'
                                         */
-  real_T UnitDelay2_InitialCondition[4];/* Expression: [0;0;0;0]
-                                         * Referenced by: '<S1>/Unit Delay2'
-                                         */
-  real_T uk2_Amp;                      /* Expression: 12
-                                        * Referenced by: '<Root>/uk2'
+  real_T b;                            /* Variable: b
+                                        * Referenced by:
+                                        *   '<Root>/Gain8'
+                                        *   '<Root>/Gain9'
                                         */
-  real_T uk2_Bias;                     /* Expression: 0
-                                        * Referenced by: '<Root>/uk2'
+  real_T kd4;                          /* Variable: kd4
+                                        * Referenced by: '<Root>/Gain7'
                                         */
-  real_T uk2_Freq;                     /* Expression: 2*pi*1.2
-                                        * Referenced by: '<Root>/uk2'
+  real_T kp4;                          /* Variable: kp4
+                                        * Referenced by: '<Root>/Gain6'
                                         */
-  real_T uk2_Phase;                    /* Expression: 0
-                                        * Referenced by: '<Root>/uk2'
+  real_T Encoder_SampleTime;           /* Expression: 0.01
+                                        * Referenced by: '<S1>/Encoder'
                                         */
-  real_T Gain_Gain;                    /* Expression: -(2*pi)/(11*4)
+  real_T Constant5_Value;              /* Expression: 30
+                                        * Referenced by: '<Root>/Constant5'
+                                        */
+  real_T Gain_Gain;                    /* Expression: -(2*pi)/(100*4*19.2)
+                                        * Referenced by: '<S1>/Gain'
+                                        */
+  real_T Gain_Gain_f;                  /* Expression: 180/pi
                                         * Referenced by: '<S3>/Gain'
                                         */
 };
 
 /* Real-time Model Data Structure */
-struct tag_RTM_Position_control_T {
+struct tag_RTM_position_control_T {
   const char_T *errorStatus;
   RTWExtModeInfo *extModeInfo;
   RTWSolverInfo solverInfo;
@@ -191,21 +188,21 @@ struct tag_RTM_Position_control_T {
 };
 
 /* Block parameters (default storage) */
-extern P_Position_control_T Position_control_P;
+extern P_position_control_T position_control_P;
 
 /* Block signals (default storage) */
-extern B_Position_control_T Position_control_B;
+extern B_position_control_T position_control_B;
 
 /* Block states (default storage) */
-extern DW_Position_control_T Position_control_DW;
+extern DW_position_control_T position_control_DW;
 
 /* Model entry point functions */
-extern void Position_control_initialize(void);
-extern void Position_control_step(void);
-extern void Position_control_terminate(void);
+extern void position_control_initialize(void);
+extern void position_control_step(void);
+extern void position_control_terminate(void);
 
 /* Real-time Model object */
-extern RT_MODEL_Position_control_T *const Position_control_M;
+extern RT_MODEL_position_control_T *const position_control_M;
 extern volatile boolean_T stopRequested;
 extern volatile boolean_T runModel;
 
@@ -223,13 +220,12 @@ extern volatile boolean_T runModel;
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'Position_control'
- * '<S1>'   : 'Position_control/Estimated a,b,c parameters'
- * '<S2>'   : 'Position_control/Estimated a,b,c parameters/EKF2'
- * '<S3>'   : 'Position_control/Estimated a,b,c parameters/Subsystem1'
- * '<S4>'   : 'Position_control/Estimated a,b,c parameters/Subsystem1/MATLAB Function4'
+ * '<Root>' : 'position_control'
+ * '<S1>'   : 'position_control/Right motor2'
+ * '<S2>'   : 'position_control/Right motor2/MATLAB Function1'
+ * '<S3>'   : 'position_control/Right motor2/Radians to Degrees'
  */
-#endif                                 /* RTW_HEADER_Position_control_h_ */
+#endif                                 /* RTW_HEADER_position_control_h_ */
 
 /*
  * File trailer for generated code.

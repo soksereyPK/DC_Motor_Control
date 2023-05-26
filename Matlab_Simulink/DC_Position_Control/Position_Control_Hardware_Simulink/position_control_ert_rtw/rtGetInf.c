@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 2.34
+ * Model version                  : 2.47
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Apr 22 18:03:52 2023
+ * C/C++ source code generated on : Wed Apr 26 12:52:06 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex

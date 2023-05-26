@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 2.34
+ * Model version                  : 2.47
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Apr 22 18:03:52 2023
+ * C/C++ source code generated on : Wed Apr 26 12:52:06 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -41,7 +41,7 @@ typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_inter_T;
 
 #endif                             /* typedef_codertarget_arduinobase_inter_T */
 
-/* Custom Type definition for MATLABSystem: '<S1>/PWM3' */
+/* Custom Type definition for MATLABSystem: '<S1>/PWM2' */
 #include "MW_SVD.h"
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN

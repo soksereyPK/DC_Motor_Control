@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 2.34
+ * Model version                  : 2.47
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Apr 22 18:03:52 2023
+ * C/C++ source code generated on : Wed Apr 26 12:52:06 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -80,49 +80,72 @@ typedef struct {
   int128m_T r;
   int128m_T r1;
   int64m_T Gain;                       /* '<S3>/Gain' */
-  real_T Gain10;                       /* '<Root>/Gain10' */
-  real_T Add3;                         /* '<Root>/Add3' */
+  real_T Derivative4;                  /* '<Root>/Derivative4' */
+  real_T Sum3;                         /* '<Root>/Sum3' */
+  real_T Gain7;                        /* '<Root>/Gain7' */
+  real_T Add2;                         /* '<Root>/Add2' */
+  real_T pwm_cal;
 } B_position_control_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder' */
-  codertarget_arduinobase_int_b_T obj_f;/* '<S1>/PWM3' */
-  codertarget_arduinobase_int_b_T obj_fg;/* '<S1>/PWM' */
-  real_T TimeStampA;                   /* '<Root>/Derivative6' */
-  real_T LastUAtTimeA;                 /* '<Root>/Derivative6' */
-  real_T TimeStampB;                   /* '<Root>/Derivative6' */
-  real_T LastUAtTimeB;                 /* '<Root>/Derivative6' */
+  codertarget_arduinobase_int_b_T obj_d;/* '<S1>/PWM2' */
+  codertarget_arduinobase_int_b_T obj_a;/* '<S1>/PWM1' */
+  real_T TimeStampA;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative4' */
+  real_T TimeStampB;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative4' */
+  real_T TimeStampA_o;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeA_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampB_g;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeB_f;               /* '<Root>/Derivative5' */
+  real_T TimeStampA_n;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeA_e;               /* '<Root>/Derivative3' */
+  real_T TimeStampB_c;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeB_f3;              /* '<Root>/Derivative3' */
+  real_T TimeStampA_g;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeA_b;               /* '<Root>/Derivative2' */
+  real_T TimeStampB_d;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeB_c;               /* '<Root>/Derivative2' */
   struct {
     void *LoggedData;
-  } Scope10_PWORK;                     /* '<Root>/Scope10' */
+  } Scope2_PWORK;                      /* '<Root>/Scope2' */
 
   struct {
     void *LoggedData;
-  } Scope8_PWORK;                      /* '<Root>/Scope8' */
+  } Scope6_PWORK;                      /* '<Root>/Scope6' */
 
   struct {
     void *LoggedData;
-  } Scope3_PWORK;                      /* '<Root>/Scope3' */
+  } Scope4_PWORK;                      /* '<Root>/Scope4' */
 
   struct {
     void *LoggedData;
-  } Scope9_PWORK;                      /* '<S1>/Scope9' */
+  } Scope1_PWORK;                      /* '<S1>/Scope1' */
 } DW_position_control_T;
 
 /* Parameters (default storage) */
 struct P_position_control_T_ {
-  real_T kd2;                          /* Variable: kd2
-                                        * Referenced by: '<Root>/Gain10'
+  real_T a;                            /* Variable: a
+                                        * Referenced by: '<Root>/Gain8'
                                         */
-  real_T kp2;                          /* Variable: kp2
-                                        * Referenced by: '<Root>/Gain5'
+  real_T b;                            /* Variable: b
+                                        * Referenced by:
+                                        *   '<Root>/Gain8'
+                                        *   '<Root>/Gain9'
+                                        */
+  real_T kd4;                          /* Variable: kd4
+                                        * Referenced by: '<Root>/Gain7'
+                                        */
+  real_T kp4;                          /* Variable: kp4
+                                        * Referenced by: '<Root>/Gain6'
                                         */
   real_T Encoder_SampleTime;           /* Expression: 0.01
                                         * Referenced by: '<S1>/Encoder'
                                         */
-  real_T Constant2_Value;              /* Expression: 50
-                                        * Referenced by: '<Root>/Constant2'
+  real_T Constant5_Value;              /* Expression: 30
+                                        * Referenced by: '<Root>/Constant5'
                                         */
   int64m_T Gain_Gain;                  /* Computed Parameter: Gain_Gain
                                         * Referenced by: '<S3>/Gain'
@@ -208,9 +231,9 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'position_control'
- * '<S1>'   : 'position_control/Out_Gear_Box'
- * '<S2>'   : 'position_control/Out_Gear_Box/MATLAB Function2'
- * '<S3>'   : 'position_control/Out_Gear_Box/Radians to Degrees'
+ * '<S1>'   : 'position_control/Right motor2'
+ * '<S2>'   : 'position_control/Right motor2/MATLAB Function1'
+ * '<S3>'   : 'position_control/Right motor2/Radians to Degrees'
  */
 #endif                                 /* RTW_HEADER_position_control_h_ */
 

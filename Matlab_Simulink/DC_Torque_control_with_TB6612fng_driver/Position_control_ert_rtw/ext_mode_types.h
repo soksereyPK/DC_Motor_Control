@@ -1,14 +1,14 @@
 /*
  * ext_mode_types.h
  *
- * Code generation for model "Position_control".
+ * Code generation for model "position_control".
  *
- * Model version              : 1.7
+ * Model version              : 2.44
  * Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
- * C source code generated on : Thu Sep  8 10:36:03 2022
+ * C source code generated on : Wed Apr 26 12:25:19 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */

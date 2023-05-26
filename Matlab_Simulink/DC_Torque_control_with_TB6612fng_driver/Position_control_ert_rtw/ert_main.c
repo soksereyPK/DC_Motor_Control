@@ -1,19 +1,19 @@
 /*
  * File: ert_main.c
  *
- * Code generated for Simulink model 'Position_control'.
+ * Code generated for Simulink model 'position_control'.
  *
- * Model version                  : 1.7
+ * Model version                  : 2.44
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Sep  8 10:36:03 2022
+ * C/C++ source code generated on : Wed Apr 26 12:25:19 2023
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Atmel->AVR
+ * Embedded hardware selection: ARM Compatible->ARM Cortex
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 
-#include "Position_control.h"
+#include "position_control.h"
 #include "rtwtypes.h"
 #include "xcp.h"
 #include "ext_mode.h"
@@ -31,16 +31,16 @@ void rt_OneStep(void)
 
 #ifndef _MW_ARDUINO_LOOP_
 
-  sei();
+  interrupts();
 
 #endif;
 
-  Position_control_step();
+  position_control_step();
 
   /* Get model outputs here */
 #ifndef _MW_ARDUINO_LOOP_
 
-  cli();
+  noInterrupts();
 
 #endif;
 
@@ -59,12 +59,20 @@ int main(void)
   /* Initialize variables */
   stopRequested = false;
   runModel = false;
+
+#if defined(MW_MULTI_TASKING_MODE) && (MW_MULTI_TASKING_MODE == 1)
+
+  MW_ASM (" SVC #1");
+
+#endif
+
+  ;
   init();
   MW_Arduino_Init();
-  rtmSetErrorStatus(Position_control_M, 0);
+  rtmSetErrorStatus(position_control_M, 0);
 
   /* Set Final Simulation Time in Ticks */
-  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) -1);
+  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) 1000);
 
   /* Parse External Mode command line arguments */
   errorCode = extmodeParseArgs(0, NULL);
@@ -72,13 +80,13 @@ int main(void)
     return (errorCode);
   }
 
-  Position_control_initialize();
-  cli();
-  sei();
+  position_control_initialize();
+  noInterrupts();
+  interrupts();
 
   /* External Mode initialization */
-  errorCode = extmodeInit(Position_control_M->extModeInfo, &rtmGetTFinal
-    (Position_control_M));
+  errorCode = extmodeInit(position_control_M->extModeInfo, &rtmGetTFinal
+    (position_control_M));
   if (errorCode != EXTMODE_SUCCESS) {
     /* Code to handle External Mode initialization errors
        may be added here */
@@ -88,23 +96,23 @@ int main(void)
     /* Wait until a Start or Stop Request has been received from the Host */
     extmodeWaitForHostRequest(EXTMODE_WAIT_FOREVER);
     if (extmodeStopRequested()) {
-      rtmSetStopRequested(Position_control_M, true);
+      rtmSetStopRequested(position_control_M, true);
     }
   }
 
-  cli();
-  configureArduinoAVRTimer();
+  noInterrupts();
+  configureArduinoARMTimer();
   runModel = !extmodeSimulationComplete() && !extmodeStopRequested() &&
-    !rtmGetStopRequested(Position_control_M);
+    !rtmGetStopRequested(position_control_M);
 
 #ifndef _MW_ARDUINO_LOOP_
 
-  sei();
+  interrupts();
 
 #endif;
 
   XcpStatus lastXcpState = xcpStatusGet();
-  sei();
+  interrupts();
   while (runModel) {
     /* Run External Mode background activities */
     errorCode = extmodeBackgroundRun();
@@ -114,7 +122,7 @@ int main(void)
     }
 
     stopRequested = !(!extmodeSimulationComplete() && !extmodeStopRequested() &&
-                      !rtmGetStopRequested(Position_control_M));
+                      !rtmGetStopRequested(position_control_M));
     runModel = !(stopRequested);
     if (stopRequested)
       disable_rt_OneStep();
@@ -125,11 +133,12 @@ int main(void)
   }
 
   /* Terminate model */
-  Position_control_terminate();
+  position_control_terminate();
 
   /* External Mode reset */
   extmodeReset();
-  cli();
+  MW_Arduino_Terminate();
+  noInterrupts();
   return 0;
 }
 
