@@ -16,7 +16,6 @@ void setup() {
   pinMode(ENCA,INPUT);
   pinMode(ENCB,INPUT);
   attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,RISING);
-  
   pinMode(PWM,OUTPUT);
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
@@ -46,7 +45,7 @@ void loop() {
   delay(1000);
   stop();
   delay(250);
-
+}
 
 void setMotor(int dir, int pwmVal, int pwm, int in1, int in2){
   digitalWrite(STBY, HIGH); 
