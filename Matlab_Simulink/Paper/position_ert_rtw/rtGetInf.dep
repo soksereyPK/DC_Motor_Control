@@ -1,0 +1,11 @@
+rtGetInf.o: \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rtGetInf.c \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rtwtypes.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rtGetInf.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rt_nonfinite.h
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rtwtypes.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rtGetInf.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/Paper/position_ert_rtw/rt_nonfinite.h:
