@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Position_Control_Single_Loop'.
  *
- * Model version                  : 1.12
+ * Model version                  : 1.22
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Mon Jun  5 16:56:52 2023
+ * C/C++ source code generated on : Sat Jun 24 10:33:56 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -30,6 +30,120 @@ DW_Position_Control_Single_Lo_T Position_Control_Single_Loop_DW;
 static RT_MODEL_Position_Control_Sin_T Position_Control_Single_Loop_M_;
 RT_MODEL_Position_Control_Sin_T *const Position_Control_Single_Loop_M =
   &Position_Control_Single_Loop_M_;
+void sMultiWordMul(const uint32_T u1[], int32_T n1, const uint32_T u2[], int32_T
+                   n2, uint32_T y[], int32_T n)
+{
+  int32_T i;
+  int32_T j;
+  int32_T k;
+  int32_T ni;
+  uint32_T a0;
+  uint32_T a1;
+  uint32_T b1;
+  uint32_T cb;
+  uint32_T cb1;
+  uint32_T cb2;
+  uint32_T u1i;
+  uint32_T w01;
+  uint32_T w10;
+  uint32_T yk;
+  boolean_T isNegative1;
+  boolean_T isNegative2;
+  isNegative1 = ((u1[n1 - 1] & 2147483648U) != 0U);
+  isNegative2 = ((u2[n2 - 1] & 2147483648U) != 0U);
+  cb1 = 1U;
+
+  /* Initialize output to zero */
+  for (k = 0; k < n; k++) {
+    y[k] = 0U;
+  }
+
+  for (i = 0; i < n1; i++) {
+    cb = 0U;
+    u1i = u1[i];
+    if (isNegative1) {
+      u1i = ~u1i + cb1;
+      cb1 = (uint32_T)(u1i < cb1);
+    }
+
+    a1 = u1i >> 16U;
+    a0 = u1i & 65535U;
+    cb2 = 1U;
+    ni = n - i;
+    ni = n2 <= ni ? n2 : ni;
+    k = i;
+    for (j = 0; j < ni; j++) {
+      u1i = u2[j];
+      if (isNegative2) {
+        u1i = ~u1i + cb2;
+        cb2 = (uint32_T)(u1i < cb2);
+      }
+
+      b1 = u1i >> 16U;
+      u1i &= 65535U;
+      w10 = a1 * u1i;
+      w01 = a0 * b1;
+      yk = y[k] + cb;
+      cb = (uint32_T)(yk < cb);
+      u1i *= a0;
+      yk += u1i;
+      cb += (yk < u1i);
+      u1i = w10 << 16U;
+      yk += u1i;
+      cb += (yk < u1i);
+      u1i = w01 << 16U;
+      yk += u1i;
+      cb += (yk < u1i);
+      y[k] = yk;
+      cb += w10 >> 16U;
+      cb += w01 >> 16U;
+      cb += a1 * b1;
+      k++;
+    }
+
+    if (k < n) {
+      y[k] = cb;
+    }
+  }
+
+  /* Apply sign */
+  if (isNegative1 != isNegative2) {
+    cb = 1U;
+    for (k = 0; k < n; k++) {
+      yk = ~y[k] + cb;
+      y[k] = yk;
+      cb = (uint32_T)(yk < cb);
+    }
+  }
+}
+
+real_T sMultiWord2Double(const uint32_T u1[], int32_T n1, int32_T e1)
+{
+  real_T y;
+  int32_T exp_0;
+  int32_T i;
+  uint32_T cb;
+  uint32_T u1i;
+  y = 0.0;
+  exp_0 = e1;
+  if ((u1[n1 - 1] & 2147483648U) != 0U) {
+    cb = 1U;
+    for (i = 0; i < n1; i++) {
+      u1i = ~u1[i];
+      cb += u1i;
+      y -= ldexp(cb, exp_0);
+      cb = (uint32_T)(cb < u1i);
+      exp_0 += 32;
+    }
+  } else {
+    for (i = 0; i < n1; i++) {
+      y += ldexp(u1[i], exp_0);
+      exp_0 += 32;
+    }
+  }
+
+  return y;
+}
 
 /* Model step function */
 void Position_Control_Single_Loop_step(void)
@@ -37,11 +151,32 @@ void Position_Control_Single_Loop_step(void)
   {
     codertarget_arduinobase_int_b_T *obj;
     real_T pwm_cal;
-    real_T rtb_Derivative9;
-    real_T rtb_Gain11;
-    real_T rtb_Gain13;
+    real_T rtb_Derivative2;
+    real_T rtb_Gain8;
+    real_T rtb_Gain9;
     real_T *lastU;
     int32_T rtb_Encoder_0;
+    uint32_T tmp;
+    uint32_T tmp_0;
+
+    /* Constant: '<Root>/Constant7' */
+    Position_Control_Single_Loop_B.Constant7 =
+      Position_Control_Single_Loop_P.Constant7_Value;
+
+    /* ManualSwitch: '<Root>/Manual Switch1' */
+    if (Position_Control_Single_Loop_P.ManualSwitch1_CurrentSetting == 1) {
+      /* ManualSwitch: '<Root>/Manual Switch1' incorporates:
+       *  Constant: '<Root>/Constant5'
+       */
+      Position_Control_Single_Loop_B.ManualSwitch1 =
+        Position_Control_Single_Loop_P.Constant5_Value;
+    } else {
+      /* ManualSwitch: '<Root>/Manual Switch1' */
+      Position_Control_Single_Loop_B.ManualSwitch1 =
+        Position_Control_Single_Loop_B.Constant7;
+    }
+
+    /* End of ManualSwitch: '<Root>/Manual Switch1' */
 
     /* MATLABSystem: '<S1>/Encoder' */
     if (Position_Control_Single_Loop_DW.obj.SampleTime !=
@@ -57,187 +192,182 @@ void Position_Control_Single_Loop_step(void)
     MW_EncoderRead(Position_Control_Single_Loop_DW.obj.Index, &rtb_Encoder_0);
 
     /* Gain: '<S1>/Gain' incorporates:
-     *  DataTypeConversion: '<S1>/Data Type Conversion'
      *  MATLABSystem: '<S1>/Encoder'
      */
-    Position_Control_Single_Loop_B.Gain =
-      Position_Control_Single_Loop_P.Gain_Gain * (real_T)rtb_Encoder_0;
+    tmp = (uint32_T)Position_Control_Single_Loop_P.Gain_Gain;
+    tmp_0 = (uint32_T)rtb_Encoder_0;
+    sMultiWordMul(&tmp, 1, &tmp_0, 1,
+                  &Position_Control_Single_Loop_B.J6_Response.chunks[0U], 2);
 
-    /* ManualSwitch: '<Root>/Manual Switch2' incorporates:
-     *  Constant: '<Root>/Constant8'
-     *  Constant: '<Root>/Constant9'
+    /* Sum: '<Root>/Sum3' incorporates:
+     *  Gain: '<S1>/Gain'
      */
-    if (Position_Control_Single_Loop_P.ManualSwitch2_CurrentSetting == 1) {
-      pwm_cal = Position_Control_Single_Loop_P.Constant8_Value;
-    } else {
-      pwm_cal = Position_Control_Single_Loop_P.Constant9_Value;
-    }
+    Position_Control_Single_Loop_B.Sum3 =
+      Position_Control_Single_Loop_B.ManualSwitch1 - sMultiWord2Double
+      (&Position_Control_Single_Loop_B.J6_Response.chunks[0U], 2, 0) *
+      4.5474735088646412E-13;
 
-    /* End of ManualSwitch: '<Root>/Manual Switch2' */
-
-    /* Sum: '<Root>/Sum2' */
-    Position_Control_Single_Loop_B.Sum2 = pwm_cal -
-      Position_Control_Single_Loop_B.Gain;
-
-    /* Derivative: '<Root>/Derivative7' incorporates:
-     *  Derivative: '<Root>/Derivative1'
-     *  Derivative: '<Root>/Derivative8'
-     *  Derivative: '<Root>/Derivative9'
+    /* Derivative: '<Root>/Derivative4' incorporates:
+     *  Derivative: '<Root>/Derivative2'
+     *  Derivative: '<Root>/Derivative3'
+     *  Derivative: '<Root>/Derivative5'
      */
     pwm_cal = Position_Control_Single_Loop_M->Timing.t[0];
     if ((Position_Control_Single_Loop_DW.TimeStampA >= pwm_cal) &&
         (Position_Control_Single_Loop_DW.TimeStampB >= pwm_cal)) {
-      /* Derivative: '<Root>/Derivative7' */
-      Position_Control_Single_Loop_B.Derivative7 = 0.0;
+      /* Derivative: '<Root>/Derivative4' */
+      Position_Control_Single_Loop_B.Derivative4 = 0.0;
     } else {
-      rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampA;
+      rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampA;
       lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA;
       if (Position_Control_Single_Loop_DW.TimeStampA <
           Position_Control_Single_Loop_DW.TimeStampB) {
         if (Position_Control_Single_Loop_DW.TimeStampB < pwm_cal) {
-          rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB;
+          rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB;
           lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB;
         }
       } else if (Position_Control_Single_Loop_DW.TimeStampA >= pwm_cal) {
-        rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB;
+        rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB;
         lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB;
       }
 
-      /* Derivative: '<Root>/Derivative7' */
-      Position_Control_Single_Loop_B.Derivative7 =
-        (Position_Control_Single_Loop_B.Sum2 - *lastU) / (pwm_cal -
-        rtb_Derivative9);
+      /* Derivative: '<Root>/Derivative4' */
+      Position_Control_Single_Loop_B.Derivative4 =
+        (Position_Control_Single_Loop_B.ManualSwitch1 - *lastU) / (pwm_cal -
+        rtb_Derivative2);
     }
 
-    /* End of Derivative: '<Root>/Derivative7' */
+    /* End of Derivative: '<Root>/Derivative4' */
 
-    /* Derivative: '<Root>/Derivative8' */
-    if ((Position_Control_Single_Loop_DW.TimeStampA_k >= pwm_cal) &&
-        (Position_Control_Single_Loop_DW.TimeStampB_a >= pwm_cal)) {
-      rtb_Derivative9 = 0.0;
+    /* Derivative: '<Root>/Derivative5' */
+    if ((Position_Control_Single_Loop_DW.TimeStampA_b >= pwm_cal) &&
+        (Position_Control_Single_Loop_DW.TimeStampB_e >= pwm_cal)) {
+      rtb_Derivative2 = 0.0;
     } else {
-      rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampA_k;
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_p;
-      if (Position_Control_Single_Loop_DW.TimeStampA_k <
+      rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampA_b;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_c;
+      if (Position_Control_Single_Loop_DW.TimeStampA_b <
+          Position_Control_Single_Loop_DW.TimeStampB_e) {
+        if (Position_Control_Single_Loop_DW.TimeStampB_e < pwm_cal) {
+          rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_e;
+          lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_e;
+        }
+      } else if (Position_Control_Single_Loop_DW.TimeStampA_b >= pwm_cal) {
+        rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_e;
+        lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_e;
+      }
+
+      rtb_Derivative2 = (Position_Control_Single_Loop_B.Derivative4 - *lastU) /
+        (pwm_cal - rtb_Derivative2);
+    }
+
+    /* Gain: '<Root>/Gain9' */
+    rtb_Gain9 = 1.0 / Position_Control_Single_Loop_P.b * rtb_Derivative2;
+
+    /* Derivative: '<Root>/Derivative3' */
+    if ((Position_Control_Single_Loop_DW.TimeStampA_i >= pwm_cal) &&
+        (Position_Control_Single_Loop_DW.TimeStampB_a >= pwm_cal)) {
+      rtb_Derivative2 = 0.0;
+    } else {
+      rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampA_i;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_f;
+      if (Position_Control_Single_Loop_DW.TimeStampA_i <
           Position_Control_Single_Loop_DW.TimeStampB_a) {
         if (Position_Control_Single_Loop_DW.TimeStampB_a < pwm_cal) {
-          rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_a;
+          rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_a;
           lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_d;
         }
-      } else if (Position_Control_Single_Loop_DW.TimeStampA_k >= pwm_cal) {
-        rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_a;
+      } else if (Position_Control_Single_Loop_DW.TimeStampA_i >= pwm_cal) {
+        rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_a;
         lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_d;
       }
 
-      rtb_Derivative9 = (Position_Control_Single_Loop_B.Derivative7 - *lastU) /
-        (pwm_cal - rtb_Derivative9);
+      rtb_Derivative2 = (Position_Control_Single_Loop_B.ManualSwitch1 - *lastU) /
+        (pwm_cal - rtb_Derivative2);
     }
 
-    /* Gain: '<Root>/Gain13' */
-    rtb_Gain13 = 1.0 / Position_Control_Single_Loop_P.b * rtb_Derivative9;
+    /* Gain: '<Root>/Gain8' */
+    rtb_Gain8 = Position_Control_Single_Loop_P.a /
+      Position_Control_Single_Loop_P.b * rtb_Derivative2;
 
-    /* Derivative: '<Root>/Derivative1' */
-    if ((Position_Control_Single_Loop_DW.TimeStampA_g >= pwm_cal) &&
+    /* Gain: '<Root>/Gain7' */
+    Position_Control_Single_Loop_B.Gain7 = Position_Control_Single_Loop_P.kd4 *
+      Position_Control_Single_Loop_B.Sum3;
+
+    /* Derivative: '<Root>/Derivative2' */
+    if ((Position_Control_Single_Loop_DW.TimeStampA_in >= pwm_cal) &&
         (Position_Control_Single_Loop_DW.TimeStampB_c >= pwm_cal)) {
-      rtb_Derivative9 = 0.0;
+      rtb_Derivative2 = 0.0;
     } else {
-      rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampA_g;
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_j;
-      if (Position_Control_Single_Loop_DW.TimeStampA_g <
+      rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampA_in;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_cj;
+      if (Position_Control_Single_Loop_DW.TimeStampA_in <
           Position_Control_Single_Loop_DW.TimeStampB_c) {
         if (Position_Control_Single_Loop_DW.TimeStampB_c < pwm_cal) {
-          rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_c;
-          lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_k;
+          rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_c;
+          lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_b;
         }
-      } else if (Position_Control_Single_Loop_DW.TimeStampA_g >= pwm_cal) {
-        rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_c;
-        lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_k;
+      } else if (Position_Control_Single_Loop_DW.TimeStampA_in >= pwm_cal) {
+        rtb_Derivative2 = Position_Control_Single_Loop_DW.TimeStampB_c;
+        lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_b;
       }
 
-      rtb_Derivative9 = (Position_Control_Single_Loop_B.Sum2 - *lastU) /
-        (pwm_cal - rtb_Derivative9);
-    }
-
-    /* Gain: '<Root>/Gain11' */
-    rtb_Gain11 = (Position_Control_Single_Loop_P.b *
-                  Position_Control_Single_Loop_P.k2 +
-                  Position_Control_Single_Loop_P.a) /
-      Position_Control_Single_Loop_P.b * rtb_Derivative9;
-
-    /* Derivative: '<Root>/Derivative9' */
-    if ((Position_Control_Single_Loop_DW.TimeStampA_b >= pwm_cal) &&
-        (Position_Control_Single_Loop_DW.TimeStampB_j >= pwm_cal)) {
-      rtb_Derivative9 = 0.0;
-    } else {
-      rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampA_b;
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_e;
-      if (Position_Control_Single_Loop_DW.TimeStampA_b <
-          Position_Control_Single_Loop_DW.TimeStampB_j) {
-        if (Position_Control_Single_Loop_DW.TimeStampB_j < pwm_cal) {
-          rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_j;
-          lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_g;
-        }
-      } else if (Position_Control_Single_Loop_DW.TimeStampA_b >= pwm_cal) {
-        rtb_Derivative9 = Position_Control_Single_Loop_DW.TimeStampB_j;
-        lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_g;
-      }
-
-      rtb_Derivative9 = (Position_Control_Single_Loop_B.Gain - *lastU) /
-        (pwm_cal - rtb_Derivative9);
+      rtb_Derivative2 = (Position_Control_Single_Loop_B.Gain7 - *lastU) /
+        (pwm_cal - rtb_Derivative2);
     }
 
     /* MATLAB Function: '<S1>/MATLAB Function1' incorporates:
-     *  Gain: '<Root>/Gain12'
-     *  Gain: '<Root>/Gain3'
-     *  Sum: '<Root>/Add1'
-     *  Sum: '<Root>/Sum5'
+     *  Gain: '<Root>/Gain6'
+     *  Sum: '<Root>/Add2'
      */
-    pwm_cal = ((Position_Control_Single_Loop_P.k1 *
-                Position_Control_Single_Loop_B.Sum2 - rtb_Derivative9) *
-               Position_Control_Single_Loop_P.k2 + (rtb_Gain13 + rtb_Gain11)) *
-      254.0 / 22.9;
+    pwm_cal = (((rtb_Gain9 + rtb_Gain8) + Position_Control_Single_Loop_P.kp4 *
+                Position_Control_Single_Loop_B.Sum3) + rtb_Derivative2) * 254.0 /
+      22.9;
     if (pwm_cal > 0.0) {
-      rtb_Gain13 = 0.0;
+      rtb_Gain9 = 0.0;
     } else if (pwm_cal < 0.0) {
-      rtb_Gain13 = fabs(pwm_cal);
+      rtb_Gain9 = fabs(pwm_cal);
       pwm_cal = 0.0;
     } else {
-      rtb_Gain13 = 0.0;
+      rtb_Gain9 = 0.0;
       pwm_cal = 0.0;
     }
 
     /* End of MATLAB Function: '<S1>/MATLAB Function1' */
 
     /* MATLABSystem: '<S1>/PWM1' */
-    obj = &Position_Control_Single_Loop_DW.obj_l;
+    obj = &Position_Control_Single_Loop_DW.obj_b;
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
-    if (!(rtb_Gain13 <= 255.0)) {
-      rtb_Gain13 = 255.0;
+    if (!(rtb_Gain9 <= 255.0)) {
+      rtb_Gain9 = 255.0;
     }
 
     MW_PWM_SetDutyCycle
-      (Position_Control_Single_Loop_DW.obj_l.PWMDriverObj.MW_PWM_HANDLE,
-       rtb_Gain13);
+      (Position_Control_Single_Loop_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE,
+       rtb_Gain9);
 
     /* End of MATLABSystem: '<S1>/PWM1' */
 
     /* MATLABSystem: '<S1>/PWM2' */
-    obj = &Position_Control_Single_Loop_DW.obj_e;
+    obj = &Position_Control_Single_Loop_DW.obj_o;
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
     if (!(pwm_cal <= 255.0)) {
       pwm_cal = 255.0;
     }
 
     MW_PWM_SetDutyCycle
-      (Position_Control_Single_Loop_DW.obj_e.PWMDriverObj.MW_PWM_HANDLE, pwm_cal);
+      (Position_Control_Single_Loop_DW.obj_o.PWMDriverObj.MW_PWM_HANDLE, pwm_cal);
 
     /* End of MATLABSystem: '<S1>/PWM2' */
+    /* Constant: '<S1>/J6_Desire' */
+    Position_Control_Single_Loop_B.J6_Desire =
+      Position_Control_Single_Loop_P.J6_Desire_Value;
   }
 
   {
     real_T *lastU;
 
-    /* Update for Derivative: '<Root>/Derivative7' */
+    /* Update for Derivative: '<Root>/Derivative4' */
     if (Position_Control_Single_Loop_DW.TimeStampA == (rtInf)) {
       Position_Control_Single_Loop_DW.TimeStampA =
         Position_Control_Single_Loop_M->Timing.t[0];
@@ -257,81 +387,81 @@ void Position_Control_Single_Loop_step(void)
       lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB;
     }
 
-    *lastU = Position_Control_Single_Loop_B.Sum2;
+    *lastU = Position_Control_Single_Loop_B.ManualSwitch1;
 
-    /* End of Update for Derivative: '<Root>/Derivative7' */
+    /* End of Update for Derivative: '<Root>/Derivative4' */
 
-    /* Update for Derivative: '<Root>/Derivative8' */
-    if (Position_Control_Single_Loop_DW.TimeStampA_k == (rtInf)) {
-      Position_Control_Single_Loop_DW.TimeStampA_k =
+    /* Update for Derivative: '<Root>/Derivative5' */
+    if (Position_Control_Single_Loop_DW.TimeStampA_b == (rtInf)) {
+      Position_Control_Single_Loop_DW.TimeStampA_b =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_p;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_c;
+    } else if (Position_Control_Single_Loop_DW.TimeStampB_e == (rtInf)) {
+      Position_Control_Single_Loop_DW.TimeStampB_e =
+        Position_Control_Single_Loop_M->Timing.t[0];
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_e;
+    } else if (Position_Control_Single_Loop_DW.TimeStampA_b <
+               Position_Control_Single_Loop_DW.TimeStampB_e) {
+      Position_Control_Single_Loop_DW.TimeStampA_b =
+        Position_Control_Single_Loop_M->Timing.t[0];
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_c;
+    } else {
+      Position_Control_Single_Loop_DW.TimeStampB_e =
+        Position_Control_Single_Loop_M->Timing.t[0];
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_e;
+    }
+
+    *lastU = Position_Control_Single_Loop_B.Derivative4;
+
+    /* End of Update for Derivative: '<Root>/Derivative5' */
+
+    /* Update for Derivative: '<Root>/Derivative3' */
+    if (Position_Control_Single_Loop_DW.TimeStampA_i == (rtInf)) {
+      Position_Control_Single_Loop_DW.TimeStampA_i =
+        Position_Control_Single_Loop_M->Timing.t[0];
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_f;
     } else if (Position_Control_Single_Loop_DW.TimeStampB_a == (rtInf)) {
       Position_Control_Single_Loop_DW.TimeStampB_a =
         Position_Control_Single_Loop_M->Timing.t[0];
       lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_d;
-    } else if (Position_Control_Single_Loop_DW.TimeStampA_k <
+    } else if (Position_Control_Single_Loop_DW.TimeStampA_i <
                Position_Control_Single_Loop_DW.TimeStampB_a) {
-      Position_Control_Single_Loop_DW.TimeStampA_k =
+      Position_Control_Single_Loop_DW.TimeStampA_i =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_p;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_f;
     } else {
       Position_Control_Single_Loop_DW.TimeStampB_a =
         Position_Control_Single_Loop_M->Timing.t[0];
       lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_d;
     }
 
-    *lastU = Position_Control_Single_Loop_B.Derivative7;
+    *lastU = Position_Control_Single_Loop_B.ManualSwitch1;
 
-    /* End of Update for Derivative: '<Root>/Derivative8' */
+    /* End of Update for Derivative: '<Root>/Derivative3' */
 
-    /* Update for Derivative: '<Root>/Derivative1' */
-    if (Position_Control_Single_Loop_DW.TimeStampA_g == (rtInf)) {
-      Position_Control_Single_Loop_DW.TimeStampA_g =
+    /* Update for Derivative: '<Root>/Derivative2' */
+    if (Position_Control_Single_Loop_DW.TimeStampA_in == (rtInf)) {
+      Position_Control_Single_Loop_DW.TimeStampA_in =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_j;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_cj;
     } else if (Position_Control_Single_Loop_DW.TimeStampB_c == (rtInf)) {
       Position_Control_Single_Loop_DW.TimeStampB_c =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_k;
-    } else if (Position_Control_Single_Loop_DW.TimeStampA_g <
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_b;
+    } else if (Position_Control_Single_Loop_DW.TimeStampA_in <
                Position_Control_Single_Loop_DW.TimeStampB_c) {
-      Position_Control_Single_Loop_DW.TimeStampA_g =
+      Position_Control_Single_Loop_DW.TimeStampA_in =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_j;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_cj;
     } else {
       Position_Control_Single_Loop_DW.TimeStampB_c =
         Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_k;
+      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_b;
     }
 
-    *lastU = Position_Control_Single_Loop_B.Sum2;
+    *lastU = Position_Control_Single_Loop_B.Gain7;
 
-    /* End of Update for Derivative: '<Root>/Derivative1' */
-
-    /* Update for Derivative: '<Root>/Derivative9' */
-    if (Position_Control_Single_Loop_DW.TimeStampA_b == (rtInf)) {
-      Position_Control_Single_Loop_DW.TimeStampA_b =
-        Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_e;
-    } else if (Position_Control_Single_Loop_DW.TimeStampB_j == (rtInf)) {
-      Position_Control_Single_Loop_DW.TimeStampB_j =
-        Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_g;
-    } else if (Position_Control_Single_Loop_DW.TimeStampA_b <
-               Position_Control_Single_Loop_DW.TimeStampB_j) {
-      Position_Control_Single_Loop_DW.TimeStampA_b =
-        Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeA_e;
-    } else {
-      Position_Control_Single_Loop_DW.TimeStampB_j =
-        Position_Control_Single_Loop_M->Timing.t[0];
-      lastU = &Position_Control_Single_Loop_DW.LastUAtTimeB_g;
-    }
-
-    *lastU = Position_Control_Single_Loop_B.Gain;
-
-    /* End of Update for Derivative: '<Root>/Derivative9' */
+    /* End of Update for Derivative: '<Root>/Derivative2' */
   }
 
   {                                    /* Sample time: [0.0s, 0.0s] */
@@ -409,19 +539,19 @@ void Position_Control_Single_Loop_initialize(void)
                     "FixedStepDiscrete");
   rtmSetTPtr(Position_Control_Single_Loop_M,
              &Position_Control_Single_Loop_M->Timing.tArray[0]);
-  rtmSetTFinal(Position_Control_Single_Loop_M, 8.0);
+  rtmSetTFinal(Position_Control_Single_Loop_M, 10.0);
   Position_Control_Single_Loop_M->Timing.stepSize0 = 0.01;
 
   /* External mode info */
-  Position_Control_Single_Loop_M->Sizes.checksums[0] = (3058565321U);
-  Position_Control_Single_Loop_M->Sizes.checksums[1] = (10189223U);
-  Position_Control_Single_Loop_M->Sizes.checksums[2] = (856896325U);
-  Position_Control_Single_Loop_M->Sizes.checksums[3] = (4102932112U);
+  Position_Control_Single_Loop_M->Sizes.checksums[0] = (1613854868U);
+  Position_Control_Single_Loop_M->Sizes.checksums[1] = (2623184912U);
+  Position_Control_Single_Loop_M->Sizes.checksums[2] = (4016207087U);
+  Position_Control_Single_Loop_M->Sizes.checksums[3] = (3123172349U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[7];
+    static const sysRanDType *systemRan[6];
     Position_Control_Single_Loop_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
@@ -430,7 +560,6 @@ void Position_Control_Single_Loop_initialize(void)
     systemRan[3] = &rtAlwaysEnabled;
     systemRan[4] = &rtAlwaysEnabled;
     systemRan[5] = &rtAlwaysEnabled;
-    systemRan[6] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(Position_Control_Single_Loop_M->extModeInfo,
       &Position_Control_Single_Loop_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(Position_Control_Single_Loop_M->extModeInfo,
@@ -442,21 +571,21 @@ void Position_Control_Single_Loop_initialize(void)
   {
     codertarget_arduinobase_int_b_T *obj;
 
-    /* InitializeConditions for Derivative: '<Root>/Derivative7' */
+    /* InitializeConditions for Derivative: '<Root>/Derivative4' */
     Position_Control_Single_Loop_DW.TimeStampA = (rtInf);
     Position_Control_Single_Loop_DW.TimeStampB = (rtInf);
 
-    /* InitializeConditions for Derivative: '<Root>/Derivative8' */
-    Position_Control_Single_Loop_DW.TimeStampA_k = (rtInf);
+    /* InitializeConditions for Derivative: '<Root>/Derivative5' */
+    Position_Control_Single_Loop_DW.TimeStampA_b = (rtInf);
+    Position_Control_Single_Loop_DW.TimeStampB_e = (rtInf);
+
+    /* InitializeConditions for Derivative: '<Root>/Derivative3' */
+    Position_Control_Single_Loop_DW.TimeStampA_i = (rtInf);
     Position_Control_Single_Loop_DW.TimeStampB_a = (rtInf);
 
-    /* InitializeConditions for Derivative: '<Root>/Derivative1' */
-    Position_Control_Single_Loop_DW.TimeStampA_g = (rtInf);
+    /* InitializeConditions for Derivative: '<Root>/Derivative2' */
+    Position_Control_Single_Loop_DW.TimeStampA_in = (rtInf);
     Position_Control_Single_Loop_DW.TimeStampB_c = (rtInf);
-
-    /* InitializeConditions for Derivative: '<Root>/Derivative9' */
-    Position_Control_Single_Loop_DW.TimeStampA_b = (rtInf);
-    Position_Control_Single_Loop_DW.TimeStampB_j = (rtInf);
 
     /* Start for MATLABSystem: '<S1>/Encoder' */
     Position_Control_Single_Loop_DW.obj.Index = 0U;
@@ -473,24 +602,24 @@ void Position_Control_Single_Loop_initialize(void)
     MW_EncoderReset(Position_Control_Single_Loop_DW.obj.Index);
 
     /* Start for MATLABSystem: '<S1>/PWM1' */
-    Position_Control_Single_Loop_DW.obj_l.matlabCodegenIsDeleted = true;
-    Position_Control_Single_Loop_DW.obj_l.isInitialized = 0;
-    Position_Control_Single_Loop_DW.obj_l.matlabCodegenIsDeleted = false;
-    obj = &Position_Control_Single_Loop_DW.obj_l;
-    Position_Control_Single_Loop_DW.obj_l.isSetupComplete = false;
-    Position_Control_Single_Loop_DW.obj_l.isInitialized = 1;
+    Position_Control_Single_Loop_DW.obj_b.matlabCodegenIsDeleted = true;
+    Position_Control_Single_Loop_DW.obj_b.isInitialized = 0;
+    Position_Control_Single_Loop_DW.obj_b.matlabCodegenIsDeleted = false;
+    obj = &Position_Control_Single_Loop_DW.obj_b;
+    Position_Control_Single_Loop_DW.obj_b.isSetupComplete = false;
+    Position_Control_Single_Loop_DW.obj_b.isInitialized = 1;
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(6U, 0.0, 0.0);
-    Position_Control_Single_Loop_DW.obj_l.isSetupComplete = true;
+    Position_Control_Single_Loop_DW.obj_b.isSetupComplete = true;
 
     /* Start for MATLABSystem: '<S1>/PWM2' */
-    Position_Control_Single_Loop_DW.obj_e.matlabCodegenIsDeleted = true;
-    Position_Control_Single_Loop_DW.obj_e.isInitialized = 0;
-    Position_Control_Single_Loop_DW.obj_e.matlabCodegenIsDeleted = false;
-    obj = &Position_Control_Single_Loop_DW.obj_e;
-    Position_Control_Single_Loop_DW.obj_e.isSetupComplete = false;
-    Position_Control_Single_Loop_DW.obj_e.isInitialized = 1;
+    Position_Control_Single_Loop_DW.obj_o.matlabCodegenIsDeleted = true;
+    Position_Control_Single_Loop_DW.obj_o.isInitialized = 0;
+    Position_Control_Single_Loop_DW.obj_o.matlabCodegenIsDeleted = false;
+    obj = &Position_Control_Single_Loop_DW.obj_o;
+    Position_Control_Single_Loop_DW.obj_o.isSetupComplete = false;
+    Position_Control_Single_Loop_DW.obj_o.isInitialized = 1;
     obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_Open(7U, 0.0, 0.0);
-    Position_Control_Single_Loop_DW.obj_e.isSetupComplete = true;
+    Position_Control_Single_Loop_DW.obj_o.isSetupComplete = true;
   }
 }
 
@@ -510,34 +639,34 @@ void Position_Control_Single_Loop_terminate(void)
 
   /* End of Terminate for MATLABSystem: '<S1>/Encoder' */
   /* Terminate for MATLABSystem: '<S1>/PWM1' */
-  obj = &Position_Control_Single_Loop_DW.obj_l;
-  if (!Position_Control_Single_Loop_DW.obj_l.matlabCodegenIsDeleted) {
-    Position_Control_Single_Loop_DW.obj_l.matlabCodegenIsDeleted = true;
-    if ((Position_Control_Single_Loop_DW.obj_l.isInitialized == 1) &&
-        Position_Control_Single_Loop_DW.obj_l.isSetupComplete) {
+  obj = &Position_Control_Single_Loop_DW.obj_b;
+  if (!Position_Control_Single_Loop_DW.obj_b.matlabCodegenIsDeleted) {
+    Position_Control_Single_Loop_DW.obj_b.matlabCodegenIsDeleted = true;
+    if ((Position_Control_Single_Loop_DW.obj_b.isInitialized == 1) &&
+        Position_Control_Single_Loop_DW.obj_b.isSetupComplete) {
       obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
       MW_PWM_SetDutyCycle
-        (Position_Control_Single_Loop_DW.obj_l.PWMDriverObj.MW_PWM_HANDLE, 0.0);
+        (Position_Control_Single_Loop_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE, 0.0);
       obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(6U);
       MW_PWM_Close
-        (Position_Control_Single_Loop_DW.obj_l.PWMDriverObj.MW_PWM_HANDLE);
+        (Position_Control_Single_Loop_DW.obj_b.PWMDriverObj.MW_PWM_HANDLE);
     }
   }
 
   /* End of Terminate for MATLABSystem: '<S1>/PWM1' */
 
   /* Terminate for MATLABSystem: '<S1>/PWM2' */
-  obj = &Position_Control_Single_Loop_DW.obj_e;
-  if (!Position_Control_Single_Loop_DW.obj_e.matlabCodegenIsDeleted) {
-    Position_Control_Single_Loop_DW.obj_e.matlabCodegenIsDeleted = true;
-    if ((Position_Control_Single_Loop_DW.obj_e.isInitialized == 1) &&
-        Position_Control_Single_Loop_DW.obj_e.isSetupComplete) {
+  obj = &Position_Control_Single_Loop_DW.obj_o;
+  if (!Position_Control_Single_Loop_DW.obj_o.matlabCodegenIsDeleted) {
+    Position_Control_Single_Loop_DW.obj_o.matlabCodegenIsDeleted = true;
+    if ((Position_Control_Single_Loop_DW.obj_o.isInitialized == 1) &&
+        Position_Control_Single_Loop_DW.obj_o.isSetupComplete) {
       obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
       MW_PWM_SetDutyCycle
-        (Position_Control_Single_Loop_DW.obj_e.PWMDriverObj.MW_PWM_HANDLE, 0.0);
+        (Position_Control_Single_Loop_DW.obj_o.PWMDriverObj.MW_PWM_HANDLE, 0.0);
       obj->PWMDriverObj.MW_PWM_HANDLE = MW_PWM_GetHandle(7U);
       MW_PWM_Close
-        (Position_Control_Single_Loop_DW.obj_e.PWMDriverObj.MW_PWM_HANDLE);
+        (Position_Control_Single_Loop_DW.obj_o.PWMDriverObj.MW_PWM_HANDLE);
     }
   }
 

@@ -1,0 +1,9 @@
+
+avrdude: AVR device initialized and ready to accept instructions
+avrdude: Device signature = 0x1e9801 (probably m2560)
+avrdude: reading input file "C:\Users\LabPC\OneDrive\MyGithub\github\DC_Motor_Control\Matlab_Simulink\DC_Position_Control\Position_Control_Hardware_Simulink/position_control.hex"
+avrdude: writing flash (24676 bytes):
+avrdude: 24676 bytes of flash written
+
+avrdude done.  Thank you.
+

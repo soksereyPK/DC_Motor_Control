@@ -1,0 +1,11 @@
+rtGetNaN.o: \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rtGetNaN.c \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rtwtypes.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rtGetNaN.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rt_nonfinite.h
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rtwtypes.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rtGetNaN.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/position_control_ert_rtw/rt_nonfinite.h:

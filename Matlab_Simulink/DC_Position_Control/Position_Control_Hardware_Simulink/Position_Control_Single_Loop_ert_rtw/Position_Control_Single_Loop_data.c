@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Position_Control_Single_Loop'.
  *
- * Model version                  : 1.12
+ * Model version                  : 1.22
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Mon Jun  5 16:56:52 2023
+ * C/C++ source code generated on : Sat Jun 24 10:33:56 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -18,28 +18,26 @@
 /* Block parameters (default storage) */
 P_Position_Control_Single_Loo_T Position_Control_Single_Loop_P = {
   /* Variable: a
-   * Referenced by: '<Root>/Gain11'
+   * Referenced by: '<Root>/Gain8'
    */
   26.85,
 
   /* Variable: b
    * Referenced by:
-   *   '<Root>/Gain11'
-   *   '<Root>/Gain13'
+   *   '<Root>/Gain8'
+   *   '<Root>/Gain9'
    */
   85.68,
 
-  /* Variable: k1
-   * Referenced by: '<Root>/Gain3'
-   */
-  26.975941359222656,
-
-  /* Variable: k2
-   * Referenced by:
-   *   '<Root>/Gain11'
-   *   '<Root>/Gain12'
+  /* Variable: kd4
+   * Referenced by: '<Root>/Gain7'
    */
   0.27328994464795386,
+
+  /* Variable: kp4
+   * Referenced by: '<Root>/Gain6'
+   */
+  7.3722535208884086,
 
   /* Expression: 0.01
    * Referenced by: '<S1>/Encoder'
@@ -47,22 +45,27 @@ P_Position_Control_Single_Loo_T Position_Control_Single_Loop_P = {
   0.01,
 
   /* Expression: 2*pi
-   * Referenced by: '<Root>/Constant8'
+   * Referenced by: '<Root>/Constant5'
    */
   6.2831853071795862,
 
-  /* Expression: pi
-   * Referenced by: '<Root>/Constant9'
+  /* Expression: pi/3
+   * Referenced by: '<Root>/Constant7'
    */
-  3.1415926535897931,
+  1.0471975511965976,
 
-  /* Expression: -(2*pi)/(100*4*19.2)
+  /* Expression: pi/3
+   * Referenced by: '<S1>/J6_Desire'
+   */
+  1.0471975511965976,
+
+  /* Computed Parameter: Gain_Gain
    * Referenced by: '<S1>/Gain'
    */
-  -0.00081812308687234192,
+  -1799071694,
 
-  /* Computed Parameter: ManualSwitch2_CurrentSetting
-   * Referenced by: '<Root>/Manual Switch2'
+  /* Computed Parameter: ManualSwitch1_CurrentSetting
+   * Referenced by: '<Root>/Manual Switch1'
    */
   0U
 };

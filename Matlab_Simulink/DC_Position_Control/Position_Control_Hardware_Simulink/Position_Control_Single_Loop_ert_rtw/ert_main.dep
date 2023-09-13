@@ -15,6 +15,7 @@ ert_main.o: \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/Position_Control_Single_Loop_types.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h \
+ C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/multiword_types.h \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/rtGetInf.h \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/rt_nonfinite.h \
  C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/MW_target_hardware_resources.h \
@@ -176,6 +177,8 @@ C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h:
 C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/Position_Control_Single_Loop_types.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2022a/toolbox/target/shared/svd/include/MW_SVD.h:
+
+C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/multiword_types.h:
 
 C:/Users/LabPC/OneDrive/MyGithub/github/DC_Motor_Control/Matlab_Simulink/DC_Position_Control/Position_Control_Hardware_Simulink/Position_Control_Single_Loop_ert_rtw/rtGetInf.h:
 

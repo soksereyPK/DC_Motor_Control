@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Position_Control_Single_Loop'.
  *
- * Model version                  : 1.12
+ * Model version                  : 1.22
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Mon Jun  5 16:56:52 2023
+ * C/C++ source code generated on : Sat Jun 24 10:33:56 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -28,8 +28,10 @@
 #endif                       /* Position_Control_Single_Loop_COMMON_INCLUDES_ */
 
 #include "Position_Control_Single_Loop_types.h"
+#include "multiword_types.h"
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
+#include <math.h>
 #include "MW_target_hardware_resources.h"
 
 /* Macros for accessing real-time model data structure */
@@ -75,78 +77,83 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Gain;                         /* '<S1>/Gain' */
-  real_T Sum2;                         /* '<Root>/Sum2' */
-  real_T Derivative7;                  /* '<Root>/Derivative7' */
+  int64m_T J6_Response;                /* '<S1>/Gain' */
+  real_T Constant7;                    /* '<Root>/Constant7' */
+  real_T ManualSwitch1;                /* '<Root>/Manual Switch1' */
+  real_T Sum3;                         /* '<Root>/Sum3' */
+  real_T Derivative4;                  /* '<Root>/Derivative4' */
+  real_T Gain7;                        /* '<Root>/Gain7' */
+  real_T J6_Desire;                    /* '<S1>/J6_Desire' */
 } B_Position_Control_Single_Loo_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   codertarget_arduinobase_inter_T obj; /* '<S1>/Encoder' */
-  codertarget_arduinobase_int_b_T obj_e;/* '<S1>/PWM2' */
-  codertarget_arduinobase_int_b_T obj_l;/* '<S1>/PWM1' */
-  real_T TimeStampA;                   /* '<Root>/Derivative7' */
-  real_T LastUAtTimeA;                 /* '<Root>/Derivative7' */
-  real_T TimeStampB;                   /* '<Root>/Derivative7' */
-  real_T LastUAtTimeB;                 /* '<Root>/Derivative7' */
-  real_T TimeStampA_k;                 /* '<Root>/Derivative8' */
-  real_T LastUAtTimeA_p;               /* '<Root>/Derivative8' */
-  real_T TimeStampB_a;                 /* '<Root>/Derivative8' */
-  real_T LastUAtTimeB_d;               /* '<Root>/Derivative8' */
-  real_T TimeStampA_g;                 /* '<Root>/Derivative1' */
-  real_T LastUAtTimeA_j;               /* '<Root>/Derivative1' */
-  real_T TimeStampB_c;                 /* '<Root>/Derivative1' */
-  real_T LastUAtTimeB_k;               /* '<Root>/Derivative1' */
-  real_T TimeStampA_b;                 /* '<Root>/Derivative9' */
-  real_T LastUAtTimeA_e;               /* '<Root>/Derivative9' */
-  real_T TimeStampB_j;                 /* '<Root>/Derivative9' */
-  real_T LastUAtTimeB_g;               /* '<Root>/Derivative9' */
+  codertarget_arduinobase_int_b_T obj_o;/* '<S1>/PWM2' */
+  codertarget_arduinobase_int_b_T obj_b;/* '<S1>/PWM1' */
+  real_T TimeStampA;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeA;                 /* '<Root>/Derivative4' */
+  real_T TimeStampB;                   /* '<Root>/Derivative4' */
+  real_T LastUAtTimeB;                 /* '<Root>/Derivative4' */
+  real_T TimeStampA_b;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeA_c;               /* '<Root>/Derivative5' */
+  real_T TimeStampB_e;                 /* '<Root>/Derivative5' */
+  real_T LastUAtTimeB_e;               /* '<Root>/Derivative5' */
+  real_T TimeStampA_i;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeA_f;               /* '<Root>/Derivative3' */
+  real_T TimeStampB_a;                 /* '<Root>/Derivative3' */
+  real_T LastUAtTimeB_d;               /* '<Root>/Derivative3' */
+  real_T TimeStampA_in;                /* '<Root>/Derivative2' */
+  real_T LastUAtTimeA_cj;              /* '<Root>/Derivative2' */
+  real_T TimeStampB_c;                 /* '<Root>/Derivative2' */
+  real_T LastUAtTimeB_b;               /* '<Root>/Derivative2' */
   struct {
     void *LoggedData;
-  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+  } Scope_PWORK;                       /* '<Root>/Scope' */
 
   struct {
-    void *LoggedData;
-  } Scope7_PWORK;                      /* '<Root>/Scope7' */
+    void *LoggedData[2];
+  } Scope4_PWORK;                      /* '<Root>/Scope4' */
 
   struct {
-    void *LoggedData;
-  } Scope1_PWORK_m;                    /* '<S1>/Scope1' */
+    void *LoggedData[2];
+  } Scope1_PWORK;                      /* '<S1>/Scope1' */
 } DW_Position_Control_Single_Lo_T;
 
 /* Parameters (default storage) */
 struct P_Position_Control_Single_Loo_T_ {
   real_T a;                            /* Variable: a
-                                        * Referenced by: '<Root>/Gain11'
+                                        * Referenced by: '<Root>/Gain8'
                                         */
   real_T b;                            /* Variable: b
                                         * Referenced by:
-                                        *   '<Root>/Gain11'
-                                        *   '<Root>/Gain13'
+                                        *   '<Root>/Gain8'
+                                        *   '<Root>/Gain9'
                                         */
-  real_T k1;                           /* Variable: k1
-                                        * Referenced by: '<Root>/Gain3'
+  real_T kd4;                          /* Variable: kd4
+                                        * Referenced by: '<Root>/Gain7'
                                         */
-  real_T k2;                           /* Variable: k2
-                                        * Referenced by:
-                                        *   '<Root>/Gain11'
-                                        *   '<Root>/Gain12'
+  real_T kp4;                          /* Variable: kp4
+                                        * Referenced by: '<Root>/Gain6'
                                         */
   real_T Encoder_SampleTime;           /* Expression: 0.01
                                         * Referenced by: '<S1>/Encoder'
                                         */
-  real_T Constant8_Value;              /* Expression: 2*pi
-                                        * Referenced by: '<Root>/Constant8'
+  real_T Constant5_Value;              /* Expression: 2*pi
+                                        * Referenced by: '<Root>/Constant5'
                                         */
-  real_T Constant9_Value;              /* Expression: pi
-                                        * Referenced by: '<Root>/Constant9'
+  real_T Constant7_Value;              /* Expression: pi/3
+                                        * Referenced by: '<Root>/Constant7'
                                         */
-  real_T Gain_Gain;                    /* Expression: -(2*pi)/(100*4*19.2)
+  real_T J6_Desire_Value;              /* Expression: pi/3
+                                        * Referenced by: '<S1>/J6_Desire'
+                                        */
+  int32_T Gain_Gain;                   /* Computed Parameter: Gain_Gain
                                         * Referenced by: '<S1>/Gain'
                                         */
-  uint8_T ManualSwitch2_CurrentSetting;
-                             /* Computed Parameter: ManualSwitch2_CurrentSetting
-                              * Referenced by: '<Root>/Manual Switch2'
+  uint8_T ManualSwitch1_CurrentSetting;
+                             /* Computed Parameter: ManualSwitch1_CurrentSetting
+                              * Referenced by: '<Root>/Manual Switch1'
                               */
 };
 
@@ -226,8 +233,8 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'Position_Control_Single_Loop'
- * '<S1>'   : 'Position_Control_Single_Loop/Right motor1'
- * '<S2>'   : 'Position_Control_Single_Loop/Right motor1/MATLAB Function1'
+ * '<S1>'   : 'Position_Control_Single_Loop/Right motor2'
+ * '<S2>'   : 'Position_Control_Single_Loop/Right motor2/MATLAB Function1'
  */
 #endif                          /* RTW_HEADER_Position_Control_Single_Loop_h_ */
 
