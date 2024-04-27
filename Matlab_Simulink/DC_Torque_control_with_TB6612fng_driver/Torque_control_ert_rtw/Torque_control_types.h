@@ -3,15 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
-<<<<<<< HEAD
- * Model version                  : 1.177
- * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
-=======
- * Model version                  : 1.200
- * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
->>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
+ * Model version                  : 2.7
+ * Simulink Coder version         : 9.8 (R2022b) 13-May-2022
+ * C/C++ source code generated on : Sat Apr 27 10:18:12 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -21,74 +15,29 @@
 
 #ifndef RTW_HEADER_Torque_control_types_h_
 #define RTW_HEADER_Torque_control_types_h_
-#include "MW_SVD.h"
 #include "rtwtypes.h"
-
-/* Model Code Variants */
-<<<<<<< HEAD
-
-/* Custom Type definition for MATLABSystem: '<S1>/Calibration write' */
 #include "MW_SVD.h"
-#ifndef struct_tag_jbIFaTBEZATkkvPSmnoPa
-#define struct_tag_jbIFaTBEZATkkvPSmnoPa
+#ifndef struct_tag_9aqKbsbsI7JI0RwgnVwU0C
+#define struct_tag_9aqKbsbsI7JI0RwgnVwU0C
 
-struct tag_jbIFaTBEZATkkvPSmnoPa
+struct tag_9aqKbsbsI7JI0RwgnVwU0C
 {
-  MW_Handle_Type MW_I2C_HANDLE;
+  int32_T __dummy;
 };
 
-#endif                                 /* struct_tag_jbIFaTBEZATkkvPSmnoPa */
-
-#ifndef typedef_c_arduinodriver_ArduinoI2C_To_T
-#define typedef_c_arduinodriver_ArduinoI2C_To_T
-
-typedef struct tag_jbIFaTBEZATkkvPSmnoPa c_arduinodriver_ArduinoI2C_To_T;
-
-#endif                             /* typedef_c_arduinodriver_ArduinoI2C_To_T */
-
-#ifndef struct_tag_3coDYKg8JwMUxQ16KBcXBE
-#define struct_tag_3coDYKg8JwMUxQ16KBcXBE
-
-struct tag_3coDYKg8JwMUxQ16KBcXBE
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  c_arduinodriver_ArduinoI2C_To_T I2CDriverObj;
-  uint32_T BusSpeed;
-  real_T DefaultMaximumBusSpeedInHz;
-};
-
-#endif                                 /* struct_tag_3coDYKg8JwMUxQ16KBcXBE */
-
-#ifndef typedef_codertarget_arduinobase_inter_T
-#define typedef_codertarget_arduinobase_inter_T
-
-typedef struct tag_3coDYKg8JwMUxQ16KBcXBE codertarget_arduinobase_inter_T;
-
-#endif                             /* typedef_codertarget_arduinobase_inter_T */
-
-#ifndef struct_tag_04b6x6tDldj9IrIH2gmbjG
-#define struct_tag_04b6x6tDldj9IrIH2gmbjG
-
-struct tag_04b6x6tDldj9IrIH2gmbjG
-{
-  int16_T __dummy;
-};
-
-#endif                                 /* struct_tag_04b6x6tDldj9IrIH2gmbjG */
+#endif                                 /* struct_tag_9aqKbsbsI7JI0RwgnVwU0C */
 
 #ifndef typedef_b_arduinodriver_ArduinoDigita_T
 #define typedef_b_arduinodriver_ArduinoDigita_T
 
-typedef struct tag_04b6x6tDldj9IrIH2gmbjG b_arduinodriver_ArduinoDigita_T;
+typedef struct tag_9aqKbsbsI7JI0RwgnVwU0C b_arduinodriver_ArduinoDigita_T;
 
 #endif                             /* typedef_b_arduinodriver_ArduinoDigita_T */
 
-#ifndef struct_tag_AYWgtFscQm3mLUJYb3A20C
-#define struct_tag_AYWgtFscQm3mLUJYb3A20C
+#ifndef struct_tag_qrLkTWTW64zZK0sqwALTyG
+#define struct_tag_qrLkTWTW64zZK0sqwALTyG
 
-struct tag_AYWgtFscQm3mLUJYb3A20C
+struct tag_qrLkTWTW64zZK0sqwALTyG
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -96,17 +45,15 @@ struct tag_AYWgtFscQm3mLUJYb3A20C
   b_arduinodriver_ArduinoDigita_T DigitalIODriverObj;
 };
 
-#endif                                 /* struct_tag_AYWgtFscQm3mLUJYb3A20C */
+#endif                                 /* struct_tag_qrLkTWTW64zZK0sqwALTyG */
 
 #ifndef typedef_codertarget_arduinobase_block_T
 #define typedef_codertarget_arduinobase_block_T
 
-typedef struct tag_AYWgtFscQm3mLUJYb3A20C codertarget_arduinobase_block_T;
+typedef struct tag_qrLkTWTW64zZK0sqwALTyG codertarget_arduinobase_block_T;
 
 #endif                             /* typedef_codertarget_arduinobase_block_T */
 
-=======
->>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #ifndef struct_tag_hiATgaifu8RfrjZ2yifYbH
 #define struct_tag_hiATgaifu8RfrjZ2yifYbH
 
@@ -122,41 +69,15 @@ struct tag_hiATgaifu8RfrjZ2yifYbH
 
 #endif                                 /* struct_tag_hiATgaifu8RfrjZ2yifYbH */
 
-#ifndef typedef_codertarget_arduinobase_int_h_T
-#define typedef_codertarget_arduinobase_int_h_T
+#ifndef typedef_codertarget_arduinobase_inter_T
+#define typedef_codertarget_arduinobase_inter_T
 
-typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_int_h_T;
+typedef struct tag_hiATgaifu8RfrjZ2yifYbH codertarget_arduinobase_inter_T;
 
-#endif                             /* typedef_codertarget_arduinobase_int_h_T */
+#endif                             /* typedef_codertarget_arduinobase_inter_T */
 
-#ifndef struct_tag_chY474Xs2EmAHQmJ9UhmtD
-#define struct_tag_chY474Xs2EmAHQmJ9UhmtD
-
-struct tag_chY474Xs2EmAHQmJ9UhmtD
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  c_arduinodriver_ArduinoI2C_To_T I2CDriverObj;
-  uint32_T BusSpeed;
-  real_T DefaultMaximumBusSpeedInHz;
-  real_T SampleTime;
-};
-
-#endif                                 /* struct_tag_chY474Xs2EmAHQmJ9UhmtD */
-
-#ifndef typedef_codertarget_arduinobase_in_h3_T
-#define typedef_codertarget_arduinobase_in_h3_T
-
-typedef struct tag_chY474Xs2EmAHQmJ9UhmtD codertarget_arduinobase_in_h3_T;
-
-#endif                             /* typedef_codertarget_arduinobase_in_h3_T */
-
-<<<<<<< HEAD
-=======
-/* Custom Type definition for MATLABSystem: '<S1>/PWM2' */
+/* Custom Type definition for MATLABSystem: '<S1>/PWM' */
 #include "MW_SVD.h"
->>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
 #ifndef struct_tag_g1WX34VPn8QzVKQriB4HN
 #define struct_tag_g1WX34VPn8QzVKQriB4HN
 
@@ -187,12 +108,12 @@ struct tag_4eDVzK5FiryyCjvjjvrZGB
 
 #endif                                 /* struct_tag_4eDVzK5FiryyCjvjjvrZGB */
 
-#ifndef typedef_codertarget_arduinobase_i_h3r_T
-#define typedef_codertarget_arduinobase_i_h3r_T
+#ifndef typedef_codertarget_arduinobase_int_h_T
+#define typedef_codertarget_arduinobase_int_h_T
 
-typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_i_h3r_T;
+typedef struct tag_4eDVzK5FiryyCjvjjvrZGB codertarget_arduinobase_int_h_T;
 
-#endif                             /* typedef_codertarget_arduinobase_i_h3r_T */
+#endif                             /* typedef_codertarget_arduinobase_int_h_T */
 
 /* Parameters (default storage) */
 typedef struct P_Torque_control_T_ P_Torque_control_T;

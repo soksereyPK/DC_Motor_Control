@@ -3,15 +3,9 @@
  *
  * Code generated for Simulink model 'Torque_control'.
  *
-<<<<<<< HEAD
- * Model version                  : 1.177
- * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Oct 15 08:20:33 2022
-=======
- * Model version                  : 1.200
- * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Sat Apr 22 17:06:25 2023
->>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
+ * Model version                  : 2.7
+ * Simulink Coder version         : 9.8 (R2022b) 13-May-2022
+ * C/C++ source code generated on : Sat Apr 27 10:18:12 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,79 +13,96 @@
  * Validation result: Not run
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "Torque_control.h"
+#include "Torque_control_private.h"
 #include "rtwtypes.h"
-#include "xcp.h"
+#include "limits.h"
+#include "rt_nonfinite.h"
 #include "ext_mode.h"
+#include "MW_ArduinoHWInit.h"
+#include "mw_freertos.h"
+#define UNUSED(x)                      x = x
+#define NAMELEN                        16
 
-volatile int IsrOverrun = 0;
-static boolean_T OverrunFlag = 0;
-void rt_OneStep(void)
+/* Function prototype declaration*/
+void exitFcn(int sig);
+void *terminateTask(void *arg);
+void *baseRateTask(void *arg);
+void *subrateTask(void *arg);
+volatile boolean_T stopRequested = false;
+volatile boolean_T runModel = true;
+extmodeErrorCode_T errorCode;
+SemaphoreHandle_t stopSem;
+SemaphoreHandle_t baserateTaskSem;
+mw_thread_t schedulerThread;
+mw_thread_t baseRateThread;
+void *threadJoinStatus;
+int terminatingmodel = 0;
+void *baseRateTask(void *arg)
 {
-  /* Check for overrun. Protect OverrunFlag against preemption */
-  if (OverrunFlag++) {
-    IsrOverrun = 1;
-    OverrunFlag--;
-    return;
+  runModel = (rtmGetErrorStatus(Torque_control_M) == (NULL));
+  while (runModel) {
+    mw_osSemaphoreWaitEver(&baserateTaskSem);
+
+    /* Run External Mode background activities */
+    errorCode = extmodeBackgroundRun();
+    if (errorCode != EXTMODE_SUCCESS) {
+      /* Code to handle External Mode background task errors
+         may be added here */
+    }
+
+    Torque_control_step();
+
+    /* Get model outputs here */
+    stopRequested = !((rtmGetErrorStatus(Torque_control_M) == (NULL)));
+    runModel = !stopRequested && !extmodeSimulationComplete() &&
+      !extmodeStopRequested();
   }
 
-#ifndef _MW_ARDUINO_LOOP_
-
-  interrupts();
-
-#endif;
-
-  Torque_control_step();
-
-  /* Get model outputs here */
-#ifndef _MW_ARDUINO_LOOP_
-
-  noInterrupts();
-
-#endif;
-
-  OverrunFlag--;
+  runModel = 0;
+  terminateTask(arg);
+  mw_osThreadExit((void *)0);
+  return NULL;
 }
 
-extern void rtIOStreamResync();
-volatile boolean_T stopRequested;
-volatile boolean_T runModel;
-int main(void)
+void exitFcn(int sig)
 {
-  float modelBaseRate = 0.01;
-  float systemClock = 0;
-  extmodeErrorCode_T errorCode = EXTMODE_SUCCESS;
+  UNUSED(sig);
+  rtmSetErrorStatus(Torque_control_M, "stopping the model");
+}
 
-  /* Initialize variables */
-  stopRequested = false;
-  runModel = false;
+void *terminateTask(void *arg)
+{
+  UNUSED(arg);
+  terminatingmodel = 1;
 
-#if defined(MW_MULTI_TASKING_MODE) && (MW_MULTI_TASKING_MODE == 1)
+  {
+    runModel = 0;
+  }
 
-  MW_ASM (" SVC #1");
+  /* Terminate model */
+  Torque_control_terminate();
+  extmodeReset();
+  mw_osSemaphoreRelease(&stopSem);
+  return NULL;
+}
 
-#endif
-
-  ;
+int app_main(int argc, char **argv)
+{
   init();
   MW_Arduino_Init();
   rtmSetErrorStatus(Torque_control_M, 0);
 
-<<<<<<< HEAD
-  /* Set Final Simulation Time in Ticks */
-  errorCode = extmodeSetFinalSimulationTime((extmodeSimulationTime_T) -1);
-
-=======
->>>>>>> 765bc2ca8affdd805e4c846c813bca333c8e6713
   /* Parse External Mode command line arguments */
-  errorCode = extmodeParseArgs(0, NULL);
+  errorCode = extmodeParseArgs(argc, (const char_T **)argv);
   if (errorCode != EXTMODE_SUCCESS) {
     return (errorCode);
   }
 
+  /* Initialize model */
   Torque_control_initialize();
-  noInterrupts();
-  interrupts();
 
   /* External Mode initialization */
   errorCode = extmodeInit(Torque_control_M->extModeInfo, &rtmGetTFinal
@@ -109,45 +120,24 @@ int main(void)
     }
   }
 
-  noInterrupts();
-  configureArduinoARMTimer();
-  runModel = !extmodeSimulationComplete() && !extmodeStopRequested() &&
-    !rtmGetStopRequested(Torque_control_M);
+  /* Call RTOS Initialization function */
+  mw_RTOSInit(0.01, 0);
 
-#ifndef _MW_ARDUINO_LOOP_
+  /* Wait for stop semaphore */
+  mw_osSemaphoreWaitEver(&stopSem);
 
-  interrupts();
+#if (MW_NUMBER_TIMER_DRIVEN_TASKS > 0)
 
-#endif;
-
-  XcpStatus lastXcpState = xcpStatusGet();
-  interrupts();
-  while (runModel) {
-    /* Run External Mode background activities */
-    errorCode = extmodeBackgroundRun();
-    if (errorCode != EXTMODE_SUCCESS) {
-      /* Code to handle External Mode background task errors
-         may be added here */
+  {
+    int i;
+    for (i=0; i < MW_NUMBER_TIMER_DRIVEN_TASKS; i++) {
+      CHECK_STATUS(mw_osSemaphoreDelete(&timerTaskSem[i]), 0,
+                   "mw_osSemaphoreDelete");
     }
-
-    stopRequested = !(!extmodeSimulationComplete() && !extmodeStopRequested() &&
-                      !rtmGetStopRequested(Torque_control_M));
-    runModel = !(stopRequested);
-    if (stopRequested)
-      disable_rt_OneStep();
-    if (lastXcpState==XCP_CONNECTED && xcpStatusGet()==XCP_DISCONNECTED)
-      rtIOStreamResync();
-    lastXcpState = xcpStatusGet();
-    MW_Arduino_Loop();
   }
 
-  /* Terminate model */
-  Torque_control_terminate();
+#endif
 
-  /* External Mode reset */
-  extmodeReset();
-  MW_Arduino_Terminate();
-  noInterrupts();
   return 0;
 }
 
